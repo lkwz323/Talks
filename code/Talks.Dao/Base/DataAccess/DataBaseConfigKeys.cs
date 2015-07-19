@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Talks.Dao.Base.TuanDataAccess
+namespace Talks.Dao.Base.DataAccess
 {
     public static class DataBaseConfigKeys
     {
@@ -11,12 +11,12 @@ namespace Talks.Dao.Base.TuanDataAccess
         /// <summary>
         /// 只读库连接串key
         /// </summary>
-        internal const string TuanReadKey = "DBConn";
+        internal const string ReadKey = "DBConn";
 
         /// <summary>
         /// 写库连接串key
         /// </summary>
-        internal const string TuanWriteKey = "DBConn";
+        internal const string WriteKey = "DBConn";
 
     }
 }

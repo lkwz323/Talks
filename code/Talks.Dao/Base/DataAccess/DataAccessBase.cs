@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Microsoft.ApplicationBlocks.Data;
 
-namespace Talks.Dao.Base.TuanDataAccess
+namespace Talks.Dao.Base.DataAccess
 {
     /// <summary>
     /// 数据库访问基类

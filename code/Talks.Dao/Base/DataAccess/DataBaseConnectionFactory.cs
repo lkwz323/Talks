@@ -5,7 +5,7 @@ using System.Text;
 using System.Configuration;
 using System.Data.SqlClient;
 
-namespace Talks.Dao.Base.TuanDataAccess
+namespace Talks.Dao.Base.DataAccess
 {
     /// <summary>
     /// 连接串工厂
@@ -74,8 +74,8 @@ namespace Talks.Dao.Base.TuanDataAccess
         /// </summary>
         public DataBaseConnectionFactory()
         {
-            ConnectionStringRead = GetConnectionString(DataBaseConfigKeys.TuanReadKey);
-            ConnectionStringWrite = GetConnectionString(DataBaseConfigKeys.TuanWriteKey);
+            ConnectionStringRead = GetConnectionString(DataBaseConfigKeys.ReadKey);
+            ConnectionStringWrite = GetConnectionString(DataBaseConfigKeys.WriteKey);
         }
 
         /// <summary>

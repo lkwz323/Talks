@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using log4net;
-using Talks.Dao.Base.TuanDataAccess;
+using Talks.Dao.Base.DataAccess;
 
 namespace Talks.Dao.Base
 {
