@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Talks.Model.Dto;
 
 namespace Talks.Dao
 {
-    interface IHomeDao
+    public interface IHomeDao
     {
+        List<HomeDto> getList(int pageSize);
+
+        int getCount();
     }
 }
