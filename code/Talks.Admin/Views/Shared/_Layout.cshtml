@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title</title>
+    @{  Html.RenderPartial("_inc_style"); }
+</head>
+<body>
+    <!-- topbar starts -->
+    @{  Html.RenderPartial("_inc_topbar"); }
+
+
+    <!-- topbar ends -->
+    <div class="ch-container">
+        <div class="row">
+            <!-- left menu starts -->
+            @{  Html.RenderPartial("_inc_left"); }
+            <!-- left menu ends -->
+            <noscript>
+                <div class="alert alert-block col-md-12">
+                    <h4 class="alert-heading">Warning!</h4>
+                    <p>
+                        You need to have <a href="http://en.wikipedia.org/wiki/JavaScript"
+                            target="_blank">JavaScript</a> enabled to use this site.
+                    </p>
+                </div>
+            </noscript>
+            <div id="content" class="col-lg-10 col-sm-10">
+                <!-- content starts -->
+                <div>
+                    <ul class="breadcrumb">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="#">管理员列表</a></li>
+                    </ul>
+                </div>
+                <div class="box-content">
+                    <!-- content Start -->
+                    @RenderBody()
+                    <!--  content end -->
+
+                </div>
+                <!--/#content.col-md-0-->
+            </div>
+
+
+        </div>
+        <hr />
+        <!--/fluid-row-->
+        @{  Html.RenderPartial("_inc_footer"); }
+        <!--/.fluid-container-->
+        @{  Html.RenderPartial("_inc_javascript"); }
+
+    </div>
+    <div class="modal fade" id="selectorModal" data-backdrop='static'
+        tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" style="width: 900px">
+            <div class="modal-content">
+                <div class="modal-header"
+                    style="padding-top: 0px; padding-bottom: 0px;">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h3 style="margin-top: 10px;">提示</h3>
+                </div>
+                <div class="modal-body" style="height: 550px; overflow-y: auto;">
+                    <p class="message">加载中...</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">关闭</a> <a
+                        href="#" data-confirm="ok" class="btn btn-primary">确定</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModalDialog" data-backdrop='static'
+        tabindex="1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h3>提示</h3>
+                </div>
+                <div class="modal-body">
+                    <p class="message">Here settings can be configured...</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">取消</a> <a
+                        href="#" class="btn btn-primary" data-dismiss="modal">确定</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModalAlert" data-backdrop='static'
+        tabindex="1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h3>标题</h3>
+                </div>
+                <div class="modal-body">
+                    <p class="message">Here settings can be configured...</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-primary" data-dismiss="modal">确定</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

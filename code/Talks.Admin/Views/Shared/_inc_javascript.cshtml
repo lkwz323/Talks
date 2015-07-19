@@ -1,0 +1,54 @@
+﻿
+<script src="@Url.Content("~/charisma/bower_components/bootstrap/dist/js/bootstrap.min.js")"></script>
+<!-- library for cookie management -->
+<script src="@Url.Content("~/charisma/js/jquery.cookie.js")"></script>
+<!-- calender plugin -->
+<script src='@Url.Content("~/charisma/bower_components/moment/min/moment.min.js")'></script>
+<script src='@Url.Content("~/charisma/bower_components/fullcalendar/dist/fullcalendar.min.js")'></script>
+<!-- data table plugin -->
+<script src='@Url.Content("~/charisma/js/jquery.dataTables.min.js")'></script>
+<!-- select or dropdown enhancer -->
+<script src="@Url.Content("~/charisma/bower_components/chosen/chosen.jquery.min.js")"></script>
+<!-- plugin for gallery image view -->
+<script src="@Url.Content("~/charisma/bower_components/colorbox/jquery.colorbox-min.js")"></script>
+<!-- notification plugin -->
+<script src="@Url.Content("~/charisma/js/jquery.noty.js")"></script>
+<!-- library for making tables responsive -->
+<script src="@Url.Content("~/charisma/bower_components/responsive-tables/responsive-tables.js")"></script>
+<!-- tour plugin -->
+<script src="@Url.Content("~/charisma/bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js")"></script>
+<!-- star rating plugin -->
+<script src="@Url.Content("~/charisma/js/jquery.raty.min.js")"></script>
+<!-- for iOS style toggle switch -->
+<script src="@Url.Content("~/charisma/js/jquery.iphone.toggle.js")"></script>
+<!-- autogrowing textarea plugin -->
+<script src="@Url.Content("~/charisma/js/jquery.autogrow-textarea.js")"></script>
+<!-- multiple file upload plugin -->
+<script src="@Url.Content("~/charisma/js/jquery.uploadify-3.1.min.js")"></script>
+<!-- history.js for cross-browser state change on ajax -->
+<script src="@Url.Content("~/charisma/js/jquery.history.js")"></script>
+<!-- application script for Charisma demo -->
+<script src="@Url.Content("~/charisma/js/charisma.js")"></script>
+<script src="@Url.Content("~/charisma/bower_components/terebentina-sco/js/sco.modal.js")"></script>
+<script src="@Url.Content("~/charisma/bower_components/terebentina-sco/js/sco.confirm.js")"></script>
+<script type='text/javascript' src="@Url.Content("~/plugins/datepicker/WdatePicker.js")">
+	
+</script>
+
+<script type="text/javascript">
+    function myConfirm(msg, callback) {
+        var d = $('#myModalDialog');
+        d.find(".message").html(msg);
+        d.find("a.btn-primary").click(callback);
+        d.modal('show');
+    }
+
+    function myAlert(msg, title) {
+        var d = $('#myModalAlert');
+        d.find(".message").html(msg);
+        title = title ? title : "提示";
+        d.find(".modal-header h3").html(title);
+        d.modal('show');
+    }
+
+</script>

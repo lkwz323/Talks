@@ -1,0 +1,43 @@
+﻿@if (ViewBag.PageInfo != null && ViewBag.PageInfo.DataList != null && ViewBag.PageInfo.DataList.Count > 0)
+{
+    var pageInfo = ViewBag.PageInfo;
+    var searcher = ViewBag.Searcher;
+    <div class="col-md-12">
+        <div class="dataTables_paginate paging_bootstrap pagination" style="margin: 10px 0;">
+            <ul class="pagination" style="margin: 10px 0;">
+                <li><a class='nolink' href="javascript:void(0)">总共
+						@pageInfo.Pages 页 @pageInfo.Total 条记录</a></li>
+                @if (pageInfo.HasPreviousPage)
+                {
+                    <li class="prev"><a href="?page=@pageInfo.PrePage@searcher.PageParam">← 上一页</a></li>
+                }
+                else
+                { 
+                    <li class="prev disabled"><a class='nolink' href="#">← 上一页</a></li>
+                }
+
+                @foreach (int item in ((int[])pageInfo.NavigatepageNums))
+                {
+                    if (item == pageInfo.PageNum)
+                    {
+                    <li class="active nolink"><a href="javascript:void(0)">@item</a></li>
+                    }
+                    else
+                    {
+                    <li><a href="?page=@(item)@(searcher.PageParam)">@item</a></li>
+                    }
+                }
+                @if (pageInfo.HasNextPage)
+                {
+                    <li class="next"><a href="?page=@pageInfo.NextPage@searcher.PageParam">下一页 →</a></li>
+                }
+                else
+                { 
+                    <li class="next disabled"><a class='nolink' href="#">下一页 → </a></li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+
+

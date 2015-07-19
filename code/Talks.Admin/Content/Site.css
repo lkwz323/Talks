@@ -1,0 +1,23 @@
+﻿/*emptyShow作为最后一个元素时不显示*/
+.listContainer > .item:last-child.emptyShow {
+    display: none;
+}
+/*emptyShow作为第一个元素时显示*/
+.listContainer > .item:first-child.emptyShow {
+    display: block;
+}
+
+.listContainer > tr.item:first-child.emptyShow {
+    display: table-row;
+}
+
+#queryform > .form-group {
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.Wdate1[readonly] {
+    cursor: pointer;
+    background-color: #ffffff;
+    background: #fff url(/plugins/datepicker/skin/datePicker.gif) no-repeat right;
+}

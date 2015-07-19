@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "主页";
+}
+
+
+<input type="hidden" class="curNavUrl"
+    value='/home/index' />
+<style type="text/css">
+    #scheme > .form-group {
+        margin-top: 10px;
+        margin-right: 20px;
+    }
+</style>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <form class="form-inline" id="scheme" method="get"
+            action="/home/list">
+            <div class="form-group">
+                <label class="control-label">xxxx：</label>
+                <input type="text"
+                    placeholder="请点击选择" name="start" id="start" readonly="readonly" value=""
+                    class="input-inline form-control input-sm Wdate1 curhand"
+                    onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',readOnly:true,   maxDate:'#F{$dp.$D(\'endCreateTime\')||\'2020-10-01 00:00\'}' })"
+                    size="20" />
+                至
+                    <input type="text" placeholder="请点击选择"
+                        name="end" id="end" readonly="readonly" value=""
+                        class=" input-inline form-control input-sm Wdate1 curhand"
+                        onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',readOnly:true,  minDate:'%y-%M-{%d}'&&'#F{$dp.$D(\'startCreateTime\')}'  })"
+                        size="20" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">xxxx：</label>
+                <input type="text"
+                    class=" input-inline form-control input-sm" name="xxxx"
+                    size="13" value='' />
+            </div>
+            <div class="form-group">
+                <label class="control-label">类型： </label>
+                <select name="type"
+                    id="type" style="width: 100px"
+                    class=" input-inline form-control input-sm">
+                    <option value="">--全部--</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary " value="">
+                    <span class="glyphicon glyphicon-search"></span>查 询
+                </button>
+            </div>
+            <div class="form-group">
+                <a href="#" class="btn btn-primary  "><span
+                    class="glyphicon glyphicon-plus"></span>添加
+                </a>
+            </div>
+            <div class="form-group">
+                <a href="#" class="btn btn-warning  "><span
+                    class="glyphicon glyphicon-trash"></span>删除
+                </a>
+            </div>
+        </form>
+    </div>
+    <table
+        class="table table-bordered table-hover table-striped table-condensed">
+
+        <thead class="text-center">
+            <tr>
+                <th style="" class="text-center">编号</th>
+                <th style="width: 60px" class="text-center">类型</th>
+                <th style="width: 55px" class="text-center">值</th>
+                <th style="width: 75px" class="text-center">3</th>
+                <th style="width: 75px" class="text-center">4</th>
+                <th style="width: 60px" class="text-center">5</th>
+                <th style="width: 150px" class="text-center">开始时间</th>
+                <th style="width: 150px" class="text-center">结束时间</th>
+                <th style="width: 90px" class="text-center">xx</th>
+                <th style="width: 70px" class="text-center">状态</th>
+                <th style="" class="text-center">操作</th>
+            </tr>
+        </thead>
+        <tbody class="listContainer">
+            @if (ViewBag.PageInfo != null && ViewBag.PageInfo.DataList != null)
+            {
+                var list = (List<Talks.Model.Dto.HomeDto>)ViewBag.PageInfo.DataList;
+                foreach (var item in list)
+                {
+                <tr class="item">
+                    <td><a href="/edit/">@item.Id</a></td>
+                    <td class="text-center">@item.Name</td>
+                    <td>50&nbsp;</td>
+                    <td>-</td>
+
+                    <td class="text-right">123
+                    </td>
+                    <td class="text-right">123
+                    </td>
+                    <td class="text-center">2015-05-01</td>
+                    <td class="text-center">2015-05-01</td>
+                    <td class="text-center">-</td>
+                    <td class="text-center">-</td>
+                    <td><a href="/edit/">编辑</a> <a href="javascript:void(0)">审核</a> <a href="#">删除</a></td>
+                </tr>
+                }
+            }
+
+
+            <tr class="item emptyShow">
+                <td colspan="11" class="text-center" style="color: red">暂无数据可显示</td>
+            </tr>
+
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+
+    @{  Html.RenderPartial("_inc_pagination"); }
+</div>
