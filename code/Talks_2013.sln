@@ -17,6 +17,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dll", "dll", "{0CACEF26-B52
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talks.Web", "Talks.Web\Talks.Web.csproj", "{9BE7C22D-76B8-4D6D-A2FD-4A03E817A6D2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_MusicStore", "_MusicStore", "{DED8F74C-AC87-4822-8647-3278D406490A}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "MvcMusicStore", "http://localhost:13280", "{183E5094-B3BB-46F0-A0B2-20C039739A8C}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_13280"
+		Debug.AspNetCompiler.PhysicalPath = "MvcMusicStore\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_13280\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_13280"
+		Release.AspNetCompiler.PhysicalPath = "MvcMusicStore\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_13280\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "MvcMusicStore\"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +66,10 @@ Global
 		{9BE7C22D-76B8-4D6D-A2FD-4A03E817A6D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BE7C22D-76B8-4D6D-A2FD-4A03E817A6D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BE7C22D-76B8-4D6D-A2FD-4A03E817A6D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{183E5094-B3BB-46F0-A0B2-20C039739A8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{183E5094-B3BB-46F0-A0B2-20C039739A8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{183E5094-B3BB-46F0-A0B2-20C039739A8C}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{183E5094-B3BB-46F0-A0B2-20C039739A8C}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,5 +80,6 @@ Global
 		{F4BB6B87-084D-41E4-ACBF-708141454073} = {0CACEF26-B523-4E83-8FB7-0F678B7158B7}
 		{734B7A72-B9DB-45E2-8D21-8784A1E3E391} = {533AF666-11DF-46EB-98A1-0A93A2F93B5C}
 		{9BE7C22D-76B8-4D6D-A2FD-4A03E817A6D2} = {533AF666-11DF-46EB-98A1-0A93A2F93B5C}
+		{183E5094-B3BB-46F0-A0B2-20C039739A8C} = {DED8F74C-AC87-4822-8647-3278D406490A}
 	EndGlobalSection
 EndGlobal
