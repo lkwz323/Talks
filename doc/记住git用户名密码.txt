@@ -1,0 +1,5 @@
+在.git/config 文件中添加如下两行
+
+[credential]   
+	    
+helper = store
