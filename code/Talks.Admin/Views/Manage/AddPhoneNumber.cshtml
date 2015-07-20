@@ -1,9 +1,9 @@
 ﻿@model Talks.Admin.Models.AddPhoneNumberViewModel
 @{
     ViewBag.Title = "Phone Number";
+    Layout = "~/Views/Shared/_Layout_Account.cshtml";
 }
 
-<h2>@ViewBag.Title.</h2>
 
 @using (Html.BeginForm("AddPhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -24,6 +24,3 @@
     </div>
 }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

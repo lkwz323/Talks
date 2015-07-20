@@ -1,5 +1,4 @@
-﻿
-@using Microsoft.AspNet.Identity
+﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -16,7 +15,7 @@
                     <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> 您好 @(User.Identity.GetUserName()) ！</span> <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="/home/index">修改密码</a></li>
+                    <li>@Html.ActionLink("修改密码", "ChangePassword", "Manage") </li>
                     <li class="divider"></li>
                     <li><a href="javascript:document.getElementById('logoutForm').submit()">退出登录</a></li>
 
@@ -25,7 +24,7 @@
             <!-- user dropdown ends -->
         </div>
     </div>
-    
+
 }
 else
 {
