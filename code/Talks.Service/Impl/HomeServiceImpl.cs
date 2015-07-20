@@ -6,11 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Talks.Dao;
+using Talks.Dao.Impl;
 
 namespace Talks.Service.Impl
 {
     public class HomeServiceImpl : IHomeService
     {
+        IHomeDao dao = new HomeDaoImpl();
         public PageInfo<HomeDto> BindDataList(dynamic ViewBag, AbstractSearchModel searcher)
         {
             searcher.SetPageParam();
@@ -27,19 +30,13 @@ namespace Talks.Service.Impl
             int size = searcher.PageSize;
             //db query and or mapping
 
-            //----------------------------------------------------------------------
-            ///////////////////////////////////
+         
             //list
-            List<HomeDto> list = new List<HomeDto>();
-            for (var i = 0; i < 10; i++)
-            {
-                list.Add(new HomeDto() { Id = i, Name = Guid.NewGuid().ToString() });
-            }
-            ///////////////////////////////////
+            var list = dao.getList(searcher.PageSize);
+           
             //count
-            var count = 101;
-            ///////////////////////////////////
-            //-----------------------------------------------------------------------
+            var count = dao.getCount();
+          
            
             Page<HomeDto> page = new Page<HomeDto>();
             page.PageSize = size;

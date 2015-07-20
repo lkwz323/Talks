@@ -19,10 +19,9 @@ namespace Talks.Dao.Impl
 
         public int getCount()
         {
-            ///////////////////////////////////
-            //count
-            int count = 101;
-            return count;
+            return (from s in db.HomeDtos
+                    select s).Count();
+
         }
 
 

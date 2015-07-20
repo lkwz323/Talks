@@ -11,7 +11,7 @@ namespace Talks.Dao
     public class TalksDBContext : DbContext
     {
         public TalksDBContext()
-            : base("name=TalksDB")
+            : base("name=DefaultConnection")
         {
         }
         /// <summary>

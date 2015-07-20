@@ -53,11 +53,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\BaseDao.cs" />
-    <Compile Include="Base\DataAccess\DataAccessBase.cs" />
-    <Compile Include="Base\DataAccess\DataBaseConfigKeys.cs" />
-    <Compile Include="Base\DataAccess\DataBaseConnectionFactory.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="IHomeDao.cs" />
     <Compile Include="Impl\HomeDaoImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
