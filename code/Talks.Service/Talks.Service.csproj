@@ -42,8 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\IBaseService.cs" />
     <Compile Include="IHomeService.cs" />
+    <Compile Include="Impl\Base\BaseServiceImpl.cs" />
     <Compile Include="Impl\HomeServiceImpl.cs" />
+    <Compile Include="Impl\TalksServiceImpl.cs" />
+    <Compile Include="ITalksService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
