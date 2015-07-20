@@ -1,63 +1,67 @@
 ﻿@using Talks.Admin.Models
 @model LoginViewModel
 @{
-    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_Layout_Account.cshtml";
+    ViewBag.Title = "登录";
 }
-
-<h2>@ViewBag.Title.</h2>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12 center login-header">
+        <h2>欢迎!</h2>
+    </div>
+    <!--/span-->
+</div>
+<div class="row">
+    <div class="well col-md-5 center login-box">
         <section id="loginForm">
+            <div class="alert alert-info">请输入用户名和密码</div>
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                <fieldset>
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-user red"></i>
+                        </span> @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "用户名" })
                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                     </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    <div class="clearfix"></div>
+                    <br>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-lock red"></i>
+                        </span> @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "密码" })
                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+                    <div class="clearfix"></div>
+                    <br>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                <label for="RememberMe">下次自动登录</label>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
+                    <p class="center" style="color:red;padding-top:10px;display:none;" id="error"></p>
+                    <p class="center col-md-5">
+                        <button type="submit" class="btn btn-primary">登 录</button>
+                    </p>
                     <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
+                        @Html.ActionLink("注册", "Register") @Html.ActionLink("忘记密码", "ForgotPassword")
+                        
+                    </p>
+                    @* Enable this once you have account confirmation enabled for password reset functionality
+                        <p>
+                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                        </p>*@
+                </fieldset>
             }
         </section>
     </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
+    @*<div class="col-md-4">
+            <section id="socialLoginForm">
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </div>*@
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

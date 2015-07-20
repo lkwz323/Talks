@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title</title>
+    @{  Html.RenderPartial("_inc_style"); }
+</head>
+<body>
+    <div class="ch-container">
+        <div class="row">          
+            <!--/row-->
+            <!-- content Start -->
+            @RenderBody()
+            <!--  content end -->
+            <!--/row-->
+        </div>
+        <!--/fluid-row-->
+
+    </div>
+    @{  Html.RenderPartial("_inc_javascript"); }
+   
+</body>
+</html>
+
+
+
+
+
+
+

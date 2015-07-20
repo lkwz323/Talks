@@ -9,6 +9,7 @@ using Talks.Service.Impl;
 
 namespace Talks.Admin.Controllers
 {
+     [Authorize]
     public class HomeController : Controller
     {
         IHomeService homeService = new HomeServiceImpl();
