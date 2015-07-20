@@ -11,7 +11,9 @@ namespace Talks.Model.Searcher.Base
     {
         public abstract SqlParameter[] GetParams();
 
-        public abstract String GetWheres();
+        public abstract string Sql { get; }
+
+        public abstract string OrderBy { get; }
 
 
 
@@ -67,7 +69,11 @@ namespace Talks.Model.Searcher.Base
          */
         public int Limit
         {
-            get { return PageSize; }
+            get { return  PageSize; }
+        }
+
+        public int End {
+            get { return Start + PageSize; }
         }
 
 

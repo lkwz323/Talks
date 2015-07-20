@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Talks.Model.Dto;
 
 namespace Talks.Model.Searcher
 {
@@ -17,16 +18,22 @@ namespace Talks.Model.Searcher
         public string Type { get; set; }
 
 
-        public override System.Data.SqlClient.SqlParameter[] GetParams()
+
+
+
+        public override SqlParameter[] GetParams()
         {
-            List<SqlParameter> list = new List<SqlParameter>();
-            return list.ToArray();
+            throw new NotImplementedException();
         }
 
-        public override string GetWheres()
+        public override string Sql
         {
-            string where="";
-            return where;
+            get { throw new NotImplementedException(); }
+        }
+
+        public override string OrderBy
+        {
+            get { throw new NotImplementedException(); }
         }
     }
 }

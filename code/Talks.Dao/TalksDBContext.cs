@@ -18,6 +18,5 @@ namespace Talks.Dao
         /// 测试用
         /// </summary>
         public DbSet<HomeDto> HomeDtos { get;set;}
-
     }
 }

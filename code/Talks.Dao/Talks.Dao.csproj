@@ -53,8 +53,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\BaseDao.cs" />
+    <Compile Include="Base\BaseSearchDao.cs" />
+    <Compile Include="Base\DataAccess\DataAccessBase.cs" />
+    <Compile Include="Base\DataAccess\DataBaseConnectionFactory.cs" />
+    <Compile Include="Base\IBaseDao.cs" />
     <Compile Include="IHomeDao.cs" />
     <Compile Include="Impl\HomeDaoImpl.cs" />
+    <Compile Include="Impl\TalksDaoImpl.cs" />
+    <Compile Include="ITalksDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TalksDBContext.cs" />
   </ItemGroup>
