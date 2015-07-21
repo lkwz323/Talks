@@ -1,0 +1,44 @@
+body {
+     font-family:微软雅黑
+}
+/*复制代码 按钮*/
+.btnCopy{
+    color:#ff0000;
+    font-size:8pt;
+}
+/*容纳pre的DIV*/
+#codeDiv{
+    width:100%;
+    height:100%;
+    overflow:auto;
+    cursor:text;
+}
+/*容纳代码的pre*/
+.code{
+  background:#EDEDED;
+  border-left:solid 3px #6CE26C;
+  padding: 5px;
+  margin: 0 5px 0 5px;
+  font-family: "微软雅黑,"Verdana,Helvetica, Arial, "宋体";
+}
+/*显示代码的图片*/
+.openimg{
+    margin-right:3px;
+    vertical-align:-4px;
+}
+/*折叠代码的图片*/
+.closeimg{
+    display:none;
+    margin-right:3px;
+    vertical-align:-4px;
+}
+/*显示的提示文本*/
+.ShowMsg{
+    color:#ff0000;
+}
+
+#MySignature　　{　　 border:solid 1px #E5E5E5;
+　　　　　　　　　　　　　　padding:10px;
+　　　　　　　　　　　　　　background:#FFFEFE url(http://images.cnblogs.com/cnblogs_com/grenet/226272/o_o_o_info.png) no-repeat scroll 15px 50%;
+　　　　　　　　　　　　　　padding-left:80px;}
+　　#MySignature div{line-height: 25px;}

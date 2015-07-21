@@ -9,18 +9,17 @@ namespace Talks.Dao.Impl
 {
     public class HomeDaoImpl : IHomeDao
     {
-        TalksDBContext db = new TalksDBContext();
+      
         public List<HomeDto> getList(int pageSize)
         {
             //list
-            var list = db.HomeDtos.Take(pageSize).ToList();
+            var list= new List<HomeDto>();
             return list;
         }
 
         public int getCount()
         {
-            return (from s in db.HomeDtos
-                    select s).Count();
+            return 101;
 
         }
 

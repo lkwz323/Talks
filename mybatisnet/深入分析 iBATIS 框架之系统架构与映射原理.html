@@ -1,0 +1,586 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0074)http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN" class="dj_webkit dj_chrome dj_contentbox"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>深入分析 iBATIS 框架之系统架构与映射原理</title>
+<link rel="schema.DC" href="http://purl.org/DC/elements/1.0/">
+<link rel="SHORTCUT ICON" href="http://www.ibm.com/favicon.ico">
+<meta name="DC.Rights" content="© Copyright IBM Corporation 2010">
+<meta name="Keywords" content="iBATIS, 框架, 原理, tttjca, tttosca">
+<meta name="DC.Date" scheme="iso8601" content="2010-11-08">
+<meta name="Source" content="v17 delivery:developerWorks">
+<meta name="Security" content="Public">
+<meta name="Abstract" content="iBATIS 通过 SQL Map 将 Java 对象映射成 SQL 语句和将结果集再转化成 Java 对象，与其他 ORM 框架相比，既解决了 Java 对象与输入参数和结果集的映射，又能够让用户方便的手写使用 SQL 语句。本文主要介绍了 iBATIS 框架的体系结构和运行流程，以及 iBATIS 如何完成 SQL 语句的解析与 Java 对象与数据字段映射关系的建立，最后用一个实例说明了 iBATIS 是如何帮我们完成工作的。">
+<meta name="Description" content="iBATIS 通过 SQL Map 将 Java 对象映射成 SQL 语句和将结果集再转化成 Java 对象，与其他 ORM 框架相比，既解决了 Java 对象与输入参数和结果集的映射，又能够让用户方便的手写使用 SQL 语句。本文主要介绍了 iBATIS 框架的体系结构和运行流程，以及 iBATIS 如何完成 SQL 语句的解析与 Java 对象与数据字段映射关系的建立，最后用一个实例说明了 iBATIS 是如何帮我们完成工作的。">
+<meta name="IBM.Effective" scheme="W3CDTF" content="2010-11-08">
+<meta name="Owner" content="developerWorks/China/IBM">
+<meta name="DC.Language" scheme="rfc1766" content="zh-CN">
+<meta name="IBM.SpecialPurpose" content="SP001">
+<meta name="IBM.Country" content="CN">
+<meta name="Robots" content="index,follow">
+<meta name="DC.Type" scheme="IBM_ContentClassTaxonomy" content="CT316">
+<meta name="DC.Subject" scheme="IBM_SubjectTaxonomy" content="TT300">
+<meta name="dW.ContentArea" content="1,7">
+<meta name="dW.Topic" content="263,41,214,9">
+
+<meta scheme="IBM_WTMCategory" name="IBM.WTMCategory" content="SOFDCJVACN">
+
+<link rel="canonical" href="./深入分析 iBATIS 框架之系统架构与映射原理_files/深入分析 iBATIS 框架之系统架构与映射原理.html">
+<!-- HEADER_SCRIPTS_AND_CSS_INCLUDE -->
+<link href="./深入分析 iBATIS 框架之系统架构与映射原理_files/www.css" rel="stylesheet" title="www" type="text/css">
+<link href="./深入分析 iBATIS 框架之系统架构与映射原理_files/cnzh.css" rel="stylesheet" title="www" type="text/css">
+<!-- Masthead/footer -->
+<link href="./深入分析 iBATIS 框架之系统架构与映射原理_files/dw-mfN2015-01.css" media="screen,projection" rel="stylesheet" title="www" type="text/css">
+<link href="./深入分析 iBATIS 框架之系统架构与映射原理_files/dw-article-6.css" rel="stylesheet" title="www" type="text/css">
+<link href="./深入分析 iBATIS 框架之系统架构与映射原理_files/dw-common-features.css" rel="stylesheet" title="www" type="text/css">
+<link href="./深入分析 iBATIS 框架之系统架构与映射原理_files/dw-local-site-v17-N2014-05.css" media="screen,projection" rel="stylesheet" title="www" type="text/css">
+        <link href="./深入分析 iBATIS 框架之系统架构与映射原理_files/dw-bluemix-regbar.css" media="screen,projection" rel="stylesheet" title="www" type="text/css">
+<script type="text/javascript" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/www.js">//</script><script type="text/javascript" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/eluminate.js"></script>
+<script type="text/javascript" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/dw-www-v2.js">//</script><script type="text/javascript" charset="utf-8" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/Dialog.xd.js"></script>   
+<script type="text/javascript">dojo.addOnLoad(function(){var dw_lang="zh_CN";var dw_source="dwchina";var dw_content=window.location.pathname.split("/")[window.location.pathname.split("/").length-2];if(dw_content=="library"){dw_content=window.location.pathname.split("/")[window.location.pathname.split("/").length-1];dw_content=window.location.pathname.split("/")[window.location.pathname.split("/").length-3]+"-"+dw_content.substring(0,dw_content.indexOf(".html"))}var lnkID="article-rbar-bmix-home-regbar";dojo.attr(dojo.query(".dw-regbar-btn")[0],"id",lnkID);var lnkHref=dojo.attr(dojo.byId(lnkID),"href")+"?lang="+dw_lang+"&ca="+dw_source+"-_-bluemix-_-"+dw_content+"-_-regbar-article";dojo.attr(dojo.byId(lnkID),"href",lnkHref);var dwRegbarShow=dojo.animateProperty({node:"dw-regbar",duration:1000,delay:1000,properties:{opacity:{start:0,end:1},top:0}});var ibmTopShow=dojo.animateProperty({node:"ibm-top",duration:1000,delay:1000,properties:{marginTop:{start:0,end:42}}});dwRegbarShow.play();ibmTopShow.play()})
+</script><script type="text/javascript">
+//  ibmweb.config.set({ sbs: { enabled: false }});
+</script>
+<script type="text/javascript">dojo.addOnLoad(function(){var dw_lang="zh_CN";var dw_source="dwchina";var dw_register="注册免费的 Bluemix 试用版";var dw_connect="连接 Bluemix 开发者";var dw_vp="在 IBM Bluemix 云平台上开发并部署您的下一个应用。";var dw_cta="开始您的试用";var dw_tile_alt="在 IBM Bluemix 云平台上开发并部署您的下一个应用。现在就开始免费试用";var dw_campaign="bluemix";var dw_content=window.location.pathname.split("/")[window.location.pathname.split("/").length-2];if(dw_content=="library"){dw_content=window.location.pathname.split("/")[window.location.pathname.split("/").length-1];dw_content=window.location.pathname.split("/")[window.location.pathname.split("/").length-3]+"-"+dw_content.substring(0,dw_content.indexOf(".html"))}var bluDevComURL="https://developer.ibm.com/bluemix/";var bluLink="https://www.bluemix.net/";var lnkID;var lnkIDd;var lnkIDt;var bLinkEnd;var bLinkTemp;var idTrkr=[];var idCnt;var artTop=dojo.query("div.ibm-col-1-1")[0];var artChildren=dojo.query(artTop).children();var edgy=false;if(dojo.hasClass(artChildren[0],"ibm-inset"))edgy=true;if((artChildren[0].nodeName=="H2")&&(dojo.hasClass(artChildren[1],"ibm-inset")))edgy=true;if(dojo.hasClass(artChildren[0],"codesection"))edgy=true;if((artChildren[0].nodeName=="H5")&&(dojo.hasClass(artChildren[1],"codesection")))edgy=true;if((artChildren[0].nodeName=="H5")&&(artChildren[1].width>=701))edgy=true;if(artChildren[1].width>=701)edgy=true;if(dojo.hasClass(artChildren[0],"ibm-data-table"))edgy=true;if((artChildren[0].nodeName=="H5")&&(dojo.hasClass(artChildren[1],"ibm-data-table")))edgy=true;if(!(edgy)){var sBarAB='<div class="dw-article-sidebar dw-bluemix" id="dwc-exp-a">'+'<img src="//dw1.s81c.com/developerworks/i/bluemix-graphic.png" height="64" width="64" alt=""/>'+'<p>'+dw_vp+'</p>'+'<p class="ibm-button-link-alternate dw-button-green">'+'<a id="tutc-sbar-bmix-home-btn-ABa" href="'+bluLink+'" class="dw-button-large">'+dw_cta+'</a></p></div>';dojo.place(sBarAB,artTop,"first")}dojo.forEach(dojo.query("#ibm-content-main a"),function(item,index){var dw_medium="article";var bLink=dojo.attr(item,"href");var linkClass=dojo.attr(item,"class");if((dojo.attr(item,"id")!=null)&&(dojo.attr(item,"id").indexOf("-sbar-")>-1))dw_medium="sidebar";if((dojo.attr(item,"id")!=null)&&(dojo.attr(item,"id").indexOf("-vpromo-")>-1))dw_medium="video-promotion";if(bLink&&(bLink.indexOf("//bluemix.net")>-1))bLink=bLink.replace("//bluemix.net","//www.bluemix.net");if(bLink&&(bLink.indexOf("//ace.ng.bluemix.net")>-1))bLink=bLink.replace("//ace.ng.bluemix.net","//www.bluemix.net");if(bLink&&(bLink.indexOf("//console.ng.bluemix.net")>-1))bLink=bLink.replace("//console.ng.bluemix.net","//www.bluemix.net");if(bLink&&((bLink.indexOf("//www.bluemix.net")>-1)||(bLink.indexOf("//www.ng.bluemix.net")>-1)||(bLink.indexOf("//hub.jazz.net")>-1))){bLinkEnd="";bLink=bLink.split("?");if((bLink[1])&&(bLink[1].indexOf("repository=")!=-1)){var deployBtn=true;bLink[0]=bLink[0]+"?"+bLink[1];bLink[1]=null}if((bLink[1])&&(bLink[1].indexOf("/")!=-1))bLinkEnd=bLink[1].substring(bLink[1].indexOf("/"));bLink=bLink[0];if(bLink.indexOf("//hub.jazz.net")>-1){if(!(deployBtn)&&((bLink.indexOf("//hub.jazz.net/git")>-1)||(bLink.indexOf("//hub.jazz.net/project")>-1))){bLink="https://login.jazz.net/psso/proxy/jazzregister?utm_source="+dw_source+"&utm_medium="+dw_medium+"&utm_content="+dw_content+"&utm_campaign="+dw_campaign+"&redirect_uri="+bLink}else{if(deployBtn){bLink=bLink+"&cm_mmc="+dw_source+"-_-"+dw_campaign+"-_-"+dw_content+"-_-"+dw_medium}else{bLink=bLink+"?utm_source="+dw_source+"&utm_campaign="+dw_campaign+"&utm_content="+dw_content+"&utm_medium="+dw_medium}}}else{if(bLink.indexOf("/#/")==-1){if(bLink.substring(bLink.length-7)=="/docs/#"){bLink=bLink.replace("/docs/#","/docs/"+"?cm_mmc="+dw_source+"-_-"+dw_campaign+"-_-"+dw_content+"-_-"+dw_medium)}else if(bLink.substring(bLink.length-5)=="/docs"){bLink=bLink.replace("/docs","/docs/"+"?cm_mmc="+dw_source+"-_-"+dw_campaign+"-_-"+dw_content+"-_-"+dw_medium)}else{bLink=bLink+"?cm_mmc="+dw_source+"-_-"+dw_campaign+"-_-"+dw_content+"-_-"+dw_medium}}else{bLink=bLink.substring(0,bLink.indexOf("#"))+"?cm_mmc="+dw_source+"-_-"+dw_campaign+"-_-"+dw_content+"-_-"+dw_medium+bLink.substring(bLink.indexOf("#")-1)}}if(bLinkEnd)bLink=bLink+bLinkEnd;if(linkClass.indexOf("bluemix-home")==-1){if((bLink.indexOf("#")==-1)&&(bLink.indexOf("/solutions")==-1)&&(bLink.indexOf("/catalog")==-1)&&(bLink.indexOf("//www.bluemix.net/")!=-1)){bLink=bLink.replace("//www.bluemix.net/","//developer.ibm.com/sso/bmregistration");if(bLink.indexOf("http://")==0)bLink=bLink.replace("http://","https://");if(bLink.indexOf("//")==0)bLink=bLink.replace("//","https://");if(bLink.indexOf("?cm_mmc=")!=-1)bLink=bLink.replace("?cm_mmc=","?lang="+dw_lang+"&ca=")}if((bLink.indexOf("#")==-1)&&(bLink.indexOf("/solutions")==-1)&&(bLink.indexOf("//www.bluemix.net?")!=-1)){bLink=bLink.replace("//www.bluemix.net","//developer.ibm.com/sso/bmregistration");if(bLink.indexOf("http://")==0)bLink=bLink.replace("http://","https://");if(bLink.indexOf("//")==0)bLink=bLink.replace("//","https://");if(bLink.indexOf("?cm_mmc=")!=-1)bLink=bLink.replace("?cm_mmc=","?lang="+dw_lang+"&ca=")}}if((bLink.indexOf("#")!=-1)&&(bLink.indexOf("solutions")!=-1)){bLinkTemp=bLink.substring(0,bLink.indexOf("?"));bLink=bLink.substring(bLink.indexOf("/#/")+3,bLink.length);bLink=bLinkTemp+bLink;bLinkTemp=bLink.substring(0,bLink.indexOf("solution="));bLink=bLink.substring(bLink.indexOf("/solution=")+10,bLink.length);bLink=bLinkTemp+bLink;bLink=bLink+"?cm_mmc="+dw_source+"-_-"+dw_campaign+"-_-"+dw_content+"-_-"+dw_medium}if((bLink.indexOf("#")!=-1)&&(bLink.indexOf("store")!=-1)){if(bLink.indexOf("&cloudOEPaneId=store")!=-1){bLinkTemp=bLink.split("&cloudOEPaneId=store");bLink=bLinkTemp[0]}bLinkTemp=bLink.substring(bLink.indexOf("serviceOfferingGuid=")+20,bLink.length);bLink=bLink.substring(0,bLink.indexOf(".net/")+5)+"catalog/"+bLinkTemp+"?cm_mmc="+dw_source+"-_-"+dw_campaign+"-_-"+dw_content+"-_-"+dw_medium}dojo.attr(item,"href",bLink);}});});</script><!-- LEADSPACE_STYLES -->
+
+<script type="text/javascript" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/cnzh-utf8.js" id="dojoIoScript2" charset="utf-8"></script><script type="text/javascript" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/saved_resource" id="dojoIoScript3" charset="utf-8"></script><script type="text/javascript" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/profiling.js" id="dojoIoScript4" charset="utf-8"></script><script type="text/javascript" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/eluminate(1).js"></script><script type="text/javascript" charset="utf-8" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/move.xd.js"></script><script type="text/javascript" charset="utf-8" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/TimedMoveable.xd.js"></script><script type="text/javascript" charset="utf-8" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/_CssStateMixin.xd.js"></script><script type="text/javascript" charset="utf-8" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/_FormMixin.xd.js"></script><script type="text/javascript" charset="utf-8" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/_DialogMixin.xd.js"></script><script type="text/javascript" charset="utf-8" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/DialogUnderlay.xd.js"></script><script type="text/javascript" charset="utf-8" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/ContentPane.xd.js"></script><script type="text/javascript" charset="utf-8" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/common.xd.js"></script><script type="text/javascript" charset="utf-8" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/TooltipDialog.xd.js"></script><script type="text/javascript" charset="utf-8" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/Mover.xd.js"></script><script type="text/javascript" charset="utf-8" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/Moveable.xd.js"></script><script type="text/javascript" charset="utf-8" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/_ContentPaneResizeMixin.xd.js"></script><script type="text/javascript" charset="utf-8" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/html.xd.js"></script><script type="text/javascript" charset="utf-8" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/loading.xd.js"></script><script type="text/javascript" charset="utf-8" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/common.xd(1).js"></script><script type="text/javascript" charset="utf-8" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/autoscroll.xd.js"></script><script type="text/javascript" charset="utf-8" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/_LayoutWidget.xd.js"></script><script type="text/javascript" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/blackwhite_lists.json" id="dojoIoScript5" charset="utf-8"></script><script language="javascript" type="text/javascript" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/50200000.js"></script><script language="javascript" type="text/javascript" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/cookie-id.js"></script><script language="javascript" type="text/javascript" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/rules_50200000.js"></script><script language="javascript" type="text/javascript" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/dispatcher-v3.js"></script><script src="./深入分析 iBATIS 框架之系统架构与映射原理_files/yahoo-min.js" type="text/javascript"></script><script src="./深入分析 iBATIS 框架之系统架构与映射原理_files/cp-v3.js" type="text/javascript"></script><script src="./深入分析 iBATIS 框架之系统架构与映射原理_files/json-min.js" type="text/javascript"></script></head>
+<body id="ibm-com" class="v17" aria-busy="false">
+<div id="dw-regbar" class="dw-home-band" aria-labelledby="dw-regbar-vp" role="complementary" style="opacity: 1; top: 0px;">
+    <div class="ibm-columns">
+        <div class="ibm-col-6-6">
+            <span id="dw-regbar-bluemix">IBM <strong>Bluemix</strong></span>
+            <span id="dw-regbar-vp">点击按钮，开始云上的开发！</span>
+            <p class="ibm-button-link-alternate dw-button-green">
+                <a class="dw-button-large dw-regbar-btn" href="https://developer.ibm.com/sso/bmregistration?lang=zh_CN&ca=dwchina-_-bluemix-_-j-lo-ibatis-principle-_-regbar-article" id="article-rbar-bmix-home-regbar">开始您的试用</a>                
+            </p>               
+        </div>
+    </div> 
+</div>	<div id="ibm-top" class="ibm-landing-page ibm-no-scroll" style="margin-top: 42px;"><img src="./深入分析 iBATIS 框架之系统架构与映射原理_files/ibm_logo_print.png" width="43" height="15" id="ibm-print-masthead" alt="IBM Print">
+
+<!-- MASTHEAD_BEGIN -->		
+<div id="ibm-masthead" role="banner">
+
+    <!-- TOP ROW -->    
+	<div id="dw-masthead-top-row">
+		<ul id="ibm-mast-options-dw" role="toolbar" aria-label="Masthead navigation">
+			<li id="dw-mast-top-4" role="presentation">
+				<a href="http://www.ibm.com/developerworks/cn/" tabindex="0"><img src="./深入分析 iBATIS 框架之系统架构与映射原理_files/dwn-dw-badge.png" width="43" height="22" alt="dW" aria-label="dW"></a>
+			</li>
+			<li id="dw-mast-top-0" role="presentation">
+				<div id="dw-mast-signin">
+					<a id="dw-mf-signin-link" class="" href="http://www.ibm.com/developerworks/dwwi/jsp/ssologin.jsp?d=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fcn%2Fjava%2Fj-lo-ibatis-principle%2Findex.html&lang=zh_CN&a=dwmav" title="" tabindex="2">登录</a>
+					<span class="dw-mf-signin-spacer">|</span>
+					<a id="dw-mf-reg-link" class="" href="http://www.ibm.com/developerworks/dwwi/jsp/ssoregister.jsp?d=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fcn%2Fjava%2Fj-lo-ibatis-principle%2Findex.html&lang=zh_CN&a=dwmav" title="" tabindex="3">注册</a>
+				</div>
+				<div id="dw-mast-auth-link" class="dw-mf-hide">
+					<a class="authenticated ibm-active" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#" role="button" tabindex="2"></a>
+					<ul id="dw-mast-auth-menu" class="dw-mf-hide">
+						<li class="dw-mast-auth-menu-title" aria-hidden="true">developerWorks 社区</li>
+						<li>
+							<span class="dw-mast-auth-menu-arrow" aria-hidden="true">›</span><a href="http://www.ibm.com/developerworks/community/profiles/html/myProfileView.do?lang=zh" tabindex="3">我的概要信息</a>
+						</li>
+						<li>
+							<span class="dw-mast-auth-menu-arrow" aria-hidden="true">›</span><a href="http://www.ibm.com/developerworks/community/groups/service/html/mycommunities?lang=zh" tabindex="4">我的社区</a>
+						</li>
+						<li>
+							<span class="dw-mast-auth-menu-arrow" aria-hidden="true">›</span><a href="http://www.ibm.com/developerworks/community/news/?lang=zh" tabindex="5">设置</a>
+						</li>
+						<li class="dw-mast-auth-menu-divider"><hr></li>
+						<li>
+							<span class="dw-mast-auth-menu-arrow" aria-hidden="true">›</span><a id="dw-mast-signout-link" href="http://www.ibm.com/developerworks/dwwi/jsp/ssologout.jsp?d=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fcn%2F&a=dwmav" tabindex="6">退出</a>
+						</li>
+					</ul>				
+				</div>
+			</li>
+			<li id="dw-mast-top-1">
+				<div></div>
+			</li>
+			<li id="dw-mast-top-3" role="presentation">
+				<a href="http://www.ibm.com/cn/zh/" tabindex="1">IBM</a>
+			</li>
+		</ul>
+	</div>
+
+    <!-- BOTTOM ROW -->
+	<div id="ibm-universal-nav-dw" aria-label="Site map">
+		<ul id="ibm-unav-links-dw">
+			<li id="ibm-unav-home-dwlogo">
+				<a href="http://www.ibm.com/developerworks/cn/"><img src="./深入分析 iBATIS 框架之系统架构与映射原理_files/dwn-dw-wordmark.png" width="225" height="28" alt="developerWorks®"></a>
+			</li>
+		</ul>
+		<ul id="ibm-menu-links-dw" class="ibm-menu-links-dw-cn" role="toolbar" aria-label="Site map">
+			<li id="dw-mast-nav-0" role="presentation"><a href="http://www.ibm.com/developerworks/cn/topics/" tabindex="0">技术主题</a></li>
+			<li id="dw-mast-nav-1" role="presentation"><a href="http://www.ibm.com/developerworks/cn/downloads/" tabindex="0">软件下载</a></li>
+			<li id="dw-mast-nav-2" role="presentation"><a href="http://www.ibm.com/developerworks/community/?lang=zh" tabindex="0">社区</a></li>
+			<li id="dw-mast-nav-3" role="presentation"><a href="https://www.ibm.com/developerworks/community/groups/service/html/communityview?communityUuid=6d7f9e5d-5f89-4767-a006-a81b8d186370&lang=zh" tabindex="0">技术讲座</a></li>
+		</ul>
+		<form id="ibm-search-form" action="http://www.ibm.com/search/csass/search/" method="get" name="form1" aria-label="搜索 developerWorks" role="search">
+			<p>
+				<label for="q"><span class="ibm-access">搜索 developerWorks</span></label>
+				<input id="q" type="text" name="q" value="搜索 developerWorks" maxlength="100">
+				<input type="hidden" name="sn" value="dw">
+				<input type="hidden" name="lang" value="zh">
+				<input type="hidden" name="cc" value="CN">
+				<input type="hidden" name="en" value="utf">
+				<input type="hidden" name="hpp" value="20">
+				<input type="hidden" name="dws" value="cndw">
+				<input type="hidden" name="lo" value="zh">
+				<input id="ibm-search" class="ibm-btn-search" type="submit" value="提交">
+			</p>
+		</form>
+	</div>    
+	
+<div id="ibm-social-tools" role="navigation" aria-label="社交工具" style="display: block;"><ul role="toolbar" aria-label="Social tool list"><li><a class="ibm-share-print" title="打印本页面" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#" rel="print" dojoattrid="1" role="button" tabindex="0">打印本页面</a></li><li><a class="ibm-share-email" title="用电子邮件发送本页面" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#" rel="email" dojoattrid="2" role="button" tabindex="-1">用电子邮件发送本页面</a></li><li></li><li></li><li><a class="ibm-share-weibo" tabindex="-1" role="button" dojoattrid="2" rel="新浪微博" title="新浪微博" href="http://service.weibo.com/share/share.php?title=%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%20iBATIS%20%E6%A1%86%E6%9E%B6%E4%B9%8B%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%98%A0%E5%B0%84%E5%8E%9F%E7%90%86&url=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fcn%2Fjava%2Fj-lo-ibatis-principle%2Findex.html&language=zh_cn" onclick="ibmweb.sbs.clickHandler(event,{url:&#39;http://service.weibo.com/share/share.php?title=%{TITLE}&amp;url=%{URL}&amp;language=zh_cn&#39;});">新浪微博</a></li><li><a class="ibm-share-renren" tabindex="-1" role="button" dojoattrid="3" rel="人人网" title="人人网" href="http://share.renren.com/share/buttonshare?title=%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%20iBATIS%20%E6%A1%86%E6%9E%B6%E4%B9%8B%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%98%A0%E5%B0%84%E5%8E%9F%E7%90%86&link=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fcn%2Fjava%2Fj-lo-ibatis-principle%2Findex.html" onclick="ibmweb.sbs.clickHandler(event,{url:&#39;http://share.renren.com/share/buttonshare?title=%{TITLE}&amp;link=%{URL}&#39;});">人人网</a></li><li><a class="dwcn-tencent-link" tabindex="-1" role="button" dojoattrid="4" rel="腾讯微博" title="腾讯微博" href="http://v.t.qq.com/share/share.php?title=%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%20iBATIS%20%E6%A1%86%E6%9E%B6%E4%B9%8B%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%98%A0%E5%B0%84%E5%8E%9F%E7%90%86&url=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fcn%2Fjava%2Fj-lo-ibatis-principle%2Findex.html" onclick="ibmweb.sbs.clickHandler(event,{url:&#39;http://v.t.qq.com/share/share.php?title=%{TITLE}&amp;url=%{URL}&#39;});">腾讯微博</a></li><li><a class="dwcn-sohu-link" tabindex="-1" role="button" dojoattrid="5" rel="搜狐微博" title="搜狐微博" href="http://t.sohu.com/third/post.jsp?title=%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%20iBATIS%20%E6%A1%86%E6%9E%B6%E4%B9%8B%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%98%A0%E5%B0%84%E5%8E%9F%E7%90%86%20&link=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fcn%2Fjava%2Fj-lo-ibatis-principle%2Findex.html" onclick="ibmweb.sbs.clickHandler(event,{url:&#39;http://t.sohu.com/third/post.jsp?title=%{TITLE}%20&amp;link=%{URL}&#39;});">搜狐微博</a></li><li><a class="dwcn-netease-link" tabindex="-1" role="button" dojoattrid="6" rel="网易微博" title="网易微博" href="http://t.163.com/article/user/checkLogin.do?info=%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%20iBATIS%20%E6%A1%86%E6%9E%B6%E4%B9%8B%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%98%A0%E5%B0%84%E5%8E%9F%E7%90%86%20http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fcn%2Fjava%2Fj-lo-ibatis-principle%2Findex.html" onclick="ibmweb.sbs.clickHandler(event,{url:&#39;http://t.163.com/article/user/checkLogin.do?info=%{TITLE}%20%{URL}&#39;});">网易微博</a></li><li><a class="ibm-share-digg" title="Digg" href="http://digg.com/submit?phase=2&url=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fcn%2Fjava%2Fj-lo-ibatis-principle%2Findex.html&title=%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%20iBATIS%20%E6%A1%86%E6%9E%B6%E4%B9%8B%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%98%A0%E5%B0%84%E5%8E%9F%E7%90%86" rel="digg" dojoattrid="7" role="button" tabindex="-1" onclick="ibmweb.sbs.clickHandler(event,{url:&#39;http://digg.com/submit?phase=2&amp;url=%{URL}&amp;title=%{TITLE}&#39;});">Digg</a></li><li><a class="ibm-share-facebook" title="Facebook" href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fcn%2Fjava%2Fj-lo-ibatis-principle%2Findex.html&t=%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%20iBATIS%20%E6%A1%86%E6%9E%B6%E4%B9%8B%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%98%A0%E5%B0%84%E5%8E%9F%E7%90%86" rel="facebook" dojoattrid="8" role="button" tabindex="-1" onclick="ibmweb.sbs.clickHandler(event,{url:&#39;http://www.facebook.com/sharer.php?u=%{URL}&amp;t=%{TITLE}&#39;});">Facebook</a></li><li><a class="ibm-share-twitter" title="Twitter" href="http://twitter.com/?status=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fcn%2Fjava%2Fj-lo-ibatis-principle%2Findex.html%20-%20%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%20iBATIS%20%E6%A1%86%E6%9E%B6%E4%B9%8B%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%98%A0%E5%B0%84%E5%8E%9F%E7%90%86" rel="twitter" dojoattrid="9" role="button" tabindex="-1" onclick="ibmweb.sbs.clickHandler(event,{url:&#39;http://twitter.com/?status=%{URL}%20-%20%{TITLE}&#39;});">Twitter</a></li><li><a class="ibm-share-delicious" title="Delicious" href="http://delicious.com/post?url=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fcn%2Fjava%2Fj-lo-ibatis-principle%2Findex.html&title=%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%20iBATIS%20%E6%A1%86%E6%9E%B6%E4%B9%8B%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%98%A0%E5%B0%84%E5%8E%9F%E7%90%86" rel="delicious" dojoattrid="10" role="button" tabindex="-1" onclick="ibmweb.sbs.clickHandler(event,{url:&#39;http://delicious.com/post?url=%{URL}&amp;title=%{TITLE}&#39;});">Delicious</a></li><li><a class="ibm-share-linkedin" title="Linked In" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fcn%2Fjava%2Fj-lo-ibatis-principle%2Findex.html&title=%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%20iBATIS%20%E6%A1%86%E6%9E%B6%E4%B9%8B%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%98%A0%E5%B0%84%E5%8E%9F%E7%90%86" rel="linkedin" dojoattrid="11" role="button" tabindex="-1" onclick="ibmweb.sbs.clickHandler(event,{url:&#39;http://www.linkedin.com/shareArticle?mini=true&amp;url=%{URL}&amp;title=%{TITLE}&#39;});">Linked In</a></li></ul></div></div>
+<div id="fdiv" class="ibm-access"></div><!-- MASTHEAD_END -->
+	    
+<!-- LAYOUT -->
+<!-- LEADSPACE_BEGIN --> 
+<div id="ibm-access-cntr" role="main"><div id="ibm-leadspace-head">
+	<!-- LEADSPACE_BODY_BEGIN --> 
+	<div id="ibm-leadspace-body">
+		<!-- Navigation_Trail_BEGIN -->
+      <ul id="ibm-navigation-trail" role="navigation" aria-label="Bread Crumbs"><li><a href="http://www.ibm.com/developerworks/cn/">developerWorks 中国</a></li><li><a href="http://www.ibm.com/developerworks/cn/topics/">技术主题</a></li><li><a href="http://www.ibm.com/developerworks/cn/java/">Java technology</a></li><li><a href="http://www.ibm.com/developerworks/cn/views/java/libraryview.jsp">文档库</a></li></ul>
+		<!-- END_Navigation_Trail -->
+			<!-- Title_Subtitle -->
+			<h1>深入分析 iBATIS 框架之系统架构与映射原理</h1>
+	</div>
+	<!-- LEADSPACE_BODY_END --> 
+	<!-- SUMMARY_BEGIN -->
+	<div id="dw-summary-area" class="dw-summary-columns">
+		<div class="ibm-col-6-4">
+		<p>iBATIS 通过 SQL Map 将 Java 对象映射成 SQL 语句和将结果集再转化成 Java 对象，与其他 ORM 框架相比，既解决了 Java 对象与输入参数和结果集的映射，又能够让用户方便的手写使用 SQL 语句。本文主要介绍了 iBATIS 框架的体系结构和运行流程，以及 iBATIS 如何完成 SQL 语句的解析与 Java 对象与数据字段映射关系的建立，最后用一个实例说明了 iBATIS 是如何帮我们完成工作的。</p>
+		<p class="ibm-no-print ibm-ind-link">
+
+			
+			<span id="nCmts"><span>7</span><img class="dw-cmts-arrow" alt="" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/dw-cmts-arrow.png" height="7" width="7"> <a href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#icomments" class="dw-cmt-link">评论：</a></span>
+		</p>
+		</div>
+		<div class="ibm-col-6-2 dw-toc-margin">
+			<p class="dw-summary-author"><a href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#authorN1002A" class="ibm-popup-link" onclick="ibmweb.overlay.show(&#39;authorN1002A&#39;,this);return false;" role="button">许 令波</a> (<a href="mailto:xulingbo0201@163.com?subject=%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%20iBATIS%20%E6%A1%86%E6%9E%B6%E4%B9%8B%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%98%A0%E5%B0%84%E5%8E%9F%E7%90%86">xulingbo0201@163.com</a>), Java 工程师, 淘宝网</p>
+<div id="authorN1002A" class="ibm-common-overlay"><div class="ibm-head"><p><a href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#close" class="ibm-common-overlay-close">关闭 [x]</a></p></div><div class="ibm-body"><div class="ibm-main"><div class="ibm-title"><!--this is where the h2 usually goes--></div><div class="ibm-container ibm-alternate"><div class="ibm-container-body">
+<p><!--.-->
+许令波，就职于淘宝网，是一名 Java 开发工程师。对大型互联网架构设计颇感兴趣，喜欢钻研开源框架的设计原理。可以通过 junshan@taobao.com 与我联系。</p><br><br></div></div></div></div><div class="ibm-footer"><!----></div></div>
+			<p class="dw-summary-date">2010 年 11 月 08 日</p>
+			
+
+
+			<div aria-hidden="true" class="ibm-container" id="dw-toc"><div class="ibm-container-body"><ul class="ibm-twisty"><li><a href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#toggle" class="ibm-twisty-trigger ibm-twisty-trigger-closed"><img src="./深入分析 iBATIS 框架之系统架构与映射原理_files/c.gif" alt="+"></a><span class="ibm-twisty-head">内容</span><div class="ibm-twisty-body" style="display: none;"><ul style="font-size:0.8em" class="ibm-link-list">
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#major1">iBATIS 框架主要的类层次结构</a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#major2">iBATIS 框架的设计策略</a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#major3">iBATIS 框架的运行原理</a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#major4">示例</a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#major5">iBATIS 对 SQL 语句的解析</a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#major6">数据库字段映射到 Java 对象</a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#major7">示例运行的结果</a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#major8">总结</a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#download">下载</a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#resources">参考资料 </a></li>
+<li><a class="ibm-anchor-down-em-link" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#icomments">评论</a></li></ul></div></li></ul></div></div>
+		</div>
+	</div>
+	<!-- SUMMARY_END -->
+</div><div id="ibm-pcon">
+
+<!-- BEGIN_IBM-CONTENT -->
+<div id="ibm-content">
+
+<!-- BEGIN_IBM-CONTENT-BODY -->
+<div id="ibm-content-body">
+
+<!-- BEGIN_IBM-CONTENT-MAIN -->
+<div id="ibm-content-main">
+
+<!-- 1_1_COLUMN_BEGIN -->
+<div class="ibm-columns">
+<div class="ibm-col-1-1"><div class="dw-article-sidebar dw-bluemix" id="dwc-exp-a"><img src="./深入分析 iBATIS 框架之系统架构与映射原理_files/bluemix-graphic.png" height="64" width="64" alt=""><p>在 IBM Bluemix 云平台上开发并部署您的下一个应用。</p><p class="ibm-button-link-alternate dw-button-green"><a id="tutc-sbar-bmix-home-btn-ABa" href="https://developer.ibm.com/sso/bmregistration?lang=zh_CN&ca=dwchina-_-bluemix-_-j-lo-ibatis-principle-_-sidebar" class="dw-button-large">开始您的试用</a></p></div>
+
+<h2 id="major1">iBATIS 框架主要的类层次结构</h2><p>总体来说 iBATIS 的系统结构还是比较简单的，它主要完成两件事情：</p><ol type="1"><li>根据 JDBC 规范建立与数据库的连接；</li><li>通过反射打通 Java 对象与数据库参数交互之间相互转化关系。</li></ol><p>iBATIS 的框架结构也是按照这种思想来组织类层次结构的，其实它是一种典型的交互式框架。先期准备好交互的必要条件，然后构建一个交互的环境，交互环境中还划分成会话，每次的会话也有一个环境。当这些环境都准备好了以后，剩下的就是交换数据了。其实涉及到网络通信，一般都会是类似的处理方式。</p><p>图 1 是 iBATIS 框架的主要的类层次结构图：</p><h5 id="fig1">图 1. iBATIS 框架的主要的类层次结构图</h5><img alt="图 1. iBATIS 框架的主要的类层次结构图" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/image001.png" width="409"><p>上面的类图中左边 SqlMapClient 接口主要定义了客户端的操作行为包括 select、insert、update、delete。而右边主要是定义了当前客户端在当前线程的执行环境。SqlMapSession 可以共享使用，也可以自己创建，如果是自己创建在结束时必须要调用关闭接口关闭。</p><p>当使用者持有了 SqlMapClientImpl 对象就可以使用 iBATIS 来工作了。这里还要提到另外一个类 SqlMapExecutorDelegate 这个类从名字就可以看出他是执行代理类。这个类非常重要，重要是因为他耦合了用户端的执行操作行为和执行的环境，他持有执行操作的所需要的数据，同时提供管理着执行操作依赖的环境。所以他是一个强耦合的类，也可以看做是个工具类。</p><div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#ibm-pcon" class="ibm-anchor-up-link">回页首</a></p><h2 id="major2">iBATIS 框架的设计策略</h2><p>iBATIS 主要的设计目的还是为了让我们执行 SQL 时对输入输出的数据管理更加方便，所以如何方便的让我们写出 SQL 和方便的获取 SQL 的执行结果才是 iBATIS 的核心竞争力。那么 iBATIS 是怎么实现它的核心竞争力的呢？</p><p>iBATIS 框架的一个重要组成部分就是其 SqlMap 配置文件，SqlMap 配置文件的核心是 Statement 语句包括 CIUD。 iBATIS 通过解析 SqlMap 配置文件得到所有的 Statement 执行语句，同时会形成 ParameterMap、ResultMap 两个对象用于处理参数和经过解析后交给数据库处理的 Sql 对象。这样除去数据库的连接，一条 SQL 的执行条件已经具备了。</p><p>图 2 描述了 Statement 有关的类结构图：</p><h5 id="fig2">图 2. Statement 有关的类结构图</h5><img alt="图 2. Statement 有关的类结构图" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/image002.png" width="572"><p>图 2 给出了围绕 SQL 执行的基本的结构关系，但是还有一个关键的部分就是，如何定义 SQL 语句中的参数与 Java 对象之间的关系，这其中还涉及到 Java 类型到数据库类型的转换等一系列问题。</p><p>数据的映射大体的过程是这样的：根据 Statement 中定义的 SQL 语句，解析出其中的参数，按照其出现的顺序保存在 Map 集合中，并按照 Statement 中定义的 ParameterMap 对象类型解析出参数的 Java 数据类型。并根据其数据类型构建 TypeHandler 对象，参数值的复制是通过 DataExchange 对象完成的。</p><p>图 3 是参数映射相关的类结构图：</p><h5 id="fig3">图 3. 参数映射相关的类结构图</h5><img alt="图 3. 参数映射相关的类结构图" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/image003.png" width="572"><p>图 3 是输入参数的映射结构情况，返回结果 ResultMap 的映射情况也是类似的。主要就是要解决 SQL 语句中的参数与返回结果的列名与 Statement 中定义的 parameterClass 和 resultClass 中属性的对应关系。</p><div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#ibm-pcon" class="ibm-anchor-up-link">回页首</a></p><h2 id="major3">iBATIS 框架的运行原理</h2><p>前面大体分析了 iBATIS 框架的主要类的结构，这里主要看一下这些类是如何串联起来、如何工作的。图 4 描述了整个过程的主要执行步骤。</p><h5 id="fig4">图 4.iBATIS 运行的主要执行步骤</h5><img alt="图 4.iBATIS 运行的主要执行步骤" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/image004.gif" width="572"><p>上图中描述的 SqlMapSession 对象的创建和释放根据不同情况会有不同，因为 SqlMapSession 负责创建数据库的连接，包括对事务的管理，iBATIS 对管理事务既可以自己管理也可以由外部管理，iBATIS 自己管理是通过共享 SqlMapSession 对象实现的，多个 Statement 的执行时共享一个 SqlMapSession 实例，而且都是线程安全的。如果是外部程序管理就要自己控制 SqlMapSession 对象的生命周期。</p><p>图 5 是通过 Spring 调用 iBATIS 执行一个 Statement 的一个详细的时序图：</p><h5 id="fig5">图 5. Spring 调用 iBATIS 执行一个 Statement 的时序图</h5><img alt="图 5. Spring 调用 iBATIS 执行一个 Statement 的时序图" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/image005.jpg" width="572"><p>（查看图 5 的 <a href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/origin_image005.jpg" target="_blank">清晰版本</a>。）</p><p>iBATIS 的主要工作连接、交互，所以必须根据不同的交易成本设计不同的交易环境。</p><div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#ibm-pcon" class="ibm-anchor-up-link">回页首</a></p><h2 id="major4">示例</h2><p>下面我们将根据一个具体的实例解析一个 Statement 如何完成映射的，我们用一个典型的查询语句看看 Java 对象中的数据时如何赋给 SQL 中的参数的，再看看 SQL 的查询结果是如何转成 Java 对象的。</p><p>先看一下示例的部分代码和配置文件，完整的代码请看附件。</p><p>Spring 的 applicationContext 配置文件：</p><h5 id="listing1">清单 1. applicationContext.xml</h5><div class="codesection"><pre class="displaycode">&lt;beans&gt;
+    &lt;bean id="sqlMapTransactionManager" 
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager"&gt;
+        &lt;property name="dataSource" ref="dataSource"/&gt;
+    &lt;/bean&gt;
+    &lt;bean id="sqlMapTransactionTemplate" 
+        class="org.springframework.transaction.support.TransactionTemplate"&gt;
+        &lt;property name="transactionManager" ref="sqlMapTransactionManager"/&gt;
+    &lt;/bean&gt;
+    &lt;!--sql map --&gt;
+    &lt;bean id="sqlMapClient" 
+        class="org.springframework.orm.ibatis.SqlMapClientFactoryBean"&gt;
+        &lt;property name="configLocation" value="com/mydomain/data/SqlMapConfig.xml"/&gt;
+        &lt;property name="dataSource" ref="dataSource"/&gt;
+    &lt;/bean&gt;
+    &lt;bean id="dataSource" name="dataSource" 
+        class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"&gt;
+        &lt;property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/&gt;
+        &lt;property name="url" value="jdbc:oracle:thin:@10.1.5.11:1521:XE"/&gt;
+        &lt;property name="username" value="junshan"/&gt;
+        &lt;property name="password" value="junshan"/&gt;
+        &lt;property name="maxActive" value="20"/&gt;
+    &lt;/bean&gt;
+    &lt;bean id="accountDAO" class="com.mydomain.AccountDAO"&gt;
+        &lt;property name="sqlMapClient" ref="sqlMapClient"/&gt;
+        &lt;property name="sqlMapTransactionTemplate" ref="sqlMapTransactionTemplate"/&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;</pre></div><p>下面是 Account.xml 的一个 Statement：</p><h5 id="listing2">清单 2. Account.xml 中一个 Statement</h5><div class="codesection"><pre class="displaycode">&lt;select id="selectAccount" parameterClass="Account" resultClass="Account"&gt;
+    select
+      ACC_ID,
+      ACC_FIRST_NAME as firstName,
+      ACC_LAST_NAME as lastName,
+      ACC_EMAIL as emailAddress,
+      ACC_DATE
+    from ACCOUNT
+    where ACC_ID = #id:INTEGER# and ACC_FIRST_NAME = #firstName#
+&lt;/select&gt;</pre></div><p>下面是 Java 的测试类：</p><h5 id="listing3">清单 3. SimpleTest</h5><div class="codesection"><pre class="displaycode">public class SimpleTest {
+    public static void main(String[] args) {
+        ApplicationContext factory = 
+        new ClassPathXmlApplicationContext("/com/mydomain/data/applicationContext.xml");
+        final AccountDAO accountDAO = (AccountDAO) factory.getBean("accountDAO");
+        final Account account = new Account();
+        account.setId(1);
+        account.setFirstName("tao");
+        account.setLastName("bao");
+        account.setEmailAddress("junshan@taobao.com");
+        account.setDate(new Date());
+        try {
+            accountDAO.getSqlMapTransactionTemplate().execute(new TransactionCallback(){
+                    public Object doInTransaction(TransactionStatus status){
+                        try{
+                            accountDAO.deleteAccount(account.getId());
+                            accountDAO.insertAccount(account);
+                            //account.setLastName("bobo");
+                            //accountDAO.updateAccount(account);
+                            Account result = accountDAO.selectAccount(account);
+                            System.out.println(result);
+                            return null;
+                        } catch (Exception e) {
+                            status.setRollbackOnly();
+                            return false;
+                        }
+                    }
+                });
+            //accountDAO.getSqlMapClient().commitTransaction();
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+     }
+}</pre></div><div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#ibm-pcon" class="ibm-anchor-up-link">回页首</a></p><h2 id="major5">iBATIS 对 SQL 语句的解析</h2><p>这里所说的 SQL 解析只是针对 iBATIS 配置文件中所定义的 SQL 语句，如前一节中清单 2 中所示的查询语句。和标准的 SQL 语句不同的是，参数的赋值是“#“包裹的变量名。如何解析这个变量就是 iBATIS 要完成的工作。当然 SQL 的表达形式还有很多其他的形式如动态 SQL 等。</p><p>现在我们关心的是当我们执行：</p><h5 id="listing4">清单 4. 执行查询方法</h5><div class="codesection"><pre class="displaycode">accountDAO.selectAccountById(account)</pre></div><p>iBATIS 将会选择清单 2 这条 Statement 来解析，最终会把它解析成一个标准的 SQL 提交给数据库执行，并且会设置两个选择条件参数。这个过程中参数映射的细节是什么样子呢？</p><p>在前面的第二小节中已经说明了，iBATIS 会把 SqlMap 配置文件解析成一个个 Statement，其中包括 ParameterMap、ResultMap，以及解析后的 SQL。当 iBATIS 构建好 RequestScope 执行环境后，要做的工作就是把传过来的对象数据结合 ParameterMap 中信息提取出一个参数数组，这个数组的顺序就是对应于 SQL 中参数的顺序，然后会调用 preparedStatement.setXXX(i, parameter) 提交参数。</p><p>在清单 3 中，我们给 account 对象的 id 属性和 firstName 属性分别赋值为 1 和“tao“，当执行清单 4 中的这段代码时，iBATIS 必须把这两个属性值传给清单 2 中 SQL 语句中对象的参数。这个是怎么做到的，其实很简单，在图 3 中描述了与 ParameterMap 相关的类的关系，这些类中都保存了在 SqlMap 配置文件初始化是解析清单 2 中 Statement 的所有必要的信息，具体的信息是这样的：</p><p>最终的 SQL 语句是：</p><h5 id="listing5">清单 5. 解析后的 SQL</h5><div class="codesection"><pre class="displaycode">select
+    ACC_ID,
+    ACC_FIRST_NAME as firstName,
+    ACC_LAST_NAME as lastName,
+    ACC_EMAIL as emailAddress,
+    ACC_DATE
+from ACCOUNT
+where ACC_ID = ? and ACC_FIRST_NAME = ?</pre></div><p>#id:INTEGER# 将被解析成 JDBC 类型是 INTEGER，参数值取 Account 对象的 id 属性。#firstName# 同样被解析成 Account 对象的 firstName 属性，而 parameterClass="Account"指明了 Account 的类类型。注意到清单 5 中 #id:INTEGER# 和 #firstName# 都被替换成“？”，iBATIS 如何保证它们的顺序？在解析清单 2 过程中，iBATIS 会根据“#”分隔符取出合法的变量名构建参数对象数组，数组的顺序就是 SQL 中变量出现的顺序。接着 iBATIS 会根据这些变量和 parameterClass 指定的类型创建合适的 dataExchange 和 parameterPlan 对象。parameterPlan 对象中按照前面的顺序保存了变量的 setter 和 getter 方法列表。</p><p>所以 parameter 的赋值就是根据 parameterPlan 中保存的 getter 方法列表以及传进来的 account 对象利用反射机制得到清单 5 对应的参数值数组，再将这个数组按照指定的 JDBC 类型提交给数据库。以上这些过程可以用图 6 的时序图清楚的描述：</p><h5 id="fig6">图 6. 映射参数值到数据库过程时序图</h5><img alt="图 6. 映射参数值到数据库过程时序图" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/image006.png" width="572"><p>上图 4 中在 8 步骤中如果 value 值为空时会设置 preparedStatement.setNull(i , jdbcType) 如果在清单 2 中的变量没有设置 jdbcType 类型时有可能会出错。</p><div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#ibm-pcon" class="ibm-anchor-up-link">回页首</a></p><h2 id="major6">数据库字段映射到 Java 对象</h2><p>数据库执行完 SQL 后会返回执行结果，在第 4 小节的例子中满足 id 为 1、firstName 为“tao”的信息有两条，iBATIS 如何将这两条记录设置到 account 对象中呢？</p><p>和 ParameterMap 类似，填充返回信息需要的资源都已经包含在 ResultMap 中。当有了保存返回结果的 ResultSet 对象后，就是要把列名映射到 account 对象的对应属性中。这个过程大体如下：</p><p>根据 ResultMap 中定义的 ResultClass 创建返回对象，这里就是 account 对象。获取这个对象的所有可写的也就是 setter 方法的属性数组，接着根据返回 ResultSet 中的列名去匹配前面的属性数组，把匹配结果构造成一个集合（resultMappingList），后面是选择 DataExchange 类型、AccessPlan 类型为后面的真正的数据交换提供支持。根据 resultMappingList 集合从 ResultSet 中取出列对应的值，构成值数组（columnValues），这个数组的顺序就是 SQL 中对应列名的顺序。最后把 columnValues 值调用 account 对象的属性的 setter 方法设置到对象中。这个过程可以用下面的时序图来表示：</p><h5 id="fig7">图 7. 映射返回对象时序图</h5><img alt="图 7. 映射返回对象时序图" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/image007.png" width="572"><div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#ibm-pcon" class="ibm-anchor-up-link">回页首</a></p><h2 id="major7">示例运行的结果</h2><p>前两个小节主要描述了输入参数和输出结果的映射原理，这里再结合第 4 小节的示例分析一下执行清单 3 代码的结果。</p><p>执行清单 3 所示代码打印的结果为：</p><h5 id="listing6">清单 6. 示例程序的运行结果</h5><div class="codesection"><pre class="displaycode">Account{id=0, firstName='tao', lastName='bobo', emailAddress='junshan@taobao.com'}</pre></div><p>上面的结果和我们预想的结果似乎有所不同，看代码我们插入数据库的 account 对象各属性值分别为 {1，“tao”，“bao”，“junshan@taobao.com”，“时间”}，后面调用清单 2 的查询，返回应该是一样的结果才对。id 的结果不对、date 属性值丢失。再仔细看看清单 2 这个 Statement 可以发现，返回结果的列名分别是 {ACC_ID,firstName,lastName,emailAddress,ACC_DATE} 其中 id 和 date 并不能映射到 Account 类的属性中。id 被赋了默认数字 0，而 date 没有被赋值。</p><p>还有一个值得注意的地方是变量 id 后面跟上 JDBC 类型，这个 JDBC 类型有没有用？通常情况下都没有用，因此你可以不设，iBATIS 会自动选择默认的类型。但是如果你要这个这个值可能为空时如果没有指定 JDBC 类型可能就有问题了，在 Oracle 中虽然能正常工作但是会引起 Oracle 这当前这个 SQL 有多次编译现象，因此会影响数据库的性能。还有当同一个 Java 类型如果对应多个 JDBC 类型（如 Date 对应 JDBC 类型有 java.sql.Date、java.sql.Timestamp）就可以通过指定 JDBC 类型保存不同的值到数据库。</p><div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#ibm-pcon" class="ibm-anchor-up-link">回页首</a></p><h2 id="major8">总结</h2><p>如果用最简洁的话来总结 iBATIS 主要完成那些功能时，我想下面几个代码足够概括。</p><h5 id="listing7">清单 7. 典型的 Java 操作数据库代码</h5><div class="codesection"><pre class="displaycode">Class.forName("oracle.jdbc.driver.OracleDriver"); 
+Connection conn= DriverManager.getConnection(url,user,password);
+java.sql.PreparedStatement  st = conn.prepareStatement(sql);
+st.setInt(0,1);
+st.execute();
+java.sql.ResultSet rs =  st.getResultSet();
+while(rs.next()){
+    String result = rs.getString(colname);
+}</pre></div><p>iBATIS 就是将上面这几行代码分解包装，但是最终执行的仍然是这几行代码。前两行是对数据库的数据源的管理包括事务管理，3、4 两行 iBATIS 通过配置文件来管理 SQL 以及输入参数的映射，6、7、8 行是 iBATIS 获取返回结果到 Java 对象的映射，他也是通过配置文件管理。</p><p>配置文件对应到相应代码如图所示：</p><h5 id="fig8">图 8. 配置文件与相应代码对应关系</h5><img alt="图 8. 配置文件与相应代码对应关系" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/image008.gif" width="572"><p>iBATIS 要达到目的就是把用户关心的和容易变化的数据放到配置文件中配置，方便用户管理。而把流程性的、固定不变的交给 iBATIS 来实现。这样是用户操作数据库简单、方便，这也是 iBATIS 的价值所在。</p><!--CMA ID: 576855--><!--Site ID: 10--><!--XSLT stylesheet used to transform this file: dw-document-html-7.0.xsl-->
+<div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#ibm-pcon" class="ibm-anchor-up-link">回页首</a></p><h2 id="download">下载</h2><table class="ibm-data-table dw-download-table" cellpadding="0" cellspacing="0" border="0"><thead><tr><th scope="col">描述</th><th scope="col">名字</th><th scope="col">大小</th></tr></thead><tbody><tr><th scope="row" class="ibm-table-row">本文示例代码</th><td nowrap="nowrap"><a href="http://www.ibm.com/developerworks/apps/download/index.jsp?contentid=576855&filename=code_example.rar&method=http&locale=zh_CN">code_example.rar</a></td><td nowrap="nowrap">7 KB</td></tr></tbody></table>
+
+</div>
+</div>
+<!-- 1_1_COLUMN_END -->
+
+<!-- SPLIT_COLUMNS_BEGIN -->
+<div class="ibm-columns">
+
+<!-- 6_4_COLUMN_BEGIN -->
+<div class="ibm-col-6-4">
+
+<h2 id="resources" class="ibm-rule">参考资料 </h2><h3 class="dw-resources-category-heading">学习</h3><ul class="ibm-bullet-list"><li>“<a href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis/">扩展 iBatis 以透明支持多种数据库</a>”（developerWorks，2007 年 12 月）：本文提供了一个简单有效的方法，通过扩展 iBatis 来透明地支持多数据库方言。</li><li>“<a href="http://www.ibm.com/developerworks/cn/opensource/os-ibatis3/">iBATIS 3 内的新特性</a>”（developerWorks，2010 年 4 月）：本文将介绍 iBATIS 3 内的一些新特性。</li><li><a href="http://www.ibm.com/developerworks/apps/SendTo?bookstore=safari">技术书店</a>：浏览关于这些和其他技术主题的图书。</li><li><a href="http://www.ibm.com/developerworks/cn/java/">developerWorks Java 技术专区</a>：数百篇关于 Java 编程各个方面的文章。</li></ul><h3 class="dw-resources-category-heading">讨论</h3><ul class="ibm-bullet-list"><li>加入 <a href="http://www.ibm.com/developerworks/cn/mydeveloperworks/">My developerWorks 中文社区</a>。</li><li>查看 <a href="http://www.ibm.com/developerworks/blogs/" onmouseover="linkQueryAppend(this)">developerWorks 博客</a> 的最新信息。</li></ul>
+
+<!-- INLINE_COMMENTS_BEGIN -->
+<h2 id="icomments" class="ibm-alternate-rule ibm-no-print">条评论</h2>
+    
+<div class="ibm-no-print" id="dw-icomments-container">	
+	<div id="threadShow"><img id="imgPlHdr" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/animated-progress-38x38c.gif" alt="" style="display: none;"><div id="cmtTog"><div class="ibm-container ibm-alternate-two dw-commentbox dw-noborder"><div class="ibm-container-body dw-commentbox dw-noborder"><p id="signInSect">请 <a onclick="var e=arguments[0] || window.event; dwsi.siInst &amp;&amp; dwsi.siInst.showSignIn(); if (e.stopPropagation){ e.stopPropagation();} else { e.cancelBubble = true; } e.preventDefault &amp;&amp; e.preventDefault(); return false;" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#">登录</a> 或 <a href="http://www.ibm.com/developerworks/dwwi/jsp/ssoregister.jsp?d=http%3A%2F%2Fwww.ibm.com%2Fdeveloperworks%2Fcn%2Fjava%2Fj-lo-ibatis-principle%2Findex.html%23icomments&lang=cn&a=dwmav">注册</a>  后发表评论。</p><p id="cmtHead"><label for="newCmt"><strong>添加评论:</strong></label></p><p>注意：评论中不支持 HTML 语法</p><div id="infoCmt"></div><form focus="name" enctype="multipart/form-data" method="post" action="" name="form" class="ibm-column-form ibm-styled-form"><p class="6-4-textarea"><textarea rows="5" name="newCmt" id="newCmt" class="dw-inoperable" disabled=""></textarea><br></p><span class="ibm-input-group"><input type="checkbox" value="1" name="comment_notification" id="comment_notification" disabled="disabled"><label id="notifyText" class="ibm-form-note dw-btn-cancel-sec" for="comment_notification">有新评论时提醒我</label></span><span class="ibm-form-note dw-btn-cancel-sec notifySection" id="maxCharsCount">剩余 <span id="charCount">1000</span> 字符</span><p class="ibm-buttons-row"><input type="button" value="发布" name="postCmt" id="postCmt" class="ibm-btn-sec ibm-btn-small ibm-disabled" disabled="disabled"></p></form></div></div><div class="ibm-alternate-rule"><hr></div><div id="topControl" class="ibm-container ibm-alternate-two dw-comment-totals" style=""><div class="ibm-container-body"><form id="selectComments" method="get" action=""><p>&nbsp;<span class="dw-comment-totals-label"><strong>共有评论 (<span id="numCmts">7</span>)</strong></span><span class="dw-how-many-comments-label" id="dropdownCmts"><label for="howManyComments"><strong>显示：</strong></label>&nbsp;<select name="comments" id="howManyComments" class="dw-how-many-comments"><option selected="selected" value="recent">最新评论 </option><option value="all">所有评论</option></select><input type="image" class="ibm-btn-go" name="ibm-go" value="Go" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/short-btn.gif" alt="Go"><br></span></p></form></div></div><div id="cmtSect"><div class="comment"><div class="dw-icomment-container"><div class="dw-icomment-body dw-noborder"><div class="dw-icomment-body dw-noborder"><p>不知道是不是我每看清<br>作者的示例代码实际是没将事务委托给spring。SqlMapClientFactoryBean只是创建了SqlMapClient的实例，但并不会通过DataSourceUtils来获取连接。所以，代码中的事务性是不起作用的。如果要委托事务给spring，得借助于SqlMapClientTemplate</p><p class="ibm-item-note-alternate dw-item-note-alternate-left">由 <strong><a href="https://www.ibm.com/developerworks/community/profiles/user/zhengbaozi">zhengbaozi</a></strong>  于 2014年10月25日发布 </p><p class="ibm-ind-link ibm-item-note-alternate dw-item-note-alternate-right"><a class="ibm-caution-link dw-report-abuse" href="http://www.ibm.com/developerworks/community/report?lang=zh&referingURL=http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html&mymessage=%E8%AF%84%E8%AE%BA%EF%BC%9A%20%E4%B8%8D%E7%9F%A5%E9%81%93%E6%98%AF%E4%B8%8D%E6%98%AF%E6%88%91%E6%AF%8F%E7%9C%8B%E6%B8%85%E4%BD%9C%E8%80%85%E7%9A%84%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81%E5%AE%9E%E9%99%85%E6%98%AF%E6%B2%A1%E5%B0%86%E4%BA%8B%E5%8A%A1%E5%A7%94%E6%89%98%E7%BB%99spring%E3%80%82SqlMapClientFactoryBean%E5%8F%AA%E6%98%AF%E5%88%9B%E5%BB%BA%E4%BA%86SqlMapClient%E7%9A%84%E5%AE%9E%E4%BE%8B%EF%BC%8C%E4%BD%86%E5%B9%B6%E4%B8%8D%E4%BC%9A%E9%80%9A%E8%BF%87DataSourceUtils%E6%9D%A5%E8%8E%B7%E5%8F%96%E8%BF%9E%E6%8E%A5%E3%80%82%E6%89%80%E4%BB%A5%EF%BC%8C%E4%BB%A3%E7%A0%81%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1%E6%80%A7%E6%98%AF%E4%B8%8D%E8%B5%B7%E4%BD%9C%E7%94%A8%E7%9A%84%E3%80%82%E5%A6%82%E6%9E%9C%E8%A6%81%E5%A7%94%E6%89%98%E4%BA%8B%E5%8A%A1%E7%BB%99spring%EF%BC%8C%E5%BE%97%E5%80%9F%E5%8A%A9%E4%BA%8ESqlMapClientTemplate%0D%E7%94%B1%20zhengbaozi%20%20%E4%BA%8E%202014%E5%B9%B410%E6%9C%8825%E6%97%A5%E5%8F%91%E5%B8%83%20%0D%0D--%E5%9C%A8%E4%B8%8B%E6%96%B9%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA--" target="_self">报告滥用</a></p><div class="dw-clear-both"></div></div></div></div></div><div class="ibm-rule"><hr></div><div class="comment"><div class="dw-icomment-container"><div class="dw-icomment-body dw-noborder"><div class="dw-icomment-body dw-noborder"><p>尽管现在已经发展到mybatis3.2了, 但仍从作者的分析中受益.</p><p class="ibm-item-note-alternate dw-item-note-alternate-left">由 <strong><a href="https://www.ibm.com/developerworks/community/profiles/user/wageyo">wageyo</a></strong>  于 2014年02月26日发布 </p><p class="ibm-ind-link ibm-item-note-alternate dw-item-note-alternate-right"><a class="ibm-caution-link dw-report-abuse" href="http://www.ibm.com/developerworks/community/report?lang=zh&referingURL=http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html&mymessage=%E8%AF%84%E8%AE%BA%EF%BC%9A%20%E5%B0%BD%E7%AE%A1%E7%8E%B0%E5%9C%A8%E5%B7%B2%E7%BB%8F%E5%8F%91%E5%B1%95%E5%88%B0mybatis3.2%E4%BA%86%2C%20%E4%BD%86%E4%BB%8D%E4%BB%8E%E4%BD%9C%E8%80%85%E7%9A%84%E5%88%86%E6%9E%90%E4%B8%AD%E5%8F%97%E7%9B%8A.%0D%E7%94%B1%20wageyo%20%20%E4%BA%8E%202014%E5%B9%B402%E6%9C%8826%E6%97%A5%E5%8F%91%E5%B8%83%20%0D%0D--%E5%9C%A8%E4%B8%8B%E6%96%B9%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA--" target="_self">报告滥用</a></p><div class="dw-clear-both"></div></div></div></div></div><div class="ibm-rule"><hr></div><div class="comment"><div class="dw-icomment-container"><div class="dw-icomment-body dw-noborder"><div class="dw-icomment-body dw-noborder"><p>最近才读完了iBatis的源代码，也很想写一篇文章的冲动，不过看了此篇，感觉没有必要了。作者的技术水平和写作水平都令人佩服。</p><p class="ibm-item-note-alternate dw-item-note-alternate-left">由 <strong><a href="https://www.ibm.com/developerworks/community/profiles/user/52788286@qq.com">52788286@qq.com</a></strong>  于 2012年08月30日发布 </p><p class="ibm-ind-link ibm-item-note-alternate dw-item-note-alternate-right"><a class="ibm-caution-link dw-report-abuse" href="http://www.ibm.com/developerworks/community/report?lang=zh&referingURL=http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html&mymessage=%E8%AF%84%E8%AE%BA%EF%BC%9A%20%E6%9C%80%E8%BF%91%E6%89%8D%E8%AF%BB%E5%AE%8C%E4%BA%86iBatis%E7%9A%84%E6%BA%90%E4%BB%A3%E7%A0%81%EF%BC%8C%E4%B9%9F%E5%BE%88%E6%83%B3%E5%86%99%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E7%9A%84%E5%86%B2%E5%8A%A8%EF%BC%8C%E4%B8%8D%E8%BF%87%E7%9C%8B%E4%BA%86%E6%AD%A4%E7%AF%87%EF%BC%8C%E6%84%9F%E8%A7%89%E6%B2%A1%E6%9C%89%E5%BF%85%E8%A6%81%E4%BA%86%E3%80%82%E4%BD%9C%E8%80%85%E7%9A%84%E6%8A%80%E6%9C%AF%E6%B0%B4%E5%B9%B3%E5%92%8C%E5%86%99%E4%BD%9C%E6%B0%B4%E5%B9%B3%E9%83%BD%E4%BB%A4%E4%BA%BA%E4%BD%A9%E6%9C%8D%E3%80%82%0D%E7%94%B1%2052788286%40qq.com%20%20%E4%BA%8E%202012%E5%B9%B408%E6%9C%8830%E6%97%A5%E5%8F%91%E5%B8%83%20%0D%0D--%E5%9C%A8%E4%B8%8B%E6%96%B9%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA--" target="_self">报告滥用</a></p><div class="dw-clear-both"></div></div></div></div></div><div class="ibm-rule"><hr></div><div class="comment"><div class="dw-icomment-container"><div class="dw-icomment-body dw-noborder"><div class="dw-icomment-body dw-noborder"><p>well done</p><p class="ibm-item-note-alternate dw-item-note-alternate-left">由 <strong><a href="https://www.ibm.com/developerworks/community/profiles/user/xb-bob">xb-bob</a></strong>  于 2011年12月29日发布 </p><p class="ibm-ind-link ibm-item-note-alternate dw-item-note-alternate-right"><a class="ibm-caution-link dw-report-abuse" href="http://www.ibm.com/developerworks/community/report?lang=zh&referingURL=http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html&mymessage=%E8%AF%84%E8%AE%BA%EF%BC%9A%20well%20done%0D%E7%94%B1%20xb-bob%20%20%E4%BA%8E%202011%E5%B9%B412%E6%9C%8829%E6%97%A5%E5%8F%91%E5%B8%83%20%0D%0D--%E5%9C%A8%E4%B8%8B%E6%96%B9%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA--" target="_self">报告滥用</a></p><div class="dw-clear-both"></div></div></div></div></div><div class="ibm-rule"><hr></div><div class="comment"><div class="dw-icomment-container"><div class="dw-icomment-body dw-noborder"><div class="dw-icomment-body dw-noborder"><p>相对较简单，总结的比较清晰。</p><p class="ibm-item-note-alternate dw-item-note-alternate-left">由 <strong><a href="https://www.ibm.com/developerworks/community/profiles/user/jasonhbc">jasonhbc</a></strong>  于 2010年11月16日发布 </p><p class="ibm-ind-link ibm-item-note-alternate dw-item-note-alternate-right"><a class="ibm-caution-link dw-report-abuse" href="http://www.ibm.com/developerworks/community/report?lang=zh&referingURL=http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html&mymessage=%E8%AF%84%E8%AE%BA%EF%BC%9A%20%E7%9B%B8%E5%AF%B9%E8%BE%83%E7%AE%80%E5%8D%95%EF%BC%8C%E6%80%BB%E7%BB%93%E7%9A%84%E6%AF%94%E8%BE%83%E6%B8%85%E6%99%B0%E3%80%82%0D%E7%94%B1%20jasonhbc%20%20%E4%BA%8E%202010%E5%B9%B411%E6%9C%8816%E6%97%A5%E5%8F%91%E5%B8%83%20%0D%0D--%E5%9C%A8%E4%B8%8B%E6%96%B9%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA--" target="_self">报告滥用</a></p><div class="dw-clear-both"></div></div></div></div></div></div></div><div id="bottomControl" class="ibm-container ibm-alternate-two dw-comment-totals" style="display:none"><div class="ibm-container-body"><form id="selectComments2" method="get" action=""><p>&nbsp;<span class="dw-comment-totals-label"><strong>共有评论 (<span id="numCmts2">7</span>)</strong></span><span class="dw-how-many-comments-label" id="dropdownCmts2"><label for="howManyComments2"><strong>显示：</strong></label>&nbsp;<select name="comments" id="howManyComments2" class="dw-how-many-comments"><option selected="selected" value="recent">最新评论 </option><option value="all">所有评论</option></select><input type="image" class="ibm-btn-go" name="ibm-go" value="Go" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/short-btn.gif" alt="Go"><br></span></p></form></div></div></div>
+</div>
+<!-- Sign in OVERLAY STARTS HERE -->
+    
+<!-- Sign in OVERLAY STARTS HERE -->
+<div class="ibm-common-overlay" id="signin_overlay">
+<div class="ibm-head">
+<p><a class="ibm-common-overlay-close" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#" onclick="dwsi.siInst.clearForm();">关闭 [x]</a></p>
+</div>
+<div class="ibm-body">
+<div class="ibm-main">
+
+ <div class="ibm-title">
+<h2>developerWorks: 登录</h2>
+<div id="ibm-overlay-error-signin" class="no-display"></div>
+</div>
+<div class="ibm-container ibm-alternate ibm-buttons-last">
+<div class="ibm-container-body">
+<p class="ibm-overlay-intro">标有星（<span class="ibm-required">*</span>）号的字段是必填字段。</p> 
+<form class="ibm-column-form" id="sFormId" action="" method="post" name="sForm" onsubmit="return false;">
+<p><label for="ibmid">IBM ID:<span class="ibm-required">*</span></label><span>
+    <input name="ibm-id" id="ibmid" size="25" value="" class="required" type="text" onkeypress="dwsi.siInst.handleEP(event,this.form);" aria-required="true">
+    <br><a onclick="window.location=&#39;/developerworks/dwwi/DWAuthRouter?m=reg&amp;lang=zh_CN&amp;d=&#39;+encodeURIComponent(location.protocol + &#39;//&#39; + location.hostname + location.pathname + &#39;#icomments&#39;); return false;" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#" class="ibm-forward-link">需要一个 IBM ID？</a> <br>
+    <a class="ibm-forward-link" href="http://www.ibm.com/developerworks/dwwi/jsp/WSHelp.jsp?lang=zh_CN">忘记 IBM ID？</a> 
+</span>
+</p> 
+<p><label for="password">密码：<span class="ibm-required">*</span></label><span>
+    <input name="password" id="password" size="25" value="" class="required" type="password" onkeypress="dwsi.siInst.handleEP(event,this.form);">
+    <br><a class="ibm-forward-link" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#" onclick="(function ()
+        {window.location=&#39;https://www.ibm.com/account/profile?page=forgot&amp;lang=zh_CN&amp;appname=ibm&amp;required=null&amp;d=&#39;+encodeURIComponent(dwsi.siInst.getAuthUrl())+&#39;%3Fm%3Dloginpage%26lang%3Dzh_CN%26d%3D&#39;+encodeURIComponent(location.href);})();">忘记密码？</a>
+    <br><a class="ibm-forward-link" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#" onclick="(function () {window.location=&#39;https://www.ibm.com/account/profile?page=chpw&amp;lang=zh_CN&amp;appname=ibm&amp;required=null&amp;d=&#39;+encodeURIComponent(location.href);})();">更改您的密码</a></span></p> 
+<p class="dw-perm-box">
+	<span><input id="perm" type="checkbox" name="perm_name"><label for="perm"> 保持登录。</label></span>
+</p>
+<p>单击提交则表示您同意developerWorks 的条款和条件。 <a href="http://www.ibm.com/developerworks/community/terms?lang=zh">查看条款和条件</a>。</p>
+<div class="ibm-buttons-row">
+   <p><input class="ibm-btn-arrow-pri" name="ibm-submit" value="提交" onclick="dwsi.siInst.signin();return false;" type="submit"><span class="ibm-sep">&nbsp;</span>
+<input value="取消" type="button" name="ibm-cancel" class="ibm-btn-cancel-sec" onclick="dwsi.siInst.clearForm();ibmweb.overlay.hide(&#39;signin_overlay&#39;);return false;"></p>
+</div>
+</form>
+ <div class="ibm-overlay-rule"><hr></div> 
+
+<p>在您首次登录 developerWorks 时，会为您创建一份个人概要。<strong>您的个人概要中的信息（您的姓名、国家/地区，以及公司名称）是公开显示的，而且会随着您发布的任何内容一起显示，除非您选择隐藏您的公司名称。</strong>您可以随时更新您的 IBM 帐户。</p>
+<div><p class="dw-c-overlay-secure">所有提交的信息确保安全。</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="ibm-footer"></div>
+</div>
+<!-- Display name OVERLAY STARTS HERE -->
+<div class="ibm-common-overlay" id="displayname_overlay">
+<div class="ibm-head">
+<p><a class="ibm-common-overlay-close" href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#" onclick="dwsi.siInst.clearForm();">关闭 [x]</a></p>
+</div>
+<div class="ibm-body">
+<div class="ibm-main">
+<div class="ibm-title">
+<h2>选择您的昵称</h2><br><br>
+<div id="ibm-overlay-error-dname" class="no-display"></div>
+</div>
+<div class="ibm-container ibm-alternate ibm-buttons-last">
+<div class="ibm-container-body">
+<p class="ibm-overlay-intro">当您初次登录到 developerWorks 时，将会为您创建一份概要信息，您需要指定一个昵称。您的昵称将和您在 developerWorks 发布的内容显示在一起。</p><p><strong>昵称长度在 3 至 31 个字符之间</strong>。 
+    您的昵称在 developerWorks 社区中必须是唯一的，并且出于隐私保护的原因，不能是您的电子邮件地址。</p>
+<p class="ibm-overlay-intro">标有星（<span class="ibm-required">*</span>）号的字段是必填字段。</p> 
+<form id="dFormId" method="post" action="" name="dForm" onsubmit="return false;" class="ibm-column-form">
+<p><label for="displayname">昵称：<span class="ibm-required">*</span></label><span>
+    <input name="displayname" id="displayname" size="25" value="" type="text" onkeypress="dwsi.siInst.handleEP(event,this.form);" aria-required="true"></span>
+    <span class="ibm-form-note">(昵称长度在 3 至 31 个字符之间)</span>
+</p>
+<p>单击<strong>提交</strong>则表示您同意developerWorks 的条款和条件。 <a href="http://www.ibm.com/developerworks/community/terms?lang=zh">查看条款和条件</a>.</p>
+<div class="ibm-buttons-row">
+   <p><input class="ibm-btn-arrow-pri" name="ibm-submit" value="提交" onclick="dwsi.siInst.signin();return false;" type="submit"><span class="ibm-sep">&nbsp;</span>
+<input value="取消" type="button" name="ibm-cancel" class="ibm-btn-cancel-sec" onclick="dwsi.siInst.clearForm();ibmweb.overlay.hide(&#39;displayname_overlay&#39;);return false;"></p>
+</div>
+</form>
+<div class="ibm-overlay-rule"><hr></div>
+<div><p class="dw-c-overlay-secure">所有提交的信息确保安全。</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="ibm-footer"></div>
+</div>
+
+
+<!-- INLINE_COMMENTS_END -->
+
+</div>
+<!-- 6_4_COLUMN_END -->
+
+<!-- 6_2_COLUMN_BEGIN -->
+<div class="ibm-col-6-2">
+
+<!-- Next_Steps -->
+<!-- Dig_Deeper -->
+
+
+<!-- Promotion_Module -->
+    
+<!-- PROMOTION_MODULE_START -->
+<div class="ibm-alternate-rule"><hr></div>
+<ul class="ibm-portrait-module-list">
+<li><a class="" href="http://www.ibm.com/developerworks/cn/puresystems/" tabindex="-1" role="presentation"><img height="60" width="60" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/sm-f-cl-puresystems70.jpg" alt=""></a>
+<h3><a class="ibm-feature-link" href="http://www.ibm.com/developerworks/cn/puresystems/">IBM PureSystems</a></h3>
+<p>IBM PureSystems™ 系列解决方案是一个专家集成系统</p></li>
+<li><a class="" href="http://www.ibm.com/developerworks/cn/views/global/libraryview.jsp?type_by=Knowledge+paths" tabindex="-1" role="presentation"><img height="60" width="60" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/sm-f-knowledgepath50.jpg" alt=""></a>
+<h3><a class="ibm-feature-link" href="http://www.ibm.com/developerworks/cn/views/global/libraryview.jsp?type_by=Knowledge+paths">developerWorks 学习路线图</a></h3>
+<p>通过学习路线图系统掌握软件开发技能</p></li>
+<li><a class="" href="http://www.ibm.com/developerworks/cn/downloads/" tabindex="-1" role="presentation"><img height="60" width="60" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/sm-f-evaluationsoftware60.png" alt=""></a>
+<h3><a class="ibm-feature-link" href="http://www.ibm.com/developerworks/cn/downloads/">软件下载资源中心</a></h3>
+<p>软件下载、试用版及云计算</p></li>
+</ul>
+<!-- PROMOTION_MODULE_END -->
+
+</div>
+<!-- 6_2_COLUMN_END -->
+
+</div>
+<!-- SPLIT_COLUMNS_END -->
+
+<!-- BOTTOM_BACK_TO_TOP -->
+<div class="ibm-columns">
+<div class="ibm-col-1-1">
+	<div class="ibm-alternate-rule"><hr></div><p class="ibm-ind-link ibm-back-to-top"><a href="http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html#ibm-pcon" class="ibm-anchor-up-link">回页首</a></p>
+</div>
+</div>
+
+<!-- Rating_Meta_BEGIN -->
+<!--Rating_Meta_BEGIN--><div class="metavalue">static.content.url=http://www.ibm.com/developerworks/js/artrating/</div><div class="metavalue">SITE_ID=10</div><div class="metavalue">Zone=Java technology, Open source</div><div class="metavalue">ArticleID=576855</div><div class="metavalue">ArticleTitle=深入分析 iBATIS 框架之系统架构与映射原理</div><div class="metavalue">publish-date=11082010</div><script language="javascript" type="text/javascript">document.write('<div class="metavalue">url='+location.href.replace(/</g,  '%3C')+'</div>');</script><div class="metavalue">url=http://www.ibm.com/developerworks/cn/java/j-lo-ibatis-principle/index.html</div><!--Rating_Meta_END-->
+<!-- Rating_Meta_END -->
+
+</div>
+<!-- END_IBM_CONTENT_MAIN -->
+
+</div>
+<!-- END_IBM_CONTENT_BODY -->
+
+</div>
+<!-- END_IBM_CONTENT -->
+
+</div></div>
+<!-- LEADSPACE_END -->
+
+
+<!-- END_IBM_PCON -->
+<!-- FOOTER_BEGIN -->
+<div id="ibm-footer" aria-label="页脚"><!-- IBM footer container; disabled --></div>
+
+<div id="ibm-footer-module-dwwrapper" role="contentinfo" aria-label="developerWorks Footer">
+
+<div id="ibm-footer-module-dw">
+	<div class="dw-footer-columns">
+		<div class="dw-footer-col-6-1 dw-footer-col-6-1-cn">
+			<ul>
+				<li><a href="https://www.ibm.com/developerworks/secure/feedback.jsp?domain=dwchina" tabindex="0">帮助</a></li>
+				<li><a href="http://www.ibm.com/developerworks/cn/author/" tabindex="0">联系编辑</a></li>
+				<li><a href="https://www.ibm.com/developerworks/secure/myideas2.jsp?domain=dwchina&start=true" tabindex="0">提交内容</a></li>
+				<li><a href="http://www.ibm.com/developerworks/cn/rss/" tabindex="0">订阅源</a></li>
+			</ul>
+        </div>
+		<div class="dw-footer-col-6-2">
+			<ul>
+				<li><a href="http://www.ibm.com/vrm/newsletter/10104?S_TACT=105AGX52&S_CMP=dwcntop" tabindex="0">在线浏览每周时事通讯</a></li>
+				<li><a class="dwcn-sina-link" href="http://weibo.com/ibmdw/" target="_blank" tabindex="0">新浪微博</a></li>
+				<li><a href="https://www.ibm.com/developerworks/community/report?lang=zh" tabindex="0">报告滥用</a></li>
+				<li><a href="https://www.ibm.com/developerworks/community/terms?lang=zh" tabindex="0">使用条款</a></li>
+				<li><a href="https://www.ibm.com/developerworks/cn/community/terms/thirdparty/" tabindex="0">第三方提示</a></li>
+			</ul>
+		</div>
+		<div class="dw-footer-col-6-3">
+			<ul>
+				<li><a href="http://www.ibm.com/privacy/cn/zh/" tabindex="0">隐私条约</a></li>
+				<li><a href="http://www.ibm.com/ibm/accessibility/cn/" tabindex="0">浏览辅助</a></li>
+				<li><a href="http://www.ibm.com/developerworks/cn/academic/" tabindex="0">IBM 教育学院教育培养计划</a></li><li><a href="http://www.ibm.com/developerworks/cn/gep/">IBM 创业企业全球扶持计划</a></li><li><a href="http://www.ibm.com/partnerworld/isv/">ISV 资源 (英语)</a></li>
+			</ul>
+		</div>
+		<div class="dw-footer-col-6-4"> 
+			<ul>
+				<li><a href="http://www.ibm.com/developerworks/cn/newsletter/" tabindex="0">dW 中国每周时事通讯</a></li>
+			</ul>
+			
+		</div>
+		<div class="dw-footer-col-6-5">
+			<ul>
+				<li class="dw-footer-lang-head">选择语言：</li>
+				<li><a href="http://www.ibm.com/developerworks/" tabindex="0">English</a></li>
+				<li><a href="http://www.ibm.com/developerworks/cn/" lang="zh" tabindex="0">中文</a></li>
+				<li><a href="http://www.ibm.com/developerworks/jp/" lang="ja" tabindex="0">日本語</a></li>
+				<li><a href="http://www.ibm.com/developerworks/ru/" lang="ru" tabindex="0">Русский</a></li>
+				<li><a href="http://www.ibm.com/developerworks/br/" lang="pt" tabindex="0">Português (Brasil)</a></li>
+				<li><a href="http://www.ibm.com/developerworks/ssa/" lang="es" tabindex="0">Español</a></li>
+				<li><a href="http://www.ibm.com/developerworks/vn/" lang="vi" tabindex="0">Việt</a></li>
+			</ul>
+		</div>
+		<div class="dw-footer-col-6-6">
+			<img width="223" height="46" alt="IBM®" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/dwn-ibm-logo-v17.png">
+			<img class="dw-preload" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/ibm_sprite_social_blue_ON.png" alt="" width="1" height="1">
+		</div>
+	</div>
+</div>
+
+</div><!-- FOOTER_END -->
+
+<!-- END_IBM-TOP -->
+</div>
+
+<!-- SCRIPTS_INCLUDE_BEGIN -->
+<script type="text/javascript" src="./深入分析 iBATIS 框架之系统架构与映射原理_files/dw-comments.js">//</script>
+<script type="text/javascript" language="JavaScript">
+	dojo.ready(function(){
+		rBHash = typeof rBHash == "undefined" ? {} : rBHash;
+		rBHash['viperLang'] = 'zh';
+		rBHash['urlLang'] = 'cn';
+		rBHash['dwwi2Lang'] = 'zh_CN';
+		rBHash['appCode'] = 'dwmav';
+		rBHash['signoutUrl'] = (location.host.toLowerCase() === "www.ibm.com" || location.host.toLowerCase() === "developer.ibm.com") ? 'http://www.ibm.com/developerworks/cn/' : ''; 
+		dwsi.siInst = new dwweb.dynnav.dwsi();
+		dwsi.siInst.initSI();		
+
+		// construct the comment widget
+dwc.cmts = '条评论';
+dwc.signInPreText = '请';
+dwc.signIn = '登录';
+dwc.or = '或';
+dwc.register = '注册';
+dwc.signInPostText = '';
+dwc.leaveCmt = '后发表评论。';
+dwc.view = '查看';
+dwc.totalCmts = '共有评论';
+dwc.postYourCmt = '添加您的评论';
+dwc.show = '显示：';
+dwc.recentCmts = '最新评论';
+dwc.allCmts = '所有评论';
+dwc.tooLongCmt = '您的评论超过了 1000 字符限制';
+dwc.numCharsLeft = '剩余 <span id="charCount">{1}</span> 字符';
+dwc.reportAbuse = '报告滥用';
+dwc.notifyMsg = '有新评论时提醒我';
+dwc.htmlWarning = '注意：评论中不支持 HTML 语法'; 
+dwc.cmt = '评论：';
+dwc.addCmts = '添加评论';
+dwc.addCmt = '添加评论';
+dwc.doNotErase = '--在下方添加评论--'; 
+dwc.viewOrAddCmts = '查看或添加评论';
+dwc.reportInapprCont = '举报不良信息';
+dwc.reportInapprContLink = 'http://www.ibm.com/developerworks/forums/forum.jspa?forumID=1834';
+dwc.postingCmt = '正在发布评论……';
+dwc.noCmt = '快来添加第一条评论';
+dwc.netwkErr = '在检索评论时出错，请稍后刷新。';
+dwc.addACmt = '添加评论';
+dwc.instructCmt = '标有星号（<span class="ibm-required">*</span>）的是必填项目。';
+dwc.btnPost = '发布';
+dwc.btnPostAnon = '匿名发布';
+dwc.btnClrCmt = '清除评论';
+dwc.btnCancel = '取消';
+dwc.showRecent = '显示最新的 {1} 条评论'; // {1} is the count to be substituted
+dwc.showNext = '显示后 {1} 条评论'; // {1} is the count to be substituted
+dwc.showAllCmts = '显示所有评论';
+dwc.enterCmt = '请输入评论内容。';
+dwc.loginErr = '暂时无法验证您的登录状态，请稍后再试。';
+dwc.postErr = '暂时无法发布您的评论，请稍后再试。';
+dwc.postBy = '由 <strong>{1}</strong>  于 {2} '; // {1} is the author to be substituted; {2} is the date
+dwc.siteId = 10;
+dwc.lang = 'zh_CN';
+dwc.viperLang = 'zh';
+//dwc.abuseHref =  null;
+dwc.maxChars = 1000;
+dwc.cmtTxt =  '评论：';
+dwc.cmtsTxt =  '评论：';  
+		dwc && new dwc.comments('threadShow','95%',5,'nCmts','icomments');
+		});
+</script>
+
+
+
+<!-- BEGIN: Use this section to set page specific variables for the Unica Page Tag -->
+<script language="JavaScript">var NTPT_PGEXTRA="ibmSkillLevel=5&ibmCmaId=576855&ibmContentAreas=java,opensource";</script>
+<!--END --><!-- SCRIPTS_INCLUDE_END -->
+
+<div id="ibm-metrics">
+<script src="./深入分析 iBATIS 框架之系统架构与映射原理_files/stats.js" type="text/javascript">//</script>
+</div>
+
+
+
+</body></html>

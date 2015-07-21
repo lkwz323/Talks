@@ -1,0 +1,1953 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script async="" src="./MyBatis For .NET学习笔记[2]_配置环境_files/analytics.js"></script><script type="text/javascript" charset="UTF-8" src="./MyBatis For .NET学习笔记[2]_配置环境_files/Widget.aspx"></script><script async="" type="text/javascript" src="./MyBatis For .NET学习笔记[2]_配置环境_files/gpt.js"></script>
+<meta charset="utf-8">
+<title>MyBatis For .NET学习笔记[2]:配置环境 - chenkai - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./MyBatis For .NET学习笔记[2]_配置环境_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./MyBatis For .NET学习笔记[2]_配置环境_files/bundle-Minyx2_Lite.css">
+<link type="text/css" rel="stylesheet" href="./MyBatis For .NET学习笔记[2]_配置环境_files/47263.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/chenkai/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/chenkai/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/chenkai/wlwmanifest.xml">
+<script src="./MyBatis For .NET学习笔记[2]_配置环境_files/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'chenkai', cb_enable_mathjax=false;</script>
+<script src="./MyBatis For .NET学习笔记[2]_配置环境_files/blog-common.js" type="text/javascript"></script>
+<script src="./MyBatis For .NET学习笔记[2]_配置环境_files/bundle-Minyx2_Lite.js" language="javascript" type="text/javascript"></script>
+<script async="" type="text/javascript" src="./MyBatis For .NET学习笔记[2]_配置环境_files/pubads_impl_68.js"></script><script type="text/javascript" charset="utf-8" src="./MyBatis For .NET学习笔记[2]_配置环境_files/metrics.js"></script><style type="text/css"></style><script type="text/javascript" src="./MyBatis For .NET学习笔记[2]_配置环境_files/osd.js"></script><script type="text/javascript" src="./MyBatis For .NET学习笔记[2]_配置环境_files/related_items_v2"></script><script type="text/javascript" id="wumiiData" src="./MyBatis For .NET学习笔记[2]_配置环境_files/hot"></script></head>
+<body><link href="./MyBatis For .NET学习笔记[2]_配置环境_files/jiathis_share.css" rel="stylesheet" type="text/css"><div class="jiathis_style" style="height: auto; position: absolute; z-index: 100000000; top: 5556.4px; right: 0px; overflow: hidden; width: 26px;"><table cellpadding="0" cellspacing="0"><tbody style="background:transparent"><tr><td style="background:transparent"><img src="./MyBatis For .NET学习笔记[2]_配置环境_files/r3.gif" style="cursor:pointer;" onmouseover="$CKE.over()" onclick="$CKE.center(this)"></td><td><div></div></td></tr></tbody></table></div><iframe frameborder="0" style="position: absolute; display: none;"></iframe><div class="jiathis_style" style="height: auto; position: absolute; z-index: 100000000; display: none; top: 50%; left: 50%; overflow: auto;"></div><iframe frameborder="0" src="./MyBatis For .NET学习笔记[2]_配置环境_files/jiathis_utility.html" style="display: none;"></iframe>
+<a name="top"></a>
+<div id="page_begin_html"><!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+<!-- Syntax Highlighter 3.0.83 START -->
+<link type="text/css" rel="stylesheet" href="http://files0.cnitblog.com/chenkai/shCore.css">
+<link type="text/css" rel="stylesheet" href="http://files0.cnitblog.com/chenkai/shThemeDefault.css%22">
+<link type="text/css" rel="stylesheet" href="http://files0.cnitblog.com/chenkai/shCoreDefault.css%22">
+
+
+
+<div style="display: none" id="__document_write_ajax_div-3"></div>
+<div style="display: none" id="__document_write_ajax_div-4"></div>
+
+<div style="display: none" id="__document_write_ajax_div-5"></div></div><script>load_page_begin_html();</script>
+
+
+<div id="container">
+    <a class="minyx" href="http://www.cnblogs.com/">代码改变世界</a>
+    <ul id="topMnu">
+        <!-- 统计数据 -->
+        <li>
+            
+                
+Posts - 225, 
+Articles - 1, 
+Comments - 2446
+<!---->
+            
+        </li>
+        <!-- 这边可以增加一些链接 -->
+        <!-- 博客园 -->
+        <li><a href="http://www.cnblogs.com/">Cnblogs</a></li>
+        <!-- 管理 -->
+        <li id="topMnu-dashboard">
+            <a id="lnkDashboard" href="http://www.cnblogs.com/chenkai/admin/EditPosts.aspx">Dashboard</a></li>
+        <li>
+            <a id="lnkLogin" href="http://passport.cnblogs.com/login.aspx?ReturnUrl=http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html">Login</a></li>
+    </ul>
+
+    <script type="text/javascript">
+        var m = window.__blog.topMenuRendered;
+        if (m) { m(__$("topMnu")); }
+    </script>
+
+    <div id="header">
+        <ul id="menu">
+            <!-- 首页，当前section加上current类 -->
+            <li id="menu-home" class="current">
+                <a id="lnkHome" href="http://www.cnblogs.com/chenkai/">Home</a></li>
+            <!-- 联系 -->
+            <li id="menu-contact">
+                <a id="lnkContact" href="http://space.cnblogs.com/msg/send/chenkai">Contact</a></li>
+            <!-- 相册 -->
+            <li id="menu-gallary">
+                <a id="lnkGallery" href="http://www.cnblogs.com/chenkai/gallery.html">Gallery</a></li>
+            <!-- Rss订阅 -->
+            <li id="rss">
+                <a id="lnkRss" href="http://www.cnblogs.com/chenkai/rss">RSS</a></li>
+        </ul>
+        <div id="newmsg"></div>
+        <h1>
+            <!-- 主标题 -->
+            <a id="lnkBlogTitle" href="http://www.cnblogs.com/chenkai/">乱世经典</a>
+            <!-- 子标题 -->
+            <small>
+                day dream</small>
+        </h1>
+    </div>
+
+    <script type="text/javascript">
+        var m = window.__blog.headerRendered;
+        if (m) { m(__$("header")); }
+    </script>
+
+    <div id="wrapper">
+        <div id="content">
+            <script type="text/javascript">
+                var m = window.__blog.preRenderPosts;
+                if (m) { m(); }
+            </script>
+            
+<div id="post_detail">
+<div class="post" id="post">
+    <a name="top"></a>
+    <h2><a id="cb_post_title_url" href="./MyBatis For .NET学习笔记[2]_配置环境_files/MyBatis For .NET学习笔记[2]_配置环境.html">MyBatis For .NET学习笔记[2]:配置环境</a></h2>
+    <small>2011-03-21 18:24 by chenkai, <span id="post_view_count">10476</span> 阅读, <span id="post_comment_count">20</span> 评论, <a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#" onclick="AddToWz(1990596);return false;">收藏</a>,  <a href="http://i.cnblogs.com/EditPosts.aspx?postid=1990596" rel="nofollow">编辑</a></small>
+    <div class="entry">
+        <div id="cnblogs_post_body"><p><font face="Consolas">最近这几天一直看MyBatis相关资料.配置一下开发环境,在上一篇</font><a href="http://www.cnblogs.com/chenkai/archive/2011/03/09/1977980.html"><font face="Consolas">MyBatis For .NET学习笔记:开篇</font></a><font face="Consolas">大概介绍一下MyBatis框架开源项目版本以及起源. 其实MyBatis的前身是IBatis. 而对应的.NET版本也是从Java版本中移植过来.这点更是体现在官方把MyBatis移植到Google Code上之后体现出来文档之间差异: Java文档和编码实例完整而实用. 而对应MyBatis 的.NEt 版本你会发现除了两个提供的User Guid和iBATIS.NET SDK for .NET 2.0文档 整个<a href="http://code.google.com/p/mybatisnet/" target="_blank">My Batis for Google Code</a>中很难再发现有点价值的资料.</font></p>  <p><font face="Consolas">另外一个就是MyBatis版本问题. 作为开源项目MyBatis[.NET]目前官方提供最新版本DataMapper 1.6.2./ DataAccess 1.9.2与以前版本类似DataMapper 1.6.1中部分隐射实体的配置文件的语法发生改变. 也就是高版本在语法上有些不想下兼容味道.这也就导致各个版本之间实例异常问题和相对应实例各不相同,版本间参考性具有差距. 这让人情何以堪啊. 这也是我最近看官方文档摸索时一个很头疼的问题. 当然到目前为止对MyBatis原理了解尚未深入.可能目前看法并不可取.只是最近摸索MyBatis出现众多问题而无法找到相关参考资料解决问题. </font></p>  <p><font face="Consolas">既然是一个成熟的ORM框架.可以先快速项目中使用.来从实际项目中从全局角度来大体预览一下MyBatis框架的特点.会更加速理解MyBatis. 可能这篇文章写得有点长[只是估计].这个过程也是初学者角度摸索MyBatis的整个过程.难免会有纰漏 还望指正.当然也遇到很多大大小小的问题.本篇将详细讲述如何配置MyBais并构建项目采用MyBatis实现数据的CRUD操作.更深层原理将在后面章节讲述.先让我们会如何使用MyBatis.</font></p>  <h3 style="padding-bottom: 3px; background-color: #80ac92; font-family: verdana, geneva, arial, helvetica, sans-serif; height: 44px; color: white; font-size: 15pt; font-weight: bolder; padding-top: 10px"><strong><font face="Cambria">&lt;1&gt;构建MyBatis For .NET环境</font></strong></h3>  <p><font face="Consolas">如果你对MyBatis了解还不够多.可以参考<a href="http://zh.wikipedia.org/zh/IBATIS" target="_blank">MyBatis For Wiki</a>,另外当然就是<a href="http://www.mybatis.org/" target="_blank">官方</a>.在开始使用MyBatis之前需要在<a href="http://code.google.com/p/mybatisnet/" target="_blank">My Batis for Google Code</a>上下载四个文件:</font></p>  <p><img style="background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; float: left; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="2011-03-18_162036" border="0" alt="2011-03-18_162036" align="left" src="./MyBatis For .NET学习笔记[2]_配置环境_files/201103211823417042.png" width="763" height="256"></p>  <p>&nbsp;</p>  <p>&nbsp;</p>  <p>&nbsp;</p>  <p>&nbsp;</p>  <p>&nbsp;</p>  <p>&nbsp;</p>  <p>&nbsp;</p>  <p><font face="Consolas">其中DataMapper和DataAccess是核心的引用文件.而另外两个分别对应说明官方提供UserGuid文档.其实可以从文件可以看出MyBaits框架有两个核心的组成部分，一个是SQL Maps，另一个是Data Access Objects也就是常说的[DAO].当然官方在USer Guid做了很经典解释[后篇会翻译出来].这里简述一下个人使用后理解.相对于ORM框架中Nhibernate中把实体EntityModel与数据库表Table通过XML文件建立映射关系.而MyBatis的不同是MyBatis用一个简单的XML文件来实现从实体到SQL statements[SQL]的映射.这就意味什么呢? </font></p>  <p><font face="Consolas">首先DataTable数据库表结构和实体彻底的失去关联.数据库表结构改动将不再直接体现在EntityModel. 实体Model把这种依赖关系转移到一个人为可控因素的SQL Statements[sql语句]上来.也就没有Nhibernate中存在的Scheme概念.这也说明另外一个问题.Myibatis 并不会为程序员在运行期自动生成SQL 执行。具体的SQL 需要程序员编写，然后通过映射配置文件，将SQL所需的参数，以及返回的结果字段映射到指定Model.相对NHibernate等“一站式”ORM机制而言Myibatis 以SQL开发的工作量和数据库移植性上的灵活性，为系统设计提供了更大的自由空间. 这也是看了诸多ORM后选择MyBatis一个原因之一. 当然关于MyBatis与Nhibernate之间特点讨论会专门拿出一片文章来阐述.</font></p>  <p><font face="Consolas">很明显DataMapper是MyBatis框架的核心.DataAccess Objects[DAO]将动态的、可插入的 DAO 组件很容易地换入换出，可以使用 iBATIS Data Access Objects API 帮助隐藏持久性层实现的细节.创建简单的组件，提供对数据的访问，而无需将实现的详细说明展示给应用程序的其余部分.</font></p>  <p><font face="Consolas">解压文件发现6个可用DLL:</font></p>  <p><img style="background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; float: left; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="2011-03-18_164848" border="0" alt="2011-03-18_164848" align="left" src="./MyBatis For .NET学习笔记[2]_配置环境_files/201103211823411436.png" width="616" height="177"></p>  <p>&nbsp;</p>  <p>&nbsp;</p>  <p>&nbsp;</p>  <p>&nbsp;</p>  <p>&nbsp;</p>  <p><font face="Consolas">根据官方的文档说明如下:</font></p>  <p><font face="Consolas"><strong>IBatisNet.Common.DLL</strong>-[Assembly of classes shared by DataAccess and DataMapper]</font></p>  <p><font face="Consolas"><strong>IBatisNet.DataAccess.Dll</strong>-[核心的DataAccess组件DLL]</font></p>  <p><font face="Consolas"><strong>IBatisNet.DataMapper.DLL</strong>-[核心的数据隐射DataMap组件DLL]</font></p>  <p><font face="Consolas"><strong>Castyle.DynamicProxy.DLL</strong>-[实现为DataMapper动态生成代理]</font></p>  <p><font face="Consolas"><strong>Log4Net.Dll</strong>-[Log4日志组件.]</font></p>  <p><font face="Consolas">有了这些引用DLL组件如下来看MyBatis For .Net在项目中如何工作使用,.实现数据的对象的CRUD操作.</font></p>  <h3 style="padding-bottom: 3px; background-color: #80ac92; font-family: verdana, geneva, arial, helvetica, sans-serif; height: 44px; color: white; font-size: 15pt; font-weight: bolder; padding-top: 10px"><strong><font face="Cambria">&lt;2&gt;实现MyBatis For .NET框架CRUD</font></strong></h3>  <p><font face="Consolas">快速了解MyBatis构造和原理 来用一个实现项目来实现MyBatis框架数据基础CRUD操作.更加直观的体现MyBatis构建的原理.为了演示理解方便这里做了一个项目架构最简单纯净的三层. 项目结构如下:</font></p>  <p><img style="background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; float: left; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="2011-03-18_173102" border="0" alt="2011-03-18_173102" align="left" src="./MyBatis For .NET学习笔记[2]_配置环境_files/201103211823411959.png" width="336" height="240"></p>  <p><font face="Consolas"></font>&nbsp;</p>  <p>&nbsp;</p>  <p>&nbsp;</p>  <p>&nbsp;</p>  <p>&nbsp;</p>  <p>&nbsp;</p>  <p>&nbsp;</p>  <p><font face="Consolas">简单介绍External-Bin中需要引用的DLL. 为了区别在命名详见下划线后缀不再赘述.EntityModel需要添加<font face="Consolas"><strong>IBatisNet.Common.DLL引用.</strong></font>首先演示前需要一个独立数据库以及一个独立数据表Prodcut Tables 创建SQL 语句:</font></p>  <div class="csharpcode">   <pre class="alt"><font color="#008080"><strong><span class="lnum">   1:  </span><span class="kwrd">CREATE</span> <span class="kwrd">DATABASE</span> BaseCardDB</strong></font></pre>
+
+  <pre><font color="#008080"><strong><span class="lnum">   2:  </span><span class="kwrd">GO</span></strong></font></pre>
+
+  <pre><font color="#008080"><strong><span class="lnum">   4:  </span><span class="kwrd">USE</span> BaseCardDB</strong></font></pre>
+
+  <pre class="alt"><font color="#008080"><strong><span class="lnum">   5:  </span><span class="kwrd">GO</span></strong></font></pre>
+
+  <pre><font color="#008080"><strong></strong></font></pre>
+
+  <pre class="alt"><font color="#008080"><strong><span class="lnum">   7:  </span><span class="kwrd">CREATE</span> <span class="kwrd">TABLE</span> Product</strong></font></pre>
+
+  <pre><font color="#008080"><strong><span class="lnum">   8:  </span>(</strong></font></pre>
+
+  <pre class="alt"><font color="#008080"><strong><span class="lnum">   9:  </span>   ProductID <span class="kwrd">INT</span> <span class="kwrd">PRIMARY</span> <span class="kwrd">KEY</span> <span class="kwrd">IDENTITY</span>(1,1) <span class="kwrd">NOT</span> <span class="kwrd">NULL</span>,</strong></font></pre>
+
+  <pre><font color="#008080"><strong><span class="lnum">  10:  </span>   Product_Name <span class="kwrd">VARCHAR</span>(50) <span class="kwrd">NOT</span> <span class="kwrd">NULL</span>,</strong></font></pre>
+
+  <pre class="alt"><font color="#008080"><strong><span class="lnum">  11:  </span>   Product_Company <span class="kwrd">VARCHAR</span>(100) <span class="kwrd">NOT</span> <span class="kwrd">NULL</span>,</strong></font></pre>
+
+  <pre><font color="#008080"><strong><span class="lnum">  12:  </span>   SignOn_Data DATETIME <span class="kwrd">NOT</span> <span class="kwrd">NULL</span> <span class="kwrd">DEFAULT</span>(GETDATE()),</strong></font></pre>
+
+  <pre class="alt"><font color="#008080"><strong><span class="lnum">  13:  </span>   Update_Data DATETIME </strong></font></pre>
+
+  <pre><font color="#008080"><strong><span class="lnum">  14:  </span> )</strong></font></pre>
+
+  <pre class="alt"><font color="#008080"><strong><span class="lnum">  15:  </span><span class="kwrd">GO</span></strong></font></pre>
+</div>
+<style type="text/css">
+
+
+
+
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p><font face="Consolas">在EntityModel项目中构建实体Product操作对象.:</font></p>
+
+<div class="csharpcode">
+  <pre class="alt"><strong><span class="lnum">   1:  </span><span class="kwrd">namespace</span> EntityModel</strong></pre>
+
+  <pre><strong><span class="lnum">   2:  </span>{</strong></pre>
+
+  <pre class="alt"><strong><span class="lnum">   3:  </span>   <span class="kwrd">public</span> <span class="kwrd">class</span> Product</strong></pre>
+
+  <pre><strong><span class="lnum">   4:  </span>    {</strong></pre>
+
+  <pre class="alt"><strong><span class="lnum">   5:  </span>       <span class="kwrd">public</span> <span class="kwrd">int</span> ProductId { get; set; }</strong></pre>
+
+  <pre><strong><span class="lnum">   6:  </span>       <span class="kwrd">public</span> <span class="kwrd">string</span> ProductName { get; set; }</strong></pre>
+
+  <pre class="alt"><strong><span class="lnum">   7:  </span>       <span class="kwrd">public</span> <span class="kwrd">string</span> ProductCompany { get; set; }</strong></pre>
+
+  <pre><strong><span class="lnum">   8:  </span>       <span class="kwrd">public</span> DateTime SignDate { get; set; }</strong></pre>
+
+  <pre class="alt"><strong><span class="lnum">   9:  </span>       <span class="kwrd">public</span> DateTime UpdateData { get; set; }</strong></pre>
+
+  <pre><strong><span class="lnum">  10:  </span>    }</strong></pre>
+
+  <pre class="alt"><strong><span class="lnum">  11:  </span>}</strong></pre>
+</div>
+<style type="text/css">
+
+
+
+
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p><font face="Consolas">走到这往往让我们联想到NhiBernate中实现实体对象与数据库表之间映射关系的XML文件.但在MyBatis中则提出来出来对应操作的SQL语句之间映射.这时实现数据映射关系的核心部分.定义个在CustomerWeb_UI中定义对应ProductMap.XML:格式如下</font></p>
+
+<div class="csharpcode">
+  <pre class="alt"><strong><span class="lnum">   1:  </span><span class="kwrd">&lt;?</span><span class="html">xml</span> <span class="attr">version</span><span class="kwrd">="1.0"</span> <span class="attr">encoding</span><span class="kwrd">="utf-8"</span> ?<span class="kwrd">&gt;</span></strong></pre>
+
+  <pre><strong><span class="lnum">   2:  </span><span class="kwrd">&lt;</span><span class="html">sqlMap</span> <span class="attr">namespace</span><span class="kwrd">="EntityModel"</span> <span class="attr">xmlns</span><span class="kwrd">="http://ibatis.apache.org/mapping"</span> </strong></pre>
+
+  <pre class="alt"><strong><span class="lnum">   3:  </span>        <span class="attr">xmlns:xsi</span><span class="kwrd">="http://www.w3.org/2001/XMLSchema-instance"</span><span class="kwrd">&gt;</span></strong></pre>
+
+  <pre><strong><span class="lnum">   4:  </span>    <span class="kwrd">&lt;</span><span class="html">statements</span><span class="kwrd">&gt;</span></strong></pre>
+
+  <pre class="alt"><strong><span class="lnum">   5:  </span>        <span class="kwrd">&lt;</span><span class="html">select</span> <span class="attr">id</span><span class="kwrd">="GetAllProducts"</span> <span class="attr">parameterClass</span><span class="kwrd">="string"</span> <span class="attr">resultClass</span><span class="kwrd">="hashtable"</span><span class="kwrd">&gt;</span></strong></pre>
+
+  <pre><strong><span class="lnum">   6:  </span>            SELECT * FROM Product WHERE Product_Company=#companyname#</strong></pre>
+
+  <pre class="alt"><strong><span class="lnum">   7:  </span>        <span class="kwrd">&lt;/</span><span class="html">select</span><span class="kwrd">&gt;</span></strong></pre>
+
+  <pre><strong><span class="lnum">   8:  </span>        <span class="kwrd">&lt;</span><span class="html">insert</span> <span class="attr">id</span><span class="kwrd">="InsertProduct"</span> <span class="attr">parameterClass</span><span class="kwrd">="EntityModel.Product"</span><span class="kwrd">&gt;</span></strong></pre>
+
+  <pre class="alt"><strong><span class="lnum">   9:  </span>            INSERT  dbo.Product ( Product_Name ,Product_Company)</strong></pre>
+
+  <pre><strong><span class="lnum">  10:  </span>            VALUES  (#ProductName# , #ProductCompany#)</strong></pre>
+
+  <pre class="alt"><strong><span class="lnum">  11:  </span>        <span class="kwrd">&lt;/</span><span class="html">insert</span><span class="kwrd">&gt;</span></strong></pre>
+
+  <pre><strong><span class="lnum">  12:  </span>        <span class="kwrd">&lt;</span><span class="html">delete</span> <span class="attr">id</span><span class="kwrd">="DeleteProduct"</span> <span class="attr">parameterClass</span><span class="kwrd">="int"</span> <span class="attr">restultClass</span><span class="kwrd">="int"</span><span class="kwrd">&gt;</span></strong></pre>
+
+  <pre class="alt"><strong><span class="lnum">  13:  </span>            DELETE FROM dbo.Product WHERE ProductID=#ProductId#</strong></pre>
+
+  <pre><strong><span class="lnum">  14:  </span>        <span class="kwrd">&lt;/</span><span class="html">delete</span><span class="kwrd">&gt;</span></strong></pre>
+
+  <pre class="alt"><strong><span class="lnum">  15:  </span>        <span class="kwrd">&lt;</span><span class="html">update</span> <span class="attr">id</span><span class="kwrd">="UpdateProduct"</span> <span class="attr">parameterClass</span><span class="kwrd">="EntityModel.Product"</span> <span class="attr">restltClass</span><span class="kwrd">="int"</span><span class="kwrd">&gt;</span></strong></pre>
+
+  <pre><strong><span class="lnum">  16:  </span>            UPDATE Product SET Product_Name=#ProductName# WHERE ProductID=#ProductId#</strong></pre>
+
+  <pre class="alt"><strong><span class="lnum">  17:  </span>        <span class="kwrd">&lt;/</span><span class="html">update</span><span class="kwrd">&gt;</span></strong></pre>
+
+  <pre><strong><span class="lnum">  18:  </span>        <span class="kwrd">&lt;</span><span class="html">select</span> <span class="attr">id</span><span class="kwrd">="SelectAllProduct"</span> <span class="attr">resultClass</span><span class="kwrd">="List"</span><span class="kwrd">&gt;</span></strong></pre>
+
+  <pre class="alt"><strong><span class="lnum">  19:  </span>            SELECT * FROM Product</strong></pre>
+
+  <pre><strong><span class="lnum">  20:  </span>        <span class="kwrd">&lt;/</span><span class="html">select</span><span class="kwrd">&gt;</span></strong></pre>
+
+  <pre class="alt"><strong><span class="lnum">  21:  </span>    <span class="kwrd">&lt;/</span><span class="html">statements</span><span class="kwrd">&gt;</span></strong></pre>
+
+  <pre><strong><span class="lnum">  22:  </span><span class="kwrd">&lt;/</span><span class="html">sqlMap</span><span class="kwrd">&gt;</span></strong></pre>
+</div>
+<style type="text/css">
+
+
+
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p><font face="Consolas">有必要说说这个定义实体操作与对应操作的SQl Statement语句之间隐射文件的语法规则.首先&lt;SQlMap&gt;标签是用来表示映射关系. NameSpace最好指定对应实体命名空间.&lt;Statements&gt;则对应定义CRUD四种类型的操作SQL语句. 其中Id作为操作间的唯一标识.ParameterClass则指定操作参数的类型. ResultsClass这个下面会说到.参数可以是对应实体的属性.也可以是程序中执行SQL语句中传递的参数.但是参数大小写敏感必须一致. 对应参数采用#Paramter#格式进行区分. 如上定义CRUD四个操作外加一个获得所有数据操作.共5个SQL语句.</font></p>
+
+<p><font face="Consolas">其实针对MyBatis中需要提供的配置文件共有4种<strong>[Important Level]:</strong></font></p>
+
+<p><font face="Consolas"><strong>Dao.config</strong>- 数据访问配置文件 用来指定配置DAO以及指定providers.config文件的位置和数据源的信息</font></p>
+
+<p><font face="Consolas"><strong>Providers.config</strong>-由框架使用的文件来查找你选定的数据库提供的定义访问参数. 这个通用的官方支持数据已达到10种.文件定义固定.[提前写好数据库访问配置 与Dao.Config进行关联.]</font></p>
+
+<p><font face="Consolas"><strong>SqlMap.config</strong>和数据映射定义XML文件[实体映射文件ProductMap.xml] -这是一个有关当前数据库信息及实体映射文件配置的文件。在这个文件里可以指定数据库连接的信息[用户名、密码及主机等），还可以指定实体映射文件.类似[ProductMap.xml]</font></p>
+
+<p><font face="Consolas">如上三个配置文件为了演示目的 放到<strong>CustomerWeb_UI</strong>项目根目录:.</font></p>
+
+<p><img style="background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; float: left; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="2011-03-21_094957" border="0" alt="2011-03-21_094957" align="left" src="./MyBatis For .NET学习笔记[2]_配置环境_files/201103211823426386.png" width="335" height="396"></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><font face="Consolas">如上配置中其中Privoiders.Config需要作为资源文件嵌入项目:</font></p>
+
+<p><font face="Consolas"><img style="background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; float: left; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="2011-03-21_095101" border="0" alt="2011-03-21_095101" align="left" src="./MyBatis For .NET学习笔记[2]_配置环境_files/201103211823426910.png" width="336" height="207"></font></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><font face="Consolas">建立操作的实体以及对应的映射文件后.来看一下Provide.Config其实就是指定项目要支持的数据配置参数.这个相对比较固定.是配置文件中变化最小的一个配置文件.在项目中可以通过配置文件操作类动态切换底层支持的数据库.底层数据库支持已经不再成为项目移植的瓶颈.目前支持12中数据库采用的是SQlServer 2005版本配置:</font></p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span>    <span class="rem">&lt;!--SqlServer 2.0 SQl--&gt;</span></pre>
+
+  <pre><span class="lnum">   2:  </span>    <span class="kwrd">&lt;</span><span class="html">provider</span></pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>        <span class="attr">name</span><span class="kwrd">="sqlServer2.0"</span></pre>
+
+  <pre><span class="lnum">   4:  </span>        <span class="attr">enabled</span><span class="kwrd">="true"</span></pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>        <span class="attr">description</span><span class="kwrd">="Microsoft SQL Server, provider V2.0.0.0 in framework .NET V2.0"</span></pre>
+
+  <pre><span class="lnum">   6:  </span>        <span class="attr">assemblyName</span><span class="kwrd">="System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"</span></pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>        <span class="attr">connectionClass</span><span class="kwrd">="System.Data.SqlClient.SqlConnection"</span></pre>
+
+  <pre><span class="lnum">   8:  </span>        <span class="attr">commandClass</span><span class="kwrd">="System.Data.SqlClient.SqlCommand"</span></pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>        <span class="attr">parameterClass</span><span class="kwrd">="System.Data.SqlClient.SqlParameter"</span></pre>
+
+  <pre><span class="lnum">  10:  </span>        <span class="attr">parameterDbTypeClass</span><span class="kwrd">="System.Data.SqlDbType"</span></pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>        <span class="attr">parameterDbTypeProperty</span><span class="kwrd">="SqlDbType"</span></pre>
+
+  <pre><span class="lnum">  12:  </span>        <span class="attr">dataAdapterClass</span><span class="kwrd">="System.Data.SqlClient.SqlDataAdapter"</span></pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>        <span class="attr">commandBuilderClass</span><span class="kwrd">=" System.Data.SqlClient.SqlCommandBuilder"</span></pre>
+
+  <pre><span class="lnum">  14:  </span>        <span class="attr">usePositionalParameters</span> = <span class="kwrd">"false"</span></pre>
+
+  <pre class="alt"><span class="lnum">  15:  </span>        <span class="attr">useParameterPrefixInSql</span> = <span class="kwrd">"true"</span></pre>
+
+  <pre><span class="lnum">  16:  </span>        <span class="attr">useParameterPrefixInParameter</span> = <span class="kwrd">"true"</span></pre>
+
+  <pre class="alt"><span class="lnum">  17:  </span>        <span class="attr">parameterPrefix</span><span class="kwrd">="@"</span></pre>
+
+  <pre><span class="lnum">  18:  </span>        <span class="attr">allowMARS</span><span class="kwrd">="false"</span></pre>
+
+  <pre class="alt"><span class="lnum">  19:  </span>    <span class="kwrd">/&gt;</span></pre>
+</div>
+<style type="text/css">
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p><font face="Consolas">在这个配置参数需要说明的是Enable属性,默认情况是设置为False的.如果要启用某个数据库驱动就要将它的值设为true，还有一个就是parameterPrefix属性，表示参数化SQL语句中参数的前缀,在SQlServer中参数前缀就是@标识. 细节容易导致编程出线一些很奇怪的 异常.大多数情况下需要检查配置文件. 在来说所这个SQLMap.则是指定当前数据库连接信息和当前实体映射文件.具体配置如下:</font></p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">&lt;?</span><span class="html">xml</span> <span class="attr">version</span><span class="kwrd">="1.0"</span> <span class="attr">encoding</span><span class="kwrd">="utf-8"</span>?<span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   2:  </span><span class="kwrd">&lt;</span><span class="html">sqlMapConfig</span> <span class="attr">xmlns</span><span class="kwrd">="http://ibatis.apache.org/dataMapper"</span>  </pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>              <span class="attr">xmlns:xsi</span><span class="kwrd">="http://www.w3.org/2001/XMLSchema-instance"</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   4:  </span>&nbsp;</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>    <span class="rem">&lt;!--BAsic Setting About Configuration--&gt;</span></pre>
+
+  <pre><span class="lnum">   6:  </span>    <span class="kwrd">&lt;</span><span class="html">settings</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>        <span class="kwrd">&lt;</span><span class="html">setting</span> <span class="attr">useStatementNamespaces</span><span class="kwrd">="false"</span><span class="kwrd">/&gt;</span></pre>
+
+  <pre><span class="lnum">   8:  </span>        <span class="kwrd">&lt;</span><span class="html">setting</span> <span class="attr">cacheModelsEnabled</span><span class="kwrd">="true"</span><span class="kwrd">/&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>    <span class="kwrd">&lt;/</span><span class="html">settings</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  10:  </span>&nbsp;</pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>    <span class="kwrd">&lt;</span><span class="html">providers</span> <span class="attr">resource</span><span class="kwrd">="providers.config"</span><span class="kwrd">/&gt;</span></pre>
+
+  <pre><span class="lnum">  12:  </span>   <span class="rem">&lt;!--DataBase Connection Configuration--&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>    <span class="kwrd">&lt;</span><span class="html">database</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  14:  </span>   <span class="kwrd">&lt;</span><span class="html">provider</span> <span class="attr">name</span><span class="kwrd">="sqlServer2.0"</span> <span class="kwrd">/&gt;</span></pre>
+
+  <pre class="alt"><p><span class="lnum">  15:  </span>   <span class="kwrd">&lt;</span><span class="html">dataSource </span><span class="attr">connectionString</span><span class="kwrd">="data source=(local);database=BaseCardDB;user id=sa;password=chenkai;"</span> <span class="kwrd">/&gt;</span></p></pre>
+
+  <pre><span class="lnum">  16:  </span>    <span class="kwrd">&lt;/</span><span class="html">database</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  17:  </span>&nbsp;</pre>
+
+  <pre><span class="lnum">  18:  </span>    <span class="kwrd">&lt;</span><span class="html">sqlMaps</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  19:  </span>        <span class="kwrd">&lt;</span><span class="html">sqlMap</span> <span class="attr">resource</span><span class="kwrd">="Maps/CustomerMap.xml"</span><span class="kwrd">/&gt;</span></pre>
+
+  <pre><span class="lnum">  20:  </span>        <span class="kwrd">&lt;</span><span class="html">sqlMap</span> <span class="attr">resource</span><span class="kwrd">="Maps/ProductMap.xml"</span><span class="kwrd">/&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  21:  </span>    <span class="kwrd">&lt;/</span><span class="html">sqlMaps</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  22:  </span>&nbsp;</pre>
+
+  <pre class="alt"><span class="lnum">  23:  </span><span class="kwrd">&lt;/</span><span class="html">sqlMapConfig</span><span class="kwrd">&gt;</span></pre>
+</div>
+<style type="text/css">
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p><font face="Consolas">对应标识标签SQlMapConfig下. Settings对应全局设置. useStatementNamespaces属性则是指定是否使用命名空间方式来识别.对于初学者而言.为了保证快速上手.建议先把这些细节概念放置一边.建议设置成FAlse.不启用. Provider节点则是指定Provide.Config的文件路劲. DataBase节点则会使找到Provide.Config中指定数据配置.目前项目中采用的是Sql2005即SQlServer2.0. SqlMaps节点这时指定了映射文件的路径. 到了这儿忘了说一下CustomerWeb_UI项目需要添加的引用:</font></p>
+
+<p><img style="background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; float: left; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="2011-03-21_115619" border="0" alt="2011-03-21_115619" align="left" src="./MyBatis For .NET学习笔记[2]_配置环境_files/201103211823425797.png" width="347" height="275"></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><font face="Consolas">在MyBatis同样支持Log4Net组件方式来查看执行整个过程.当然测试框架也对Nunit很好的支持.可以在执行时启用Log4日志记录.找到项目的Web.Config添加如下Log4支持配置:</font></p>
+<font face="Consolas"></font>
+
+<div><div id="highlighter_174801" class="syntaxhighlighter collapsed nogutter sdf htmlscript"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number2 index0 alt1"><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">log4net</code><code class="htmlscript plain">&gt;</code></div><div class="line number3 index1 alt2"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript comments">&lt;!-- Define some output appenders --&gt;</code></div><div class="line number4 index2 alt1"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">appender</code> <code class="htmlscript plain">name="RollingLogFileAppender" type="log4net.Appender.RollingFileAppender"&gt;</code></div><div class="line number5 index3 alt2"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">param</code> <code class="htmlscript plain">name="File" value="log.txt"/&gt;</code></div><div class="line number6 index4 alt1"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">param</code> <code class="htmlscript plain">name="AppendToFile" value="true"/&gt;</code></div><div class="line number7 index5 alt2"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">param</code> <code class="htmlscript plain">name="MaxSizeRollBackups" value="2"/&gt;</code></div><div class="line number8 index6 alt1"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">param</code> <code class="htmlscript plain">name="MaximumFileSize" value="100KB"/&gt;</code></div><div class="line number9 index7 alt2"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">param</code> <code class="htmlscript plain">name="RollingStyle" value="Size"/&gt;</code></div><div class="line number10 index8 alt1"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">param</code> <code class="htmlscript plain">name="StaticLogFileName" value="true"/&gt;</code></div><div class="line number11 index9 alt2"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">layout</code> <code class="htmlscript plain">type="log4net.Layout.PatternLayout"&gt;</code></div><div class="line number12 index10 alt1"><code class="htmlscript spaces">&nbsp;&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">param</code> <code class="htmlscript plain">name="Header" value="[Header]\r\n"/&gt;</code></div><div class="line number13 index11 alt2"><code class="htmlscript spaces">&nbsp;&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">param</code> <code class="htmlscript plain">name="Footer" value="[Footer]\r\n"/&gt;</code></div><div class="line number14 index12 alt1"><code class="htmlscript spaces">&nbsp;&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">param</code> <code class="htmlscript plain">name="ConversionPattern" value="%d [%t] %-5p %c [%x] - %m%n"/&gt;</code></div><div class="line number15 index13 alt2"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;/</code><code class="htmlscript keyword">layout</code><code class="htmlscript plain">&gt;</code></div><div class="line number16 index14 alt1"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;/</code><code class="htmlscript keyword">appender</code><code class="htmlscript plain">&gt;</code></div><div class="line number17 index15 alt2"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">appender</code> <code class="htmlscript plain">name="ConsoleAppender" type="log4net.Appender.ConsoleAppender"&gt;</code></div><div class="line number18 index16 alt1"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">layout</code> <code class="htmlscript plain">type="log4net.Layout.PatternLayout"&gt;</code></div><div class="line number19 index17 alt2"><code class="htmlscript spaces">&nbsp;&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">param</code> <code class="htmlscript plain">name="ConversionPattern" value="%d [%t] %-5p %c [%x] &amp;lt;%X{auth}&amp;gt; - %m%n"/&gt;</code></div><div class="line number20 index18 alt1"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;/</code><code class="htmlscript keyword">layout</code><code class="htmlscript plain">&gt;</code></div><div class="line number21 index19 alt2"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;/</code><code class="htmlscript keyword">appender</code><code class="htmlscript plain">&gt;</code></div><div class="line number22 index20 alt1"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript comments">&lt;!-- Set root logger level to ERROR and its appenders --&gt;</code></div><div class="line number23 index21 alt2"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">root</code><code class="htmlscript plain">&gt;</code></div><div class="line number24 index22 alt1"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">level</code> <code class="htmlscript plain">value="DEBUG"/&gt;</code></div><div class="line number25 index23 alt2"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">appender-ref</code> <code class="htmlscript plain">ref="RollingLogFileAppender"/&gt;</code></div><div class="line number26 index24 alt1"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">appender-ref</code> <code class="htmlscript plain">ref="ConsoleAppender"/&gt;</code></div><div class="line number27 index25 alt2"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;/</code><code class="htmlscript keyword">root</code><code class="htmlscript plain">&gt;</code></div><div class="line number28 index26 alt1"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript comments">&lt;!-- Print only messages of level DEBUG or above in the packages --&gt;</code></div><div class="line number29 index27 alt2"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">logger</code> <code class="htmlscript plain">name="IBatisNet.DataMapper.Configuration.Cache.CacheModel"&gt;</code></div><div class="line number30 index28 alt1"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">level</code> <code class="htmlscript plain">value="DEBUG"/&gt;</code></div><div class="line number31 index29 alt2"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;/</code><code class="htmlscript keyword">logger</code><code class="htmlscript plain">&gt;</code></div><div class="line number32 index30 alt1"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">logger</code> <code class="htmlscript plain">name="IBatisNet.DataMapper.Configuration.Statements.PreparedStatementFactory"&gt;</code></div><div class="line number33 index31 alt2"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">level</code> <code class="htmlscript plain">value="DEBUG"/&gt;</code></div><div class="line number34 index32 alt1"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;/</code><code class="htmlscript keyword">logger</code><code class="htmlscript plain">&gt;</code></div><div class="line number35 index33 alt2"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">logger</code> <code class="htmlscript plain">name="IBatisNet.DataMapper.LazyLoadList"&gt;</code></div><div class="line number36 index34 alt1"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">level</code> <code class="htmlscript plain">value="DEBUG"/&gt;</code></div><div class="line number37 index35 alt2"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;/</code><code class="htmlscript keyword">logger</code><code class="htmlscript plain">&gt;</code></div><div class="line number38 index36 alt1"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">logger</code> <code class="htmlscript plain">name="IBatisNet.DataAccess.DaoSession"&gt;</code></div><div class="line number39 index37 alt2"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">level</code> <code class="htmlscript plain">value="DEBUG"/&gt;</code></div><div class="line number40 index38 alt1"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;/</code><code class="htmlscript keyword">logger</code><code class="htmlscript plain">&gt;</code></div><div class="line number41 index39 alt2"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">logger</code> <code class="htmlscript plain">name="IBatisNet.DataMapper.SqlMapSession"&gt;</code></div><div class="line number42 index40 alt1"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">level</code> <code class="htmlscript plain">value="DEBUG"/&gt;</code></div><div class="line number43 index41 alt2"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;/</code><code class="htmlscript keyword">logger</code><code class="htmlscript plain">&gt;</code></div><div class="line number44 index42 alt1"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">logger</code> <code class="htmlscript plain">name="IBatisNet.Common.Transaction.TransactionScope"&gt;</code></div><div class="line number45 index43 alt2"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">level</code> <code class="htmlscript plain">value="DEBUG"/&gt;</code></div><div class="line number46 index44 alt1"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;/</code><code class="htmlscript keyword">logger</code><code class="htmlscript plain">&gt;</code></div><div class="line number47 index45 alt2"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">logger</code> <code class="htmlscript plain">name="IBatisNet.DataAccess.Configuration.DaoProxy"&gt;</code></div><div class="line number48 index46 alt1"><code class="htmlscript spaces">&nbsp;&nbsp;</code><code class="htmlscript plain">&lt;</code><code class="htmlscript keyword">level</code> <code class="htmlscript plain">value="DEBUG"/&gt;</code></div><div class="line number49 index47 alt2"><code class="htmlscript spaces">&nbsp;</code><code class="htmlscript plain">&lt;/</code><code class="htmlscript keyword">logger</code><code class="htmlscript plain">&gt;</code></div><div class="line number50 index48 alt1"><code class="htmlscript plain">&lt;/</code><code class="htmlscript keyword">log4net</code><code class="htmlscript plain">&gt;</code></div></div></td></tr></tbody></table></div></div>
+
+<p><font face="Consolas">支持Log4之后我们基本完成对一个Product实体操作对象全部配置.如下就来编写数据访问类.添加DataAccess.DLL引用：</font></p>
+
+<p class="csharpcode"></p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="rem">//添加引用</span></pre>
+
+  <pre><span class="lnum">   2:  </span><span class="kwrd">using</span> IBatisNet.Common;</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span><span class="kwrd">using</span> IBatisNet.DataMapper;</pre>
+
+  <pre><span class="lnum">   4:  </span><span class="kwrd">using</span> IBatisNet.DataMapper.Configuration;</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span><span class="kwrd">using</span> IBatisNet.Common.Utilities;</pre>
+
+  <pre><span class="lnum">   6:  </span><span class="kwrd">using</span> IBatisNet.DataAccess;</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span><span class="kwrd">using</span> IBatisNet.DataAccess.Configuration;</pre>
+
+  <pre><span class="lnum">   8:  </span><span class="kwrd">using</span> IBatisNet.DataAccess.Interfaces;</pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span><span class="kwrd">using</span> IBatisNet.Common.Logging;</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+
+
+<p><style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style><font face="Consolas">数据访问对象Product对象底层数据库操作类ProductService.</font><font face="Consolas">采用SqlMapper对象来进行数据封装操作.其实了解过项目源码的人应该知道.MyBatis曾使用NPetShop中病开放相关的源码.在源码你会看到一个另外一层对SQlmapper应用动态封装. 然后与数据访问层进行隔离开来.其实作者是对Sqlmapper进行一定重写. 这里暂时用最为简单SQlMapper对象进行数据操作.类似我们要插入一条Product记录：</font></p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span>        <span class="kwrd">public</span> <span class="kwrd">void</span> InsertProduct(Product getproduct)</pre>
+
+  <pre><span class="lnum">   2:  </span>        {</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>            ISqlMapper _getsqlManager = <span class="kwrd">null</span>;</pre>
+
+  <pre><span class="lnum">   4:  </span>            DomSqlMapBuilder getdombuilder = <span class="kwrd">new</span> DomSqlMapBuilder();</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>&nbsp;</pre>
+
+  <pre><span class="lnum">   6:  </span>            <span class="kwrd">if</span> (getdombuilder != <span class="kwrd">null</span>)</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>                ProductService._getsqlmapper = getdombuilder.Configure() <span class="kwrd">as</span> SqlMapper;</pre>
+
+  <pre><span class="lnum">   8:  </span>            _getsqlManager = Mapper.Instance();</pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>&nbsp;</pre>
+
+  <pre><span class="lnum">  10:  </span>            <span class="kwrd">if</span> (_getsqlManager!=<span class="kwrd">null</span>)</pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>                _getsqlManager.Insert(<span class="str">"InsertProduct"</span>, getproduct);</pre>
+
+  <pre><span class="lnum">  12:  </span>        }</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+
+
+<p>执行插入操作:</p>
+
+<div class="csharpcode">
+  <div class="csharpcode">
+    <pre class="alt"><span class="lnum">   1:  </span>        <span class="rem">//插入一条数据</span></pre>
+
+    <pre><span class="lnum">   2:  </span>        ProductService_BL getproductBl = <span class="kwrd">new</span> ProductService_BL();</pre>
+
+    <pre class="alt"><span class="lnum">   3:  </span>        getproductBl.InsertProduct(<span class="kwrd">new</span> Product()</pre>
+
+    <pre><span class="lnum">   4:  </span>            {</pre>
+
+    <pre class="alt"><span class="lnum">   5:  </span>                ProductName = <span class="str">"Deskshop-54"</span>,</pre>
+
+    <pre><span class="lnum">   6:  </span>                SignDate=DateTime.Now,</pre>
+
+    <pre class="alt"><span class="lnum">   7:  </span>                ProductCompany = <span class="str">"Auto-Desk"</span></pre>
+
+    <pre><span class="lnum">   8:  </span>            });</pre>
+  </div>
+  <style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style></div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>插入结果:</p>
+
+<p><img style="background-image: none; border-bottom: 0px; border-left: 0px; padding-left: 0px; padding-right: 0px; display: inline; float: left; border-top: 0px; border-right: 0px; padding-top: 0px" title="2011-03-21_164852" border="0" alt="2011-03-21_164852" align="left" src="./MyBatis For .NET学习笔记[2]_配置环境_files/201103211823426320.png" width="506" height="210"></p>
+
+
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><font face="Consolas">ok.来完整分析一下这条数据插入流程.通过Instace()方法初始化SqlMapper对象 在执行插入数据时.在来回来同看看.ProductMap.xml映射文件中关于InsertProduct配置:</font></p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="rem">&lt;!--Insert Product--&gt;</span></pre>
+
+  <pre><span class="lnum">   2:  </span><span class="kwrd">&lt;</span><span class="html">insert</span> <span class="attr">id</span><span class="kwrd">="InsertProduct"</span> <span class="attr">parameterClass</span><span class="kwrd">="EntityModel.Product"</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>INSERT  dbo.Product ( Product_Name ,Product_Company)</pre>
+
+  <pre><span class="lnum">   4:  </span>VALUES  (#ProductName# , #ProductCompany#)</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span><span class="kwrd">&lt;/</span><span class="html">insert</span><span class="kwrd">&gt;</span></pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p><font face="Consolas">执行InsertOperator方法时sqlMapper对象通过查找配置中的InsertProduct下SQL语句进行执行插入操作. 当然配置则指定参数的类型是EntityModel.Product.这里要说一下.如果单一写一个Product类名.可能在执行是爆出异常提示不识别该参数类型.所以对于分层架构来说最好带上命名空间.</font></p>
+
+<p><font face="Consolas">当然在初步调试尝试建立SQlMaper初始化时会碰见如下无法找到DAo.Config文件异常:</font></p>
+
+<p><img style="border: 0px; padding-left: 0px; padding-right: 0px; display: inline; float: left; padding-top: 0px; width: 774px; background-image: none;" title="2011-03-16_094951" border="0" alt="2011-03-16_094951" align="left" src="./MyBatis For .NET学习笔记[2]_配置环境_files/201103211823438796.png" width="793" height="330"></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><font face="Consolas">Dao.config用来建立数据库连接信息.另外一个就是用来识别SQlMap.Config文件.Dao.Config设置路劲对外可执行程序是可见的.设置Dao.Config文件作为编译内容:</font></p>
+
+<p><img style="background-image: none; border-bottom: 0px; border-left: 0px; padding-left: 0px; padding-right: 0px; display: inline; float: left; border-top: 0px; border-right: 0px; padding-top: 0px" title="2011-03-21_172158" border="0" alt="2011-03-21_172158" align="left" src="./MyBatis For .NET学习笔记[2]_配置环境_files/201103211823435731.png" width="329" height="225"></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><font face="Consolas">如下来更新一下这条记录.更新操作中当然可以使用SQlMapper实例的Update方法进行操作.：</font></p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span> <span class="rem">//更新操作</span></pre>
+
+  <pre><span class="lnum">   2:  </span> <span class="kwrd">public</span> <span class="kwrd">string</span> UpdateProductById(Product getproduct)</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>  {</pre>
+
+  <pre><span class="lnum">   4:  </span>     <span class="kwrd">string</span> getresult = <span class="kwrd">string</span>.Empty;</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>     <span class="kwrd">if</span> (_getsqlManager == <span class="kwrd">null</span>)</pre>
+
+  <pre><span class="lnum">   6:  </span>              _getsqlManager = Mapper.Instance();</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>     <span class="kwrd">else</span></pre>
+
+  <pre><span class="lnum">   8:  </span>         {</pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>              _getsqlManager.BeginTransaction();</pre>
+
+  <pre><span class="lnum">  10:  </span>               <span class="kwrd">try</span></pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>               {</pre>
+
+  <pre><span class="lnum">  12:  </span>                    getresult = _getsqlManager.Update(<span class="str">"UpdateProduct"</span>, getproduct).ToString();</pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>                    _getsqlManager.CommitTransaction();</pre>
+
+  <pre><span class="lnum">  14:  </span>                }</pre>
+
+  <pre class="alt"><span class="lnum">  15:  </span>                <span class="kwrd">catch</span></pre>
+
+  <pre><span class="lnum">  16:  </span>                {</pre>
+
+  <pre class="alt"><span class="lnum">  17:  </span>                    _getsqlManager.RollBackTransaction();</pre>
+
+  <pre><span class="lnum">  18:  </span>                    <span class="kwrd">throw</span>;</pre>
+
+  <pre class="alt"><span class="lnum">  19:  </span>                }</pre>
+
+  <pre><span class="lnum">  20:  </span>            }</pre>
+
+  <pre class="alt"><span class="lnum">  21:  </span>            <span class="kwrd">return</span> getresult;</pre>
+
+  <pre><span class="lnum">  22:  </span>}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+
+
+<p><font face="Consolas">参数依然指定一个Product对象.但在数据更新过程中加入MyBatis的事务处理.当更新数据时发生异常则回滚当前操作保持原来数据.另外一个增加返回值.string类型.执行代码:</font></p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span> ProductService_BL getproductBl = <span class="kwrd">new</span> ProductService_BL();</pre>
+
+  <pre><span class="lnum">   2:  </span> <span class="kwrd">string</span> getresult = getproductBl.UpdateProduct(<span class="kwrd">new</span> Product</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span> {</pre>
+
+  <pre><span class="lnum">   4:  </span>     ProductId = 1,</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>     ProductName = <span class="str">"Widows  phone 7 Device"</span>,</pre>
+
+  <pre><span class="lnum">   6:  </span>     ProductCompany = <span class="str">"Tommy Frank and MS Team"</span></pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>   });</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>执行结果:</p>
+
+<p><img style="background-image: none; border-bottom: 0px; border-left: 0px; padding-left: 0px; padding-right: 0px; display: inline; float: left; border-top: 0px; border-right: 0px; padding-top: 0px" title="2011-03-21_175218" border="0" alt="2011-03-21_175218" align="left" src="./MyBatis For .NET学习笔记[2]_配置环境_files/201103211823435698.png" width="558" height="213"></p>
+
+
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><font face="Consolas">对应的配置的ProductMap.XML隐射配置附带返回值Update：</font></p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">&lt;</span><span class="html">update</span> <span class="attr">id</span><span class="kwrd">="UpdateProduct"</span> <span class="attr">parameterClass</span><span class="kwrd">="EntityModel.Product"</span> <span class="attr">restltClass</span><span class="kwrd">="int"</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   2:  </span>   UPDATE Product SET Product_Name=#ProductName# WHERE ProductID=#ProductId#</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span><span class="kwrd">&lt;/</span><span class="html">update</span><span class="kwrd">&gt;</span></pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p><font face="Consolas">当然在初步调试时也出现各种各样的异常.当你调试会发现的大多出现异常源自于配置文件中出现错误,类似我们在实例化SqlMapper对象时提示:</font></p>
+
+<p><img style="border: 0px; padding-left: 0px; padding-right: 0px; display: inline; float: left; padding-top: 0px; width: 774px; background-image: none;" title="2011-03-16_160335" border="0" alt="2011-03-16_160335" align="left" src="./MyBatis For .NET学习笔记[2]_配置环境_files/20110321182343125.png" width="803" height="378"></p>
+
+
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><font face="Consolas">SQlMap.Config的重要职能之一就是指定当前项目使用数据库连接具体配置信息. 另外一个就是Dao.Config使其配置可见.这很重要.这里需要在SQlMap.config中添加一个&lt;DataBase&gt;节点用来配置数据库连接.当然异常信息在MyBatis中初步调试时很常见.</font></p>
+
+<p><font face="Consolas">以上只是说明如何让MyBatis在一个简单纯净的三层架构如何去进行基础数据的CRUd操作. 让它快速工作起来.你会发现.从定义一个操作实体到编写隐射文件.指定数据库连接 操作.都异常简单.最终所有数据操作都交给对应数据操作的SQL Statement[sql语句来完成].在一定程度上增加灵活性.MyBatis中提出的新概念比较少.相对NhiberNate学习曲线较小.容易上手使用. </font></p>
+
+<p><font face="Consolas">这篇文章整整采用一周业余时间来验证. 如下为验证的源码项目:</font></p>
+
+<p><font face="Consolas">&nbsp;<a href="http://files.cnblogs.com/chenkai/BatisDemonstarate_DUI.rar">/Files/chenkai/BatisDemonstarate_DUI.rar</a></font></p></div><div id="MySignature"></div>
+        <div class="clear"></div>
+        <div id="blog_post_info_block">
+        <div id="blog_post_info"><div id="green_channel">
+绿色通道：
+<a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(1990596,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+<a id="green_channel_follow" onclick="c_follow();" href="javascript:void(0);">关注我</a>
+<a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a><a id="green_channel_contact" href="http://msg.cnblogs.com/send/chenkai" target="_blank">与我联系</a>
+<a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./MyBatis For .NET学习笔记[2]_配置环境_files/icon_weibo_24.png" alt=""></a>
+</div>
+<div id="author_profile">
+<div id="author_profile_info" class="author_profile_info">
+<a href="http://home.cnblogs.com/u/chenkai/" target="_blank"><img src="./MyBatis For .NET学习笔记[2]_配置环境_files/u43680.jpg" class="author_avatar" alt=""></a>
+<div id="author_profile_detail" class="author_profile_info">
+<a href="http://home.cnblogs.com/u/chenkai/">chenkai</a><br>
+<a href="http://home.cnblogs.com/u/chenkai/followees">关注 - 2</a><br>
+<a href="http://home.cnblogs.com/u/chenkai/followers">粉丝 - 691</a>
+</div>
+</div>
+<div class="clear"></div>
+<div id="author_profile_honor">荣誉：<a href="http://www.cnblogs.com/expert/" target="_blank">推荐博客</a></div>
+<div id="author_profile_follow">
+    <a href="javascript:void(0);" onclick="c_follow();return false;">+加关注</a>
+</div>
+</div>
+<div id="div_digg">										
+    <div class="diggit" onclick="votePost(1990596,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">7</span>
+    </div>
+	<div class="buryit" onclick="votePost(1990596,&#39;Bury&#39;)"> 
+		<span class="burynum" id="bury_count">0</span>
+	</div>
+	<div class="clear"></div>	
+	<div class="diggword" id="digg_tips">
+    (请您对文章做出评价)
+    </div>	
+</div>
+</div>
+        <div class="clear"></div>
+        <div id="post_next_prev"><a href="http://www.cnblogs.com/chenkai/archive/2011/03/14/1984104.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/chenkai/archive/2011/03/14/1984104.html" title="发布于2011-03-14 18:35">Silverlight 与WCF通信异常10013处理</a><br><a href="http://www.cnblogs.com/chenkai/archive/2011/03/25/1995678.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/chenkai/archive/2011/03/25/1995678.html" title="发布于2011-03-25 17:13">零Code生成Windows phone 7 应用程序</a><br></div>
+    </div>
+</div>
+    <ul class="postmetadata">
+        <li class="icon_cat" id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/chenkai/category/185124.html">03.ADO.NET Entity Framework </a></li>
+        <li class="icon_bullet" id="EntryTag">标签: <a href="http://www.cnblogs.com/chenkai/tag/MyBatis%20For%20.NET/">MyBatis For .NET</a>, <a href="http://www.cnblogs.com/chenkai/tag/Base%20Operator/">Base Operator</a>, <a href="http://www.cnblogs.com/chenkai/tag/CRUD/">CRUD</a></li>
+    </ul>
+</div>
+<script type="text/javascript">var allowComments=true,isLogined=false,cb_blogId=47263,cb_entryId=1990596,cb_blogApp=currentBlogApp,cb_blogUserGuid='63ff460b-63cf-dd11-9e4d-001cf0cd104b',cb_entryCreatedDate='2011/3/21 18:24:00';loadViewCount(cb_entryId);</script>
+<script type="text/javascript">
+    var m = window.__blog.postRendered;
+    if (m) { m(__$("post")); }
+</script>
+<script type="text/javascript">
+    var m = window.__blog.postRenderPosts;
+    if (m) { m(); }
+</script>
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<a class="addcomment" href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#comment_tip">Add your comment</a>
+<h3 id="comments"></h3>
+<div class="feedbackNoItems"></div>
+
+
+<ol class="commentlist" id="commentList">	
+
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051275" class="layer">#1楼</a><a name="2051275" id="comment_anchor_2051275"></a>[<span class="louzhu">楼主</span>]</cite> <a id="a_comment_author_2051275" href="http://www.cnblogs.com/chenkai/" target="_blank">chenkai</a> <a href="http://msg.cnblogs.com/send/chenkai" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2011-03-21 18:35</span></small>
+			</h5>
+			<div id="comment_body_2051275" class="blog_comment_body">这篇文章写得真够"辛苦的" 拖时间太长了....</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2051275,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2051275,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2051275_avatar" style="display:none;">http://pic.cnblogs.com/face/u43680.jpg</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051290" class="layer">#2楼</a><a name="2051290" id="comment_anchor_2051290"></a></cite> <a id="a_comment_author_2051290" href="http://home.cnblogs.com/u/110631/" target="_blank">witgo</a> <a href="http://msg.cnblogs.com/send/witgo" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2011-03-21 18:58</span></small>
+			</h5>
+			<div id="comment_body_2051290" class="blog_comment_body">这个东东好长时间没有更新了。如果是新项目的话，推荐SubSonic3.0</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2051290,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2051290,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051298" class="layer">#3楼</a><a name="2051298" id="comment_anchor_2051298"></a></cite> <a id="a_comment_author_2051298" href="http://www.cnblogs.com/alexis/" target="_blank">Alexis</a> <a href="http://msg.cnblogs.com/send/Alexis" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2011-03-21 19:09</span></small>
+			</h5>
+			<div id="comment_body_2051298" class="blog_comment_body"><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051290" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2051290);">@</a>witgo<br>为什么都用NHibernate呢</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2051298,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2051298,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2051298_avatar" style="display:none;">http://pic.cnblogs.com/face/u97911.jpg</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051304" class="layer">#4楼</a><a name="2051304" id="comment_anchor_2051304"></a></cite> <a id="a_comment_author_2051304" href="http://home.cnblogs.com/u/110631/" target="_blank">witgo</a> <a href="http://msg.cnblogs.com/send/witgo" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2011-03-21 19:21</span></small>
+			</h5>
+			<div id="comment_body_2051304" class="blog_comment_body">NHibernate 有点复杂，如果资源不够的话，还是SubSonic比较好些。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2051304,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2051304,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051538" class="layer">#5楼</a><a name="2051538" id="comment_anchor_2051538"></a></cite> <a id="a_comment_author_2051538" href="http://www.cnblogs.com/leo32/" target="_blank">广广</a> <a href="http://msg.cnblogs.com/send/%E5%B9%BF%E5%B9%BF" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2011-03-22 09:04</span></small>
+			</h5>
+			<div id="comment_body_2051538" class="blog_comment_body">嗯嗯，ibatis不错，一直都在用。。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2051538,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2051538,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051582" class="layer">#6楼</a><a name="2051582" id="comment_anchor_2051582"></a></cite> <a id="a_comment_author_2051582" href="http://home.cnblogs.com/u/52882/" target="_blank">roloxa</a> <a href="http://msg.cnblogs.com/send/roloxa" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2011-03-22 09:34</span></small>
+			</h5>
+			<div id="comment_body_2051582" class="blog_comment_body">顶你哦</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2051582,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2051582,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051624" class="layer">#7楼</a><a name="2051624" id="comment_anchor_2051624"></a>[<span class="louzhu">楼主</span>]</cite> <a id="a_comment_author_2051624" href="http://www.cnblogs.com/chenkai/" target="_blank">chenkai</a> <a href="http://msg.cnblogs.com/send/chenkai" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2011-03-22 10:09</span></small>
+			</h5>
+			<div id="comment_body_2051624" class="blog_comment_body"><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051538" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2051538);">@</a>广广<br>TKs.谢谢支持,.1<br></div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2051624,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2051624,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2051624_avatar" style="display:none;">http://pic.cnblogs.com/face/u43680.jpg</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051627" class="layer">#8楼</a><a name="2051627" id="comment_anchor_2051627"></a>[<span class="louzhu">楼主</span>]</cite> <a id="a_comment_author_2051627" href="http://www.cnblogs.com/chenkai/" target="_blank">chenkai</a> <a href="http://msg.cnblogs.com/send/chenkai" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2011-03-22 10:10</span></small>
+			</h5>
+			<div id="comment_body_2051627" class="blog_comment_body"><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051304" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2051304);">@</a>witgo<br>Nhibernate是一个巨无霸. 不用则已 要用就要精通.最忌讳的是吧Nhibernate用的半生不熟状态 那真的还不如不用...</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2051627,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2051627,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2051627_avatar" style="display:none;">http://pic.cnblogs.com/face/u43680.jpg</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051635" class="layer">#9楼</a><a name="2051635" id="comment_anchor_2051635"></a></cite> <a id="a_comment_author_2051635" href="http://home.cnblogs.com/u/110631/" target="_blank">witgo</a> <a href="http://msg.cnblogs.com/send/witgo" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2011-03-22 10:16</span></small>
+			</h5>
+			<div id="comment_body_2051635" class="blog_comment_body"><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051627" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2051627);">@</a>chenkai<br>楼上正解，SubSonic3.0比MyBatis简单多了，比较适合做小型网站。Nhibernate适合新开发的大中型业务系统。MyBatis用于重构现有的系统比较好。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2051635,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2051635,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051643" class="layer">#10楼</a><a name="2051643" id="comment_anchor_2051643"></a></cite> <a id="a_comment_author_2051643" href="http://home.cnblogs.com/u/110631/" target="_blank">witgo</a> <a href="http://msg.cnblogs.com/send/witgo" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2011-03-22 10:22</span></small>
+			</h5>
+			<div id="comment_body_2051643" class="blog_comment_body">IIS Express+SQLite+SubSonic3.0+MVC3.0+Razor这是做小型网站的神级平台。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2051643,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2051643,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051647" class="layer">#11楼</a><a name="2051647" id="comment_anchor_2051647"></a>[<span class="louzhu">楼主</span>]</cite> <a id="a_comment_author_2051647" href="http://www.cnblogs.com/chenkai/" target="_blank">chenkai</a> <a href="http://msg.cnblogs.com/send/chenkai" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2011-03-22 10:30</span></small>
+			</h5>
+			<div id="comment_body_2051647" class="blog_comment_body"><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051643" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2051643);">@</a>witgo<br>我还是更多用于原项目的重构.</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2051647,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2051647,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2051647_avatar" style="display:none;">http://pic.cnblogs.com/face/u43680.jpg</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051656" class="layer">#12楼</a><a name="2051656" id="comment_anchor_2051656"></a></cite> <a id="a_comment_author_2051656" href="http://home.cnblogs.com/u/110631/" target="_blank">witgo</a> <a href="http://msg.cnblogs.com/send/witgo" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2011-03-22 10:36</span></small>
+			</h5>
+			<div id="comment_body_2051656" class="blog_comment_body"><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051647" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2051647);">@</a>chenkai<br>现有的系统是Sql+DataSet， 想改为ORM？那就用MyBatis吧。这样重构还是比较痛苦滴。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2051656,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2051656,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051662" class="layer">#13楼</a><a name="2051662" id="comment_anchor_2051662"></a>[<span class="louzhu">楼主</span>]</cite> <a id="a_comment_author_2051662" href="http://www.cnblogs.com/chenkai/" target="_blank">chenkai</a> <a href="http://msg.cnblogs.com/send/chenkai" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2011-03-22 10:39</span></small>
+			</h5>
+			<div id="comment_body_2051662" class="blog_comment_body"><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051656" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2051656);">@</a>witgo<br>我的重构是重新移植.<br>也就做了一个切换层. 类似做了一个开关 只需配置一下就可以很方便的切换到ORM框架上来. 不用再源码上加以维护.</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2051662,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2051662,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2051662_avatar" style="display:none;">http://pic.cnblogs.com/face/u43680.jpg</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051671" class="layer">#14楼</a><a name="2051671" id="comment_anchor_2051671"></a></cite> <a id="a_comment_author_2051671" href="http://home.cnblogs.com/u/110631/" target="_blank">witgo</a> <a href="http://msg.cnblogs.com/send/witgo" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2011-03-22 10:46</span></small>
+			</h5>
+			<div id="comment_body_2051671" class="blog_comment_body"><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2051662" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2051662);">@</a>chenkai<br>这要看现有的系统的架构了，如果是基于Sql+DataSet的，最好架构级重构，<br>这样才不会把现有的问题引入到新系统里来。不然的话，以后一下缺陷叠加维护开发成本指数级的上涨。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2051671,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2051671,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2052804" class="layer">#15楼</a><a name="2052804" id="comment_anchor_2052804"></a></cite> <a id="a_comment_author_2052804" href="http://www.cnblogs.com/muer/" target="_blank">红萝卜</a> <a href="http://msg.cnblogs.com/send/%E7%BA%A2%E8%90%9D%E5%8D%9C" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2011-03-23 15:10</span></small>
+			</h5>
+			<div id="comment_body_2052804" class="blog_comment_body">？</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2052804,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2052804,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2052804_avatar" style="display:none;">http://pic.cnblogs.com/face/61550/20130606160904.png</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2228178" class="layer">#16楼</a><a name="2228178" id="comment_anchor_2228178"></a></cite> <a id="a_comment_author_2228178" href="http://www.cnblogs.com/dyfzwj/" target="_blank">上善若水123</a> <a href="http://msg.cnblogs.com/send/%E4%B8%8A%E5%96%84%E8%8B%A5%E6%B0%B4123" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2011-10-26 10:46</span></small>
+			</h5>
+			<div id="comment_body_2228178" class="blog_comment_body">您好！你的例子中 <br>List&lt;Product&gt; getproductlist = new List&lt;Product&gt;();<br>                getproductlist = _getsqlManager.QueryForList&lt;Product&gt;("SelectAllProduct", null).ToList&lt;Product&gt;();<br>会报错。<br>无法将类型为“System.Collections.ArrayList”的对象强制转换为类型“EntityModel.Product”。 <br>我应该怎么处理？急切</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2228178,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2228178,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2516624" class="layer">#17楼</a><a name="2516624" id="comment_anchor_2516624"></a></cite> <a id="a_comment_author_2516624" href="http://home.cnblogs.com/u/437109/" target="_blank">huhang22333</a> <a href="http://msg.cnblogs.com/send/huhang22333" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-10-26 16:55</span></small>
+			</h5>
+			<div id="comment_body_2516624" class="blog_comment_body"><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2228178" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2228178);">@</a>上善若水123<br>我也想知道啊，我公司现在马上要用这个，我下了DEMO，用的时候也碰到这个问题，你是怎么解决的？</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2516624,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2516624,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2526465" class="layer">#18楼</a><a name="2526465" id="comment_anchor_2526465"></a></cite> <a id="a_comment_author_2526465" href="http://www.cnblogs.com/your568/" target="_blank">火精灵</a> <a href="http://msg.cnblogs.com/send/%E7%81%AB%E7%B2%BE%E7%81%B5" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-11-07 16:45</span></small>
+			</h5>
+			<div id="comment_body_2526465" class="blog_comment_body"><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2228178" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2228178);">@</a>上善若水123<br>我已经解决了<br>修改ProductMap.xml 中的“&lt;select id="SelectAllProduct" parameterClass="EntityModel.Product" resultClass="EntityModel.Product"&gt;<br>			SELECT * FROM Product<br>		&lt;/select&gt;”<br>把resultClass="List"&gt;修改成<br>resultClass="EntityModel.Product"&gt;</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2526465,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2526465,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2526480" class="layer">#19楼</a><a name="2526480" id="comment_anchor_2526480"></a></cite> <a id="a_comment_author_2526480" href="http://www.cnblogs.com/your568/" target="_blank">火精灵</a> <a href="http://msg.cnblogs.com/send/%E7%81%AB%E7%B2%BE%E7%81%B5" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-11-07 16:54</span></small>
+			</h5>
+			<div id="comment_body_2526480" class="blog_comment_body">不过又有新问题了，怎么查询不出数据了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2526480,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2526480,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#2584746" class="layer">#20楼</a><a name="2584746" id="comment_anchor_2584746"></a><span id="comment-maxId" style="display:none;">2584746</span><span id="comment-maxDate" style="display:none;">2012/12/24 10:10:00</span></cite> <a id="a_comment_author_2584746" href="http://home.cnblogs.com/u/442886/" target="_blank">好玩一人</a> <a href="http://msg.cnblogs.com/send/%E5%A5%BD%E7%8E%A9%E4%B8%80%E4%BA%BA" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-12-24 10:10</span></small>
+			</h5>
+			<div id="comment_body_2584746" class="blog_comment_body">There is no DAO implementation found for ICustomerDao in this context. <br>你们有没有遇到这个错误呀？要怎么解决?急。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2584746,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2584746,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+</ol>
+
+<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" id="lnk_RefreshComments" onclick="return RefreshCommentList();">刷新评论</a><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21/1990596.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="site_nav_under"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="http://www.gcpowertools.com.cn/order/specialoffers.htm?utm_source=cnblogs&utm_medium=blogpage&utm_term=Promotion&utm_content=SummerPromotion&utm_campaign=community" target="_blank">【热门】支持Visual Studio2015的葡萄城控件新品发布暨夏季促销</a><br></div>
+<div id="opt_under_post"></div>
+<script type="text/javascript">
+    var enableGoogleAd = canShowAdsense(); 
+    fixPostBodyFormat();
+</script>
+<script type="text/javascript">
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+    (function () {
+        if (enableGoogleAd) {
+            var gads = document.createElement('script');
+            gads.async = true;
+            gads.type = 'text/javascript';
+            var useSSL = 'https:' == document.location.protocol;
+            gads.src = (useSSL ? 'https:' : 'http:') +
+              '//www.googletagservices.com/tag/js/gpt.js';
+            var node = document.getElementsByTagName('script')[0];
+            node.parentNode.insertBefore(gads, node);
+        }
+  })();
+</script>
+<script type="text/javascript">
+    try {
+        if (enableGoogleAd) {
+            googletag.cmd.push(function() {
+            googletag.defineSlot('/1090369/cnblogs_blogpost_C2', [468, 60], 'div-gpt-ad-1433581717989-0').addService(googletag.pubads());
+            googletag.defineSlot('/1090369/cnblogs_blogpost_C1_sitehome', [300, 250], 'div-gpt-ad-1433581717989-1').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.pubads().collapseEmptyDivs();
+            googletag.enableServices();
+            });
+        };
+    } catch (e) { }
+</script>
+<div id="google_ad_c1" class="c_ad_block">
+    <div id="div-gpt-ad-1433581717989-1" style="height:250px; width:300px;">
+    <script type="text/javascript">
+        try {
+            if (enableGoogleAd) {
+                googletag.cmd.push(function () { googletag.display('div-gpt-ad-1433581717989-1'); });
+            } else {
+                $('#div-gpt-ad-1433581717989-1').hide();
+            }
+    } catch (e) { }
+    </script>
+    <div id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0" name="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" src="javascript:"<html><body style='background:transparent'></body></html>"" style="border: 0px; vertical-align: bottom;"></iframe></div><iframe id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__hidden__" name="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__hidden__" width="0" height="0" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" src="javascript:"<html><body style='background:transparent'></body></html>"" style="border: 0px; vertical-align: bottom; visibility: hidden; display: none;"></iframe></div>
+</div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/525498/" target="_blank">当果粉探索Material Design时，发生了什么？</a><br> ·  <a href="http://news.cnblogs.com/n/525497/" target="_blank">HTML5可被用于隐藏恶意程序</a><br> ·  <a href="http://news.cnblogs.com/n/525496/" target="_blank">腾讯的阅文集团，战略入股了喜马拉雅FM</a><br> ·  <a href="http://news.cnblogs.com/n/525495/" target="_blank">为什么总把东西看成人脸？因为你神经质！</a><br> ·  <a href="http://news.cnblogs.com/n/525494/" target="_blank">创业CEO：优秀领导者如何激发改变，以变应万变</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="google_ad_c2" class="c_ad_block">
+<div id="div-gpt-ad-1433581717989-0" style="height:60px; width:468px;">
+<script type="text/javascript">
+try {
+    if (enableGoogleAd) {
+        googletag.cmd.push(function () { googletag.display('div-gpt-ad-1433581717989-0'); });
+    } else {
+        $('#div-gpt-ad-1433581717989-0').hide();
+    }
+} catch (e) { }
+</script>
+<div id="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0" name="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0" width="468" height="60" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" src="javascript:"<html><body style='background:transparent'></body></html>"" style="border: 0px; vertical-align: bottom;"></iframe></div></div>
+</div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/512047/" target="_blank">RESTful架构详解</a><br> ·  <a href="http://kb.cnblogs.com/page/523194/" target="_blank">优秀程序员眼中的整洁代码</a><br> ·  <a href="http://kb.cnblogs.com/page/524946/" target="_blank">怎样看待比自己强的人</a><br> ·  <a href="http://kb.cnblogs.com/page/511067/" target="_blank">编程王道，唯“慢”不破</a><br> ·  <a href="http://kb.cnblogs.com/page/524473/" target="_blank">程序员要有持续产出</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+$(function () {
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 200);
+});
+</script>
+</div>
+
+        </div>
+
+        <script type="text/javascript">
+            var m = window.__blog.contentRendered;
+            if (m) { m(__$("content")); }
+        </script>
+
+        <div id="sidebar">
+            
+<div id="about">
+<div>
+<h2 id="about_title">About</h2>
+<div id="about_body">
+<div id="blog-news"><a href="http://www3.clustrmaps.com/user/9d0ab1ae"><img src="./MyBatis For .NET学习笔记[2]_配置环境_files/chenkai.cnblogs.com--thumb.jpg" alt="Locations of visitors to this page">
+</a>
+<br>
+网名:<font style="font-weight;blod;color:red;">Kadenchen/ChenkaiUnion</font>
+原名:<font style="font-weight:blod;color:red;">陈凯-(chenkai)</font> 
+如下方式能联系到我:Email:dkjay@163.com    MSN:chenkaiHome@live.cn 
+<br>
+<div align="left" style="font-family:宋体;">您是第<a href="http://www.amazingcounter.com/"><img border="0" src="./MyBatis For .NET学习笔记[2]_配置环境_files/counter.php" alt="track hits"></a>访客
+</div>
+
+<br>
+<div id="MicrosoftTranslatorWidget" style="width: 263px; border: 2px solid rgb(58, 87, 112); direction: ltr; min-height: 57px; background-image: url(data:image/x-ms-bmp;base64,Qk2eAAAAAAAAADYAAAAoAAAAAQAAABoAAAABABgAAAAAAGgAAAAAAAAAAAAAAAAAAAAAAAAAoIJZ/5x/V/+Ze1T/lXhS/5F1T/+OcU3/im5L/4ZrSP+CaEb/f2RE/3thQf93Xj//dFo8/6CCWf+khVv/p4le/6uMYP+vj2P/spNl/7aWZ/+6mWr/vpxs/8Ggbv/Fo3H/yaZz/8yqdv8=); background-color: rgb(120, 173, 208); background-repeat: repeat-x;" class="" translate="no"><div id="MSTWContent"><div id="MSTWHeader" style="border-color: rgb(101, 147, 179);"><span class="MSTWBox"><span id="MSTWHeaderText" style="width: 160px;">翻译此页</span></span><span class="MSTWBox"><select name="MSTWMenu" id="MSTWMenu" style="margin-top: 2px;"><option value="ar">阿拉伯语</option><option value="et">爱沙尼亚语</option><option value="mww">白苗文</option><option value="bg">保加利亚语</option><option value="pl">波兰语</option><option value="bs-latn">波斯尼亚语</option><option value="fa">波斯语</option><option value="ko">朝鲜语</option><option value="da">丹麦语</option><option value="de">德语</option><option value="ru">俄语</option><option value="fr">法语</option><option value="zh-cht">繁体中文</option><option value="fi">芬兰语</option><option value="ht">海地克里奥尔语</option><option value="nl">荷兰语</option><option value="ca">加泰隆语</option><option value="cs">捷克语</option><option value="otq">克雷塔罗奥托米语</option><option value="tlh">克林贡语</option><option value="hr">克罗地亚语</option><option value="lv">拉脱维亚语</option><option value="lt">立陶宛语</option><option value="ro">罗马尼亚语</option><option value="mt">马耳他语</option><option value="ms">马来语</option><option value="no">挪威语</option><option value="pt">葡萄牙语</option><option value="ja">日语</option><option value="sv">瑞典语</option><option value="sr-latn">塞尔维亚语 (拉丁文)</option><option value="sr-cyrl">塞尔维亚语 (西里尔文)</option><option value="sk">斯洛伐克语</option><option value="sl">斯洛文尼亚语</option><option value="th">泰语</option><option value="tr">土耳其语</option><option value="cy">威尔士语</option><option value="ur">乌尔都语</option><option value="uk">乌克兰语</option><option value="es">西班牙语</option><option value="he">希伯来语</option><option value="el">希腊语</option><option value="hu">匈牙利语</option><option value="it">意大利语</option><option value="hi">印地语</option><option value="id">印度尼西亚语</option><option selected="selected" value="en">英语</option><option value="yua">尤卡坦玛雅语</option><option value="vi">越南语</option></select><a id="MSTWGoButton" title="翻译此页" class="MSTWButtonLink" href="javascript: 翻译此页" style="overflow: hidden; border-color: rgb(101, 147, 179); background-image: url(data:image/x-ms-bmp;base64,Qk2GAAAAAAAAADYAAAAoAAAAAQAAABQAAAABABgAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAA6MOI/+XAhv/jvoT/4LyD/966gf/cuID/2bZ+/9ezff/VsXv/0q96/+jDiP/qxYn/7MeL/+/JjP/xy47/882P//bPkf/40pL/+tSU//3Wlf8=); background-repeat: repeat-x;"><img id="MSTWGoImage" src="data:image/gif;base64,R0lGODlhGAASAHAAACH5BAEAAP8ALAAAAAAYABIAhwAAAP%2f%2f%2fwAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAg8AP8JHEiwoMGDCBMqXMiwIcMAARwihAhRYkGKFC0KxIjRIkeODj9%2bfCiyYsOSHkFq7KhxY8SW%0d%0aMGPKRBgQADs%3d" style="border-width:0px;"></a></span></div><div id="MSTWFooter"><span id="MSTWBrand" class="MSTWBox"><a id="MSTWBrandLink" title="Microsoft® Translator" href="http://www.bing.com/translator?ref=MSTWidget" target="_blank"><span style="font-family: Segoe UI; direction: ltr;">Microsoft<sup style="vertical-align: super; font-size: 70%;">®</sup> Translator</span></a></span><span id="MSTWGetShare" class="MSTWBox"><a id="MSTWGetButton" title="为您自己的站点获取此小工具" class="MSTWButtonLink" href="http://www.microsofttranslator.com/widget/?ref=MSTWidget" target="_blank" style="border-color: rgb(101, 147, 179);"><img id="MSTWGetImage" src="data:image/gif;base64,R0lGODlhGAASAPcAAAAAAP%2f%2f%2fwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAYABIA%0d%0aAAhBAP8JHEiwoMGDCBMqXMiwocOHCAMEGCgRYkWCFxlmxDhx4caCH0F2TBiSI8mRJw%2bWVIny38qI%0d%0aI19CnEmzpk2DAQEAOw%3d%3d" style="border-width:0px;"></a><a id="MSTWShareButton" title="分享" class="MSTWButtonLink" href="mailto:?charset=utf-8&subject=%E6%9F%A5%E7%9C%8B%E6%AD%A4%E9%A1%B5%E4%BB%8E%20%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%20%E5%88%B0%20%E8%8B%B1%E8%AF%AD%20%E7%9A%84%E7%BF%BB%E8%AF%91&body=%E8%AF%91%E6%96%87%3A%20http%3A%2F%2Fwww.cnblogs.com%2Fchenkai%2Farchive%2F2011%2F03%2F21%2F1990596.html%23mstto%3Den%0D%0A%E5%8E%9F%E6%96%87%3A%20http%3A%2F%2Fwww.cnblogs.com%2Fchenkai%2Farchive%2F2011%2F03%2F21%2F1990596.html%0D%0A%0D%0A%E8%87%AA%E5%8A%A8%E7%BF%BB%E8%AF%91%E7%94%B1%20Microsoft%C2%AE%20Translator%20%E6%8F%90%E4%BE%9B%0D%0Ahttp%3A%2F%2Fwww.bing.com%2Ftranslator" style="border-color: rgb(101, 147, 179);"><img id="MSTWShareImage" src="data:image/gif;base64,R0lGODlhGAASAPcAAAAAAP%2f%2f%2fwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%0d%0aAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAYABIA%0d%0aAAhHAP8JHEiwoMGDCBMqXMiwocOHBQNInEiRokKJFwNc%2fKfxoMaOCDuCHChyo8CRIEcaLGmxZMKP%0d%0aITlmnPmyok2MEHPq3MlTYUAAOw%3d%3d" style="border-width:0px;"></a></span></div><div id="MSTWHidden" style="display: none;"><span id="MSTWCheckOut">查看此页从 {1} 到 {0} 的翻译</span><span id="MSTWTranslatedFrom">源语言</span><span id="MSTWOriginal">原文:</span><span id="MSTWTranslated">译文:</span><span id="MSTWPoweredBy">自动翻译由 Microsoft® Translator 提供</span><span id="MSTWStart">开始翻译</span><span id="MSTWStop">停止翻译</span><span id="MSTWClose">关闭</span><span id="MSTWCloseShowOrig">关闭并显示原始页面</span><span id="MSTWLangNotSup"></span><span id="MSTWSelect">选择</span></div></div></div> <div style="display: none" id="__document_write_ajax_div-8"></div><div style="display: none" id="__document_write_ajax_div-9"></div><div style="display: none" id="__document_write_ajax_div-10"></div> 
+<br>
+<a href="http://t.sina.com.cn/1918185435?s=6uyXnP"><img src="./MyBatis For .NET学习笔记[2]_配置环境_files/7.png"></a><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/chenkai/">chenkai</a><br>园龄：<a href="http://home.cnblogs.com/u/chenkai/" title="入园时间：2008-11-10">6年8个月</a><br>荣誉：<a href="http://www.cnblogs.com/expert/">推荐博客</a><br>粉丝：<a href="http://home.cnblogs.com/u/chenkai/followers/">691</a><br>关注：<a href="http://home.cnblogs.com/u/chenkai/followees/">2</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="cnblogs.UserManager.FollowBlogger(&#39;63ff460b-63cf-dd11-9e4d-001cf0cd104b&#39;)">+加关注</a></div><div style="display: none" id="__document_write_ajax_div-2"></div></div></div>
+<script type="text/javascript">loadBlogNews();</script>
+</div>
+</div>
+</div>
+
+            <script type="text/javascript">
+                var m = window.__blog.aboutRendered;
+                if (m) { m(__$("about")); }
+            </script>
+            
+<div id="mySearchWrapper">
+    <div id="mySearch">
+        <input type="image" src="./MyBatis For .NET学习笔记[2]_配置环境_files/btnsearch.gif" id="btnZzk" class="submit" onclick="zzk_go();return false;">
+        <label class="lb_search"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="keyword"></label>
+    </div>
+</div>
+
+            <script type="text/javascript">
+                var m = window.__blog.searchFormRendered;
+                if (m) { m(__$("searchform")); }
+            </script>
+            <div id="sideMain">
+            <div id="side-recent-posts">
+        <h2>最新随笔</h2>
+        <ul class="bullet">
+                <li><a href="http://www.cnblogs.com/chenkai/p/3417967.html">Windows phone应用开发[22]-再谈下拉刷新</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/p/3412794.html">Windows phone应用开发[21]-图片性能优化</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/p/3408658.html">Windows phone应用开发[20]-禁止Pivot手势</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/p/3371066.html">Windows phone应用开发[19]-RSA数据加密</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/p/3347636.html">Windows phone应用开发[18]-下拉刷新</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/p/3233403.html">Dribbble for windows phone 8</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/p/3169225.html">Windows phone应用开发[17]-xap提交异常处理</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2013/05/30/3108765.html">windows 编译版本异常处理</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2013/05/16/3082889.html">R语言的前世今生</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2013/02/19/2917626.html">Windows 8 添加隐私策略(C++版)</a></li>
+        </ul>
+    </div><div id="side-recent-comments">
+        <h2>最新评论</h2>
+        <ul class="voice">
+                <li>
+                    <a href="http://www.cnblogs.com/chenkai/archive/2013/01/26/2877855.html#3208790">Re:Elmah 日志记录组件</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/chenkai/archive/2013/01/26/2877855.html#3208790">
+                        @空葫芦可以自定义日志的看下自定义错误信息并写入到Elmah ：...
+                        -- HTL
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/chenkai/archive/2009/04/07/1430668.html#3205086">Re:分享一个Asp.net(C#)开发的Wiki Engine</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/chenkai/archive/2009/04/07/1430668.html#3205086">
+                        这个项目挂掉了吗？怎么访问不了？
+                        -- 马洪彪
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/chenkai/archive/2010/07/26/1785074.html#3179150">Re:C#操作IIS完整解析</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/chenkai/archive/2010/07/26/1785074.html#3179150">
+                        @chenkai请问 微软封装好的方法在哪可以查得到？...
+                        -- Qzzm!
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/chenkai/archive/2011/04/22/2024679.html#3158787">Re:Silverlight 5 Beta新特性[4]文本缩进控制</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/chenkai/archive/2011/04/22/2024679.html#3158787">
+                        为什么我的RichTextBoxOverflow显示找不到呢？而且给RichTextBox设置的OverflowContentTarget属性也说不支持……我用的是Silverlight 5 啊，这是......
+                        -- 歲月靜好
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/chenkai/archive/2013/01/04/2844702.html#3155530">Re:Fine Uploader文件上传组件</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/chenkai/archive/2013/01/04/2844702.html#3155530">
+                        validation这个参数总会you默认弹窗，我想自定义样式和效果，看源文档半天也没看到，</a><a href="" target="_blank">500) this.width=500;"/&gt;</a>
+                        -- 高尔础础
+                    
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/chenkai/archive/2009/11/11/1601193.html#3144388">Re:数据库设计中一个矛盾:数据库外键,用还是不用？你怎么看.?</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/chenkai/archive/2009/11/11/1601193.html#3144388">
+                        淡化外键，并不能简单武断的说淡化或不淡化。 必须根据实际情况来决定，如数据来源，关联影响，业务控制逻辑等。以下是个人关于是否淡化外键的个人经验和想法。	淡化外键的情况：如果对于某此数据来源复杂，且单表......
+                        -- 蓝蓝的大海
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/chenkai/archive/2010/07/26/1785074.html#3127945">Re:C#操作IIS完整解析</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/chenkai/archive/2010/07/26/1785074.html#3127945">
+                        请问楼主，有没有什么方法能够对IIS express做操作呢？<br><br>我用ServerManager貌似无法针对IIS Express使用
+                        -- Alf7
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/chenkai/p/3417967.html#3118482">Re:Windows phone应用开发[22]-再谈下拉刷新</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/chenkai/p/3417967.html#3118482">
+                        楼主请教一下，在源码中，为什么themes/generic.xaml不能更名呢，比如改成thems1/generic.xaml。我在全局搜不到这个路径的引用，是不是我忽略了什么呀?能不能帮忙指点一下.......
+                        -- 鸣动我心
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/chenkai/archive/2010/03/19/1690144.html#3110294">Re:多个版本的统计图工具【Chart Tools】</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/chenkai/archive/2010/03/19/1690144.html#3110294">
+                        不错，我以前一直用finereport做的，也有类似的效果
+                        -- kittey
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/chenkai/archive/2012/12/10/2811196.html#3076285">Re:PHP IDE NetBeans代码主题和除掉竖线解决方案</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/chenkai/archive/2012/12/10/2811196.html#3076285">
+                        @chenkai  好了，谢谢哈
+                        -- leonyl
+                    </a>
+                </li>
+        </ul>
+    </div></div>
+            <div id="sideRight">
+            <div id="side-archives">
+        <h2>随笔档案</h2>
+        <ul class="date">
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2013/11.html">2013年11月(3)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2013/10.html">2013年10月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2013/09.html">2013年9月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2013/08.html">2013年8月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2013/07.html">2013年7月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2013/05.html">2013年5月(2)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2013/02.html">2013年2月(2)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2013/01.html">2013年1月(5)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2012/12.html">2012年12月(2)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2012/11.html">2012年11月(2)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2012/10.html">2012年10月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2012/07.html">2012年7月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2012/06.html">2012年6月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2012/05.html">2012年5月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2012/04.html">2012年4月(5)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2012/01.html">2012年1月(8)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2011/12.html">2011年12月(6)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2011/11.html">2011年11月(3)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2011/07.html">2011年7月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2011/06.html">2011年6月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2011/05.html">2011年5月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2011/04.html">2011年4月(13)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2011/03.html">2011年3月(8)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2011/02.html">2011年2月(2)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2011/01.html">2011年1月(6)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2010/12.html">2010年12月(9)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2010/11.html">2010年11月(10)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2010/10.html">2010年10月(3)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2010/09.html">2010年9月(10)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2010/08.html">2010年8月(9)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2010/07.html">2010年7月(7)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2010/06.html">2010年6月(8)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2010/05.html">2010年5月(8)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2010/04.html">2010年4月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2010/03.html">2010年3月(6)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2010/02.html">2010年2月(10)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2010/01.html">2010年1月(3)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2009/12.html">2009年12月(4)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2009/11.html">2009年11月(6)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2009/09.html">2009年9月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2009/08.html">2009年8月(9)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2009/07.html">2009年7月(2)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2009/06.html">2009年6月(8)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2009/05.html">2009年5月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2009/04.html">2009年4月(13)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2009/03.html">2009年3月(8)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2009/02.html">2009年2月(10)</a></li>
+                <li><a href="http://www.cnblogs.com/chenkai/archive/2008/12.html">2008年12月(1)</a></li>
+        </ul>
+    </div><div id="side-link-217333">
+            <h2>Focus Website/News</h2>
+            <ul class="chain">
+                        <li>
+                            <a href="http://www.cnblogs.com/jv9/" target="_blank">Cnblogs-sllover</a>
+                        </li>
+                        <li>
+                            <a href="http://www.codeguru.com/" target="_blank">codeguru.com-(大分类的开源站)</a>
+                        </li>
+                        <li>
+                            <a href="http://www.codeplex.com/" target="_blank">codeplex.com</a>
+                        </li>
+                        <li>
+                            <a href="http://www.infoq.com/cn/" target="_blank">infoq.com--(inforq中)</a>
+                        </li>
+                        <li>
+                            <a href="http://www.dev114.net/" target="_blank">IT实用站点导航</a>
+                        </li>
+                        <li>
+                            <a href="http://www.jfree.org/" target="_blank">JFreeChart -jfree.org-(用于生成图表的项目)</a>
+                        </li>
+                        <li>
+                            <a href="http://bbs.jquery.org.cn/" target="_blank">Jquery中文社区</a>
+                        </li>
+                        <li>
+                            <a href="http://livesino.net/archives/3026.live" target="_self">LiveSino-NewsLive</a>
+                        </li>
+                        <li>
+                            <a href="http://msdn.microsoft.com/zh-cn/default.aspx" target="_blank">MSDN主页(简体中文)</a>
+                        </li>
+                        <li>
+                            <a href="http://www.opensource.org/" target="_blank">opensource.org-(开源设计)</a>
+                        </li>
+                        <li>
+                            <a href="http://www.opensourceproject.org.cn/" target="_blank">opensourceproject.org.cn-(中国区开源)</a>
+                        </li>
+                        <li>
+                            <a href="http://www.openwebdesign.org/" target="_blank">openwebdesign.org</a>
+                        </li>
+                        <li>
+                            <a href="http://tahiti.oracle.com/" target="_blank">Oracle Resource</a>
+                        </li>
+                        <li>
+                            <a href="http://poi.apache.org/index.html" target="_blank">poi.apache.org-(处理Excel,WORD组件)</a>
+                        </li>
+                        <li>
+                            <a href="http://team.silverlight.net/announcement/announcing-the-new-microsoft-sdk-for-facebook-platform/" target="_blank">Silverlight Team Blog</a>
+                        </li>
+                        <li>
+                            <a href="http://www.silverlightchina.net/" target="_blank">SilverlightChina-(银光中国)</a>
+                        </li>
+                        <li>
+                            <a href="http://www.slfans.com/" target="_blank">SilverlightFans</a>
+                        </li>
+                        <li>
+                            <a href="http://silverlight.net/" target="_blank">Silverlight-Net(pancrase)</a>
+                        </li>
+                        <li>
+                            <a href="http://olaponline.radar-soft.com/RiaOLAPGrid.aspx" target="_blank">SilverlightTool-radarsoft</a>
+                        </li>
+                        <li>
+                            <a href="http://sourceforge.net/" target="_blank">sourceforge.net-(开源站点)</a>
+                        </li>
+                        <li>
+                            <a href="http://sourceforge.net/projects/pdfbox/" target="_blank">处理PDF文档组件</a>
+                        </li>
+                        <li>
+                            <a href="http://www.nbao.net/" target="_blank">泥水佬作坊-(技博)</a>
+                        </li>
+                        <li>
+                            <a href="http://www.iisol.cn/" target="_blank">欧拉-(技博)</a>
+                        </li>
+                        <li>
+                            <a href="http://www.asp.net/ajax/" target="_blank">微软Asp.net Ajax官网</a>
+                        </li>
+                        <li>
+                            <a href="http://www.asp.net/cn/" target="_blank">微软Asp.net官网</a>
+                        </li>
+            </ul>
+        </div></div>
+            <div id="sideLeft">
+            <div id="side-calendar">
+        <h2>日历</h2>
+        <div id="blog-calendar"><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="日历">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2011/02/01&#39;);return false;">&lt;</a></td><td align="center">2011年3月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2011/04/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">27</td><td class="CalOtherMonthDay" align="center">28</td><td align="center"><a href="http://www.cnblogs.com/chenkai/archive/2011/03/01.html"><u>1</u></a></td><td align="center">2</td><td align="center">3</td><td align="center">4</td><td class="CalWeekendDay" align="center">5</td></tr><tr><td class="CalWeekendDay" align="center">6</td><td align="center">7</td><td align="center">8</td><td align="center"><a href="http://www.cnblogs.com/chenkai/archive/2011/03/09.html"><u>9</u></a></td><td align="center">10</td><td align="center"><a href="http://www.cnblogs.com/chenkai/archive/2011/03/11.html"><u>11</u></a></td><td class="CalWeekendDay" align="center">12</td></tr><tr><td class="CalWeekendDay" align="center">13</td><td align="center"><a href="http://www.cnblogs.com/chenkai/archive/2011/03/14.html"><u>14</u></a></td><td align="center">15</td><td align="center">16</td><td align="center">17</td><td align="center">18</td><td class="CalWeekendDay" align="center">19</td></tr><tr><td class="CalWeekendDay" align="center">20</td><td align="center"><a href="http://www.cnblogs.com/chenkai/archive/2011/03/21.html"><u>21</u></a></td><td align="center">22</td><td align="center">23</td><td align="center">24</td><td align="center"><a href="http://www.cnblogs.com/chenkai/archive/2011/03/25.html"><u>25</u></a></td><td class="CalWeekendDay" align="center">26</td></tr><tr><td class="CalWeekendDay" align="center">27</td><td align="center">28</td><td align="center"><a href="http://www.cnblogs.com/chenkai/archive/2011/03/29.html"><u>29</u></a></td><td align="center">30</td><td align="center">31</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td></tr><tr><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td><td class="CalOtherMonthDay" align="center">8</td><td class="CalOtherMonthDay" align="center">9</td></tr>
+</tbody></table></div>
+    </div><div id="side-categories">
+        <h2>随笔分类</h2>
+        <ul class="folder">
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/174447.html">01.Ajax&amp;Jquery(8)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/184825.html">02.ArcGis(Gis9.2/9.3)(1)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/185124.html">03.ADO.NET Entity Framework (3)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/174446.html">04.Asp.Net(C#)(44)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/174449.html">06.Life&amp;Others(16)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/174454.html">07.Linq(4)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/185422.html">08.NHibernate(4)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/232977.html">09.Oracle(4)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/233957.html">10.Ruby(4)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/239043.html">11.Ruby On Rails(4)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/178378.html">12.SilverLight(44)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/249000.html">13.Windows Phone(58)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/232764.html">14.Windows 7(6)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/224284.html">15.Windows 8(5)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/249464.html">16.PHP(3)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/258091.html">16.Windows Power Shell(2)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/277498.html">17.Project Management(5)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/449054.html">Asp.net Mvc(1)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/449702.html">Python(2)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/chenkai/category/480726.html">R(1)</a>
+                </li>
+        </ul>
+    </div><div id="side-top-posts-custom">
+    <h2>推荐排行榜</h2>
+    <div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/chenkai/archive/2011/03/29/1998982.html">1. 谈谈创业和梦想(29)</a></li><li><a href="http://www.cnblogs.com/chenkai/archive/2010/09/19/1831171.html">2. 算法还重要吗？(23)</a></li><li><a href="http://www.cnblogs.com/chenkai/archive/2010/07/26/1785074.html">3. C#操作IIS完整解析(20)</a></li><li><a href="http://www.cnblogs.com/chenkai/archive/2010/09/09/1822305.html">4. MSSQl分布式查询(19)</a></li><li><a href="http://www.cnblogs.com/chenkai/archive/2010/08/19/1802948.html">5. 编程累了进来听听音乐[再次更新……](19)</a></li></ul></div>
+</div><div id="side-top-posts">
+    <h2>阅读排行榜</h2>
+    <div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/chenkai/archive/2013/01/31/2888110.html">1. 从Pycharm说起(57929)</a></li><li><a href="http://www.cnblogs.com/chenkai/archive/2013/01/04/2844702.html">2. Fine Uploader文件上传组件(22858)</a></li><li><a href="http://www.cnblogs.com/chenkai/archive/2010/07/26/1785074.html">3. C#操作IIS完整解析(22000)</a></li><li><a href="http://www.cnblogs.com/chenkai/archive/2009/08/10/1542653.html">4. 卸载VS2008完整步骤解决方案(21824)</a></li><li><a href="http://www.cnblogs.com/chenkai/archive/2009/03/02/1401121.html">5. VS2008下载地址和版本破解(20880)</a></li></ul></div>
+</div>    
+    
+    
+    
+    
+
+
+        
+        
+        
+        
+        
+        
+        
+<div id="side-link-249549">
+            <h2>F#</h2>
+            <ul class="chain">
+                        <li>
+                            <a href="http://blogs.msdn.com/b/dsyme/" target="_blank">Don Syme's WebLog on F# and Related Topics</a>
+                        </li>
+                        <li>
+                            <a href="http://research.microsoft.com/en-us/um/cambridge/projects/fsharp/" target="_blank">F# at Microsoft Research </a>
+                        </li>
+                        <li>
+                            <a href="http://www.ffconsultancy.com/dotnet/fsharp/" target="_blank">F#.NET tutorials and examples</a>
+                        </li>
+                        <li>
+                            <a href="http://cs.hubfs.net/" target="_blank">hubFS: THE place for F#</a>
+                        </li>
+                        <li>
+                            <a href="http://strangelights.com/fsharp/" target="_blank">Robert Pickering's F# Resources</a>
+                        </li>
+            </ul>
+        </div><div id="side-link-236709">
+            <h2>Focus Company</h2>
+            <ul class="chain">
+                        <li>
+                            <a href="http://www.americanmcgee.com/wordpress/category/spicy-horse/" target="_self">American McGee’s Blog</a>
+                        </li>
+                        <li>
+                            <a href="http://www.autodesk.com/" target="_self">AutoDesk</a>
+                        </li>
+                        <li>
+                            <a href="http://github.com/dyang" target="_self">Derek Yang-git-space</a>
+                        </li>
+                        <li>
+                            <a href="http://dyang.github.com/" target="_self">dyang</a>
+                        </li>
+                        <li>
+                            <a href="http://www.codeproject.com/script/Membership/View.aspx?mid=6763762" target="_blank">My CodeProject</a>
+                        </li>
+                        <li>
+                            <a href="http://www.douban.com/people/36789840/" target="_blank">My Douban</a>
+                        </li>
+                        <li>
+                            <a href="http://github.com/chenkai" target="_blank">My Github</a>
+                        </li>
+                        <li>
+                            <a href="http://neverdoright.blogbus.com/" target="_self">neverdoright-黑橡树blog</a>
+                        </li>
+                        <li>
+                            <a href="http://opensource.thoughtworks.com/" target="_self">OpenSource-ThoughtWorks</a>
+                        </li>
+                        <li>
+                            <a href="http://phoenixtoday.blogbus.com/" target="_self">phoenixtoday-[朱雀巴士站]</a>
+                        </li>
+                        <li>
+                            <a href="http://www.spicyhorse.com/home.html" target="_self">Spicyhorse</a>
+                        </li>
+                        <li>
+                            <a href="http://www.taiwen.org/tag/thoughtworks/" target="_self">taiwen-Blog</a>
+                        </li>
+                        <li>
+                            <a href="http://blogs.thoughtworks.com/" target="_self">ThoughtWork-Blogs</a>
+                        </li>
+                        <li>
+                            <a href="http://jessie2730.spaces.live.com/" target="_self">ThoughtWorks-HR-LiveSpace</a>
+                        </li>
+                        <li>
+                            <a href="http://martinfowler.com/" target="_self">Thoughtworks-martinfowler</a>
+                        </li>
+                        <li>
+                            <a href="http://en.wikipedia.org/" target="_self">wikipedia-en</a>
+                        </li>
+                        <li>
+                            <a href="http://blog.sina.com.cn/lichengpeng" target="_blank">李承鹏SinaBlog</a>
+                        </li>
+            </ul>
+        </div><div id="side-link-297008">
+            <h2>Silverlight Assistant Tool</h2>
+            <ul class="chain">
+                        <li>
+                            <a href="http://kaxaml.com/" target="_blank">KaXaml</a>
+                        </li>
+                        <li>
+                            <a href="http://blois.us/Rooler/" target="_blank">Rooler</a>
+                        </li>
+                        <li>
+                            <a href="http://www.eqatec.com/tools/profiler/?gclid=CO3jpvKKwagCFU0mHAodegN6pQ" target="_blank">Silverlight Profiler</a>
+                        </li>
+                        <li>
+                            <a href="http://firstfloorsoftware.com/silverlightspy/download-silverlight-spy/" target="_blank">Silverlight SPY</a>
+                        </li>
+                        <li>
+                            <a href="http://firstfloorsoftware.com/silverlightspy/download-silverlight-spy/" target="_blank">Silverlight SPY</a>
+                        </li>
+                        <li>
+                            <a href="http://karlshifflett.wordpress.com/xaml-power-toys/" target="_blank">XAML Power Toys</a>
+                        </li>
+            </ul>
+        </div><div id="side-link-297000">
+            <h2>Silverlight OpenSource</h2>
+            <ul class="chain">
+                        <li>
+                            <a href="http://caliburn.codeplex.com/" target="_blank">Calibure</a>
+                        </li>
+                        <li>
+                            <a href="http://familyshow.codeplex.com/" target="_blank">FamilyShow [MS]</a>
+                        </li>
+                        <li>
+                            <a href="http://www.fulcrumweb.com/" target="_blank">Fulcrumweb[Crm/Erp]</a>
+                        </li>
+                        <li>
+                            <a href="http://www.mono-project.com/Moonlight" target="_blank">MoonLight</a>
+                        </li>
+                        <li>
+                            <a href="http://compositewpf.codeplex.com/" target="_blank">Patterns &amp; Practices: Prism </a>
+                        </li>
+            </ul>
+        </div><div id="side-link-249374">
+            <h2>Silverlight UnionGroup</h2>
+            <ul class="chain">
+                        <li>
+                            <a href="http://10rem.net/" target="_blank">Rem.Net</a>
+                        </li>
+                        <li>
+                            <a href="http://www.silverlightforums.com/index.php" target="_blank">SilverlightForums</a>
+                        </li>
+                        <li>
+                            <a href="http://silverlighthack.com/" target="_blank">SilverlightHack</a>
+                        </li>
+            </ul>
+        </div><div id="side-link-234596">
+            <h2>SomeBooks</h2>
+            <ul class="chain">
+                        <li>
+                            <a href="http://www.microsoft.com/presspass/events/mix/VideoGallery.aspx#channel_contentListTop" target="_blank">Mix10-Liveonline</a>
+                        </li>
+                        <li>
+                            <a href="http://live.visitmix.com/" target="_blank">Mix10-visitmix</a>
+                        </li>
+            </ul>
+        </div></div>
+            
+                <div id="sideContainer"></div>
+                <script type="text/javascript">
+                    $.ajax({
+                        url: '/' + currentBlogApp + '/mvc/blog/Minyx2_Lite_SideColumn.aspx',
+                        data: '{}',
+                        type: 'post',
+                        dataType: 'text',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            if (data) {
+                                $("#sideContainer").html(data);
+                                loadBlogDefaultCalendar();
+                                loadBlogSideBlocks();
+                                var m = window.__blog.sideContainerRendered;
+                                if (m) { m(__$("sideContainer")); }
+                                window.__blog.sidebar.__layout();
+                            }
+                        }
+                    });
+
+                </script>
+            
+        </div>
+
+        <script type="text/javascript">
+            var m = window.__blog.sidebarRendered;
+            if (m) { m(__$("sidebar")); }
+        </script>
+
+        <div id="footer">
+            
+<p id="logoFoot">
+    <a href="http://www.spiga.com.mx/" title="Agencia Interactiva Spiga">www.spiga.com.mx</a>
+</p>
+<div class="footText">
+<p>
+Copyright ©2015 chenkai
+</p>
+<p>
+<a href="http://www.cnblogs.com/">博客园</a>
+</p>
+</div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var m = window.__blog.wrapperRendered;
+        if (m) { m(__$("wrapper")); }
+    </script>
+
+</div>
+<script type="text/javascript">
+    var m = window.__blog.containerRendered;
+    if (m) { m(__$("container")); }
+</script>
+<!--PageEndHtml Block Begin-->
+<script type="text/javascript">
+    var wumiiSitePrefix = "http://www.cnblogs.com/chenkai/";
+    var wumiiParams = "&num=5&mode=3&pf=CNBLOGS";
+</script>
+<script type="text/javascript" src="./MyBatis For .NET学习笔记[2]_配置环境_files/relatedItemsWidget.htm"></script><iframe src="./MyBatis For .NET学习笔记[2]_配置环境_files/container.html" style="visibility: hidden; display: none;"></iframe>
+<a href="http://www.wumii.com/widget/relatedItems.htm" style="border:0;">
+    <img src="./MyBatis For .NET学习笔记[2]_配置环境_files/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;">
+</a>
+<!--PageEndHtml Block End-->
+
+
+<iframe id="google_osd_static_frame_6035135774873" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;"></iframe></body></html>
