@@ -42,12 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\IBaseService.cs" />
+    <Compile Include="IDiscountHelper.cs" />
     <Compile Include="IHomeService.cs" />
-    <Compile Include="Impl\Base\BaseServiceImpl.cs" />
-    <Compile Include="Impl\HomeServiceImpl.cs" />
-    <Compile Include="Impl\TalksServiceImpl.cs" />
     <Compile Include="ITalksService.cs" />
+    <Compile Include="IValueCalculater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
@@ -62,7 +60,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

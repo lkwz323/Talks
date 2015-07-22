@@ -1,0 +1,1214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0045)http://www.cnblogs.com/willick/p/3223042.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script async="" src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/analytics.js"></script>
+
+<title>[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/bundle-nature.css">
+<link type="text/css" rel="stylesheet" href="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/79226.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/willick/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/willick/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/willick/wlwmanifest.xml">
+<script type="text/javascript" src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/encoder.js"></script><script async="" type="text/javascript" src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/gpt.js"></script><script src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'willick', cb_enable_mathjax=false;</script>
+<script src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/blog-common.js" type="text/javascript"></script>
+<script async="" type="text/javascript" src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/pubads_impl_68.js"></script><script type="text/javascript" src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/osd.js"></script></head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="banner"><div id="bnr_pic">
+<!--done-->
+<div class="header">
+	<div class="headerText">
+		<a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/willick/">Liam Wang</a><br>
+	</div><br>
+	<div class="headerDis">踏踏实实做事，平平凡凡过日子。</div>
+</div>
+</div></div>
+<div id="main">
+	<!-- left starts -->
+	<div id="left">
+		<div id="mystats">
+			<br>
+				
+<!--done-->
+<div class="blogStats">
+随笔 - 35&nbsp;
+文章 - 8&nbsp;
+评论 - 761&nbsp;
+
+</div>
+			
+		</div>
+		<div id="mylinks">
+<!--done-->
+<a id="MyLinks1_HomeLink" class="menu" href="http://www.cnblogs.com/">博客园</a>&nbsp;&nbsp;<a id="MyLinks1_MyHomeLink" class="menu" href="http://www.cnblogs.com/willick/">首页</a>&nbsp;&nbsp;<a id="MyLinks1_NewPostLink" class="menu" rel="nofollow" href="http://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a>&nbsp;&nbsp;<a id="MyLinks1_ContactLink" accesskey="9" class="menu" rel="nofollow" href="http://msg.cnblogs.com/send/Liam%20Wang">联系</a>&nbsp;&nbsp;<a id="MyLinks1_Admin" class="menu" rel="nofollow" href="http://i.cnblogs.com/">管理</a>&nbsp;&nbsp;<a id="MyLinks1_Syndication" class="menu" href="http://www.cnblogs.com/willick/rss">订阅</a>&nbsp;<a id="MyLinks1_XMLLink" href="http://www.cnblogs.com/willick/rss"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/xml.gif" alt="订阅"></a></div>
+		<div id="topics">
+			
+<div id="post_detail">
+<div class="post">
+	<div class="postTitle">
+		<h1><a id="cb_post_title_url" class="postTitle2" href="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园.html">[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject</a></h1>
+	</div>
+	<div id="cnblogs_post_body"><blockquote>
+<p>本文目录：</p>
+</blockquote>
+<h1>为什么需要依赖注入</h1>
+<p>在[ASP.NET MVC 小牛之路]系列的<a href="http://www.cnblogs.com/willick/p/3195560.html" target="_blank">理解MVC模式</a>文章中，我们提到MVC的一个重要特征是关注点分离(separation of concerns)。我们希望应用程序的各部分组件尽可能多的相互独立、尽可能少的相互依赖。</p>
+<p>我们的理想情况是：一个组件可以不知道也可以不关心其他的组件，但通过提供的公开接口却可以实现其他组件的功能调用。这种情况就是所谓的<strong>松耦合</strong>。</p>
+<p>举个简单的例子。我们要为商品定制一个“高级”的价钱计算器LinqValueCalculator，这个计算器需要实现IValueCalculator接口。如下代码所示：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> IValueCalculator {
+    </span><span style="color: #0000ff;">decimal</span> ValueProducts(<span style="color: #0000ff;">params</span><span style="color: #000000;"> Product[] products);
+}
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> LinqValueCalculator : IValueCalculator {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">decimal</span> ValueProducts(<span style="color: #0000ff;">params</span><span style="color: #000000;"> Product[] products) {
+        </span><span style="color: #0000ff;">return</span> products.Sum(p =&gt;<span style="color: #000000;"> p.Price);
+    }
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>Product类和前两篇博文中用到的是一样的。现在有个购物车ShoppingCart类，它需要有一个能计算购物车内商品总价钱的功能<span style="line-height: 1.5;">。但购物车本身没有计算的功能，因此，购物车要嵌入一个计算器组件，这个计算器组件可以是LinqValueCalculator组件，但不一定是LinqValueCalculator组件（以后购物车升级，可能会嵌入别的更高级的计算器）。那么我们可以这样定义购物车ShoppingCart类：<br></span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008080;"> 1</span> <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> ShoppingCart {
+</span><span style="color: #008080;"> 2</span>     <span style="color: #008000;">//</span><span style="color: #008000;">计算购物车内商品总价钱</span>
+<span style="color: #008080;"> 3</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">decimal</span><span style="color: #000000;"> CalculateStockValue() {
+</span><span style="color: #008080;"> 4</span>         Product[] products =<span style="color: #000000;"> { 
+</span><span style="color: #008080;"> 5</span>             <span style="color: #0000ff;">new</span> Product {Name = <span style="color: #800000;">"</span><span style="color: #800000;">西瓜</span><span style="color: #800000;">"</span>, Category = <span style="color: #800000;">"</span><span style="color: #800000;">水果</span><span style="color: #800000;">"</span>, Price = <span style="color: #800080;">2.3M</span><span style="color: #000000;">}, 
+</span><span style="color: #008080;"> 6</span>             <span style="color: #0000ff;">new</span> Product {Name = <span style="color: #800000;">"</span><span style="color: #800000;">苹果</span><span style="color: #800000;">"</span>, Category = <span style="color: #800000;">"</span><span style="color: #800000;">水果</span><span style="color: #800000;">"</span>, Price = <span style="color: #800080;">4.9M</span><span style="color: #000000;">}, 
+</span><span style="color: #008080;"> 7</span>             <span style="color: #0000ff;">new</span> Product {Name = <span style="color: #800000;">"</span><span style="color: #800000;">空心菜</span><span style="color: #800000;">"</span>, Category = <span style="color: #800000;">"</span><span style="color: #800000;">蔬菜</span><span style="color: #800000;">"</span>, Price = <span style="color: #800080;">2.2M</span><span style="color: #000000;">}, 
+</span><span style="color: #008080;"> 8</span>             <span style="color: #0000ff;">new</span> Product {Name = <span style="color: #800000;">"</span><span style="color: #800000;">地瓜</span><span style="color: #800000;">"</span>, Category = <span style="color: #800000;">"</span><span style="color: #800000;">蔬菜</span><span style="color: #800000;">"</span>, Price = <span style="color: #800080;">1.9M</span><span style="color: #000000;">} 
+</span><span style="color: #008080;"> 9</span> <span style="color: #000000;">        };
+</span><span style="color: #008080;">10</span>         IValueCalculator calculator = <span style="color: #0000ff;">new</span><span style="color: #000000;"> LinqValueCalculator();
+</span><span style="color: #008080;">11</span> 
+<span style="color: #008080;">12</span>         <span style="color: #008000;">//</span><span style="color: #008000;">计算商品总价钱 </span>
+<span style="color: #008080;">13</span>         <span style="color: #0000ff;">decimal</span> totalValue =<span style="color: #000000;"> calculator.ValueProducts(products);
+</span><span style="color: #008080;">14</span> 
+<span style="color: #008080;">15</span>         <span style="color: #0000ff;">return</span><span style="color: #000000;"> totalValue;
+</span><span style="color: #008080;">16</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">17</span> }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="line-height: 1.5; font-size: 14px;">ShoppingCart</span><span style="line-height: 1.5; font-size: 14px;">类是通过IValueCalculator接口（而不是通过LinqValueCalculator）来计算商品总价钱的。如果以后购物车升级需要使用更高级的计算器，那么只需要改变第10行代码中new后面的对象（即把LinqValueCalculator换掉），其他的代码都不用变动。这样就实现了一定的松耦合。这时三者的关系如下图所示：<br></span></p>
+<p><span style="line-height: 1.5; font-size: 14px;"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/06110345-94a8093a53c9442aa2c3d96796373b5c.png" alt="" width="542" height="101"></span></p>
+<p>这个图说明，<span>ShoppingCart</span><span>类既依赖IValueCalculator接口又依赖LinqValueCalculator类。这样就有个问题，用现实世界的话来讲就是，如果嵌入在购物车内的计算器组件坏了，会导致整个购物车不能正常工作，岂不是要把整个购物车要换掉！最好的办法是将计算器组件和购物车完全独立开来，这样不管哪个组件坏了，只要换对应的组件即可。即我们要解决的问题是，要让ShoppingCart组件和LinqValueCalculator组件完全断开关系，而依赖注入这种设计模式就是为了解决这种问题。<br></span></p>
+<h1>什么是依赖注入</h1>
+<p>上面实现的部分松耦合显然并不是我们所需要的。<strong>我们所需要的是，在一个类内部，不通过创建对象的实例而能够获得某个实现了公开接口的对象的引用。这种“需要”，就称为DI（依赖注入，Dependency Injection），和所谓的IoC（控制反转，Inversion of Control ）是一个意思。</strong></p>
+<p>DI是一种通过接口实现松耦合的设计模式。初学者可能会好奇网上为什么有那么多技术文章对DI这个东西大兴其笔，是因为DI对于基于几乎所有框架下，要高效开发应用程序，它都是开发者必须要有的一个重要的理念，包括MVC开发。它是解耦的一个重要手段。</p>
+<p>DI模式可分为两个部分。一是移除对组件（上面示例中的LinqValueCalculator）的依赖，二是通过类的构造函数（或类的Setter访问器）来传递实现了公开接口的组件的引用。如下面代码所示：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> ShoppingCart {
+    IValueCalculator calculator;
+    
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">构造函数，参数为实现了IValueCalculator接口的类的实例</span>
+    <span style="color: #0000ff;">public</span><span style="color: #000000;"> ShoppingCart(IValueCalculator calcParam) {
+        calculator </span>=<span style="color: #000000;"> calcParam;
+    }
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">计算购物车内商品总价钱</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">decimal</span><span style="color: #000000;"> CalculateStockValue() {
+        Product[] products </span>=<span style="color: #000000;"> { 
+            </span><span style="color: #0000ff;">new</span> Product {Name = <span style="color: #800000;">"</span><span style="color: #800000;">西瓜</span><span style="color: #800000;">"</span>, Category = <span style="color: #800000;">"</span><span style="color: #800000;">水果</span><span style="color: #800000;">"</span>, Price = <span style="color: #800080;">2.3M</span><span style="color: #000000;">}, 
+            </span><span style="color: #0000ff;">new</span> Product {Name = <span style="color: #800000;">"</span><span style="color: #800000;">苹果</span><span style="color: #800000;">"</span>, Category = <span style="color: #800000;">"</span><span style="color: #800000;">水果</span><span style="color: #800000;">"</span>, Price = <span style="color: #800080;">4.9M</span><span style="color: #000000;">}, 
+            </span><span style="color: #0000ff;">new</span> Product {Name = <span style="color: #800000;">"</span><span style="color: #800000;">空心菜</span><span style="color: #800000;">"</span>, Category = <span style="color: #800000;">"</span><span style="color: #800000;">蔬菜</span><span style="color: #800000;">"</span>, Price = <span style="color: #800080;">2.2M</span><span style="color: #000000;">}, 
+            </span><span style="color: #0000ff;">new</span> Product {Name = <span style="color: #800000;">"</span><span style="color: #800000;">地瓜</span><span style="color: #800000;">"</span>, Category = <span style="color: #800000;">"</span><span style="color: #800000;">蔬菜</span><span style="color: #800000;">"</span>, Price = <span style="color: #800080;">1.9M</span><span style="color: #000000;">} 
+        };
+
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">计算商品总价钱 </span>
+        <span style="color: #0000ff;">decimal</span> totalValue =<span style="color: #000000;"> calculator.ValueProducts(products);
+
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> totalValue;
+    }
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>这样我们就彻底断开了ShoppingCart和LinqValueCalculator之间的依赖关系。某个实现了IValueCalculator接口的类(示例中的<span>LinqValueCalculator</span>)的实例引用作为参数，传递给ShoppingCart类的构造函数。但是ShoppingCart类不知道也不关心这个实现了IValueCalculator接口的类是什么，更没有责任去操作这个类。 这时我们可以用下图来描述ShoppingCart、LinqValueCalculator和IValueCalculator之间的关系：</p>
+<p><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/06110409-c3161656afa44fb393eb458d6ac7daca.png" alt="" width="601" height="56"></p>
+<p>在程序运行的时候，依赖被注入到ShoppingCart，这个依赖就是，通过ShoppingCart构造函数传递实现了IValueCalculator接口的类的实例引用。在程序运行之前（或编译时），ShoppingCart和任何实现IValueCalculator接口的类没有任何依赖关系。（注意，程序运行时是有具体依赖关系的。）</p>
+<p>注意，上面示例使用的注入方式称为“构造注入”，我们也可以通过属性来实现注入，这种注入被称为“setter 注入”，就不举例了，朋友们可以看看<a href="http://home.cnblogs.com/u/leoo2sk/">T2噬菌体</a>的文章<a href="http://www.cnblogs.com/leoo2sk/archive/2009/06/17/di-and-ioc.html" target="_blank">依赖注入那些事儿</a>来对DI进行更多的了解。</p>
+<p>由于经常会在编程时使用到DI，所以出现了一些DI的辅助工具（或叫DI容器），如Unity和Ninject等。由于Ninject的轻量和使用简单，加上本人只用过Ninject，所以本系列文章选择用它来开发MVC应用程序。下面开始介绍Ninject，但在这之前，先来介绍一个安装Ninject需要用到的插件-NuGet。</p>
+<h1><strong>使用NuGet安装库</strong></h1>
+<p>NuGet&nbsp;是一种 Visual Studio 扩展，它能够简化在 Visual Studio 项目中添加、更新和删除库（部署为程序包）的操作。比如你要在项目中使用Log4Net这个库，如果没有NuGet这个扩展，你可能要先到网上搜索Log4Net，再将程序包的内容解压缩到解决方案中的特定位置，然后在各项目工程中依次添加程序集引用，最后还要使用正确的设置更新 web.config。而NuGet可以简化这一切操作。例如我们在讲依赖注入的项目中，若要使用一个NuGet库，可直接右击项目（或引用），选择“管理NuGet程序包”（VS2010下为“Add Library Package Reference”），如下图：</p>
+<p><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/06205259-96fed3c2f4cb42ab9ddf8cb3576f0132.png" alt=""></p>
+<p>在弹出如下窗口中选择“联机”，搜索“Ninject”，然后进行相应的操作即可：</p>
+<p><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/06205109-55b2fd80d54744b4a97daea62e56c7ef.png" alt="" width="606" height="404"></p>
+<p>在本文中我们只需要知道如何使用NuGet来安装库就可以了。NuGet的详细使用方法可查看MSDN文档：<a href="http://msdn.microsoft.com/zh-cn/magazine/hh547106.aspx" target="_blank">使用 NuGet 管理项目库</a>。</p>
+<h1>使用Ninject的一般步骤</h1>
+<p>在使用Ninject前先要创建一个Ninject内核对象，代码如下：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">class</span><span style="color: #000000;"> Program { 
+    </span><span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> Main(<span style="color: #0000ff;">string</span><span style="color: #000000;">[] args) { 
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">创建Ninject内核实例</span>
+        IKernel ninjectKernel = <span style="color: #0000ff;">new</span><span style="color: #000000;"> StandardKernel(); 
+    } 
+}</span></pre>
+</div>
+<p>使用Ninject内核对象一般可分为两个步骤。第一步是把一个接口(IValueCalculator)绑定到一个实现该接口的类(LinqValueCalculator)，如下：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">...<br></span><span style="color: #008000;">//</span><span style="color: #008000;">绑定接口到实现了该接口的类</span>
+ninjectKernel.Bind&lt;IValueCalculator&gt;().To&lt;LinqValueCalculator&lt;<span style="color: #000000;">(); <br>...</span></pre>
+</div>
+<p>这个绑定操作就是告诉Ninject，当接收到一个请求IValueCalculator接口的实现时，就返回一个LinqValueCalculator类的实例。</p>
+<p>第二步是用Ninject的Get方法去获取IValueCalculator接口的实现。这一步，Ninject将自动为我们创建LinqValueCalculator类的实例，并返回该实例的引用。然后我们可以把这个引用通过构造函数注入到ShoppingCart类。如下代码所示：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #000000;">...
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 获得实现接口的对象实例</span>
+IValueCalculator calcImpl = ninjectKernel.Get&lt;IValueCalculator&gt;<span style="color: #000000;">(); 
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 创建ShoppingCart实例并注入依赖</span>
+ShoppingCart cart = <span style="color: #0000ff;">new</span><span style="color: #000000;"> ShoppingCart(calcImpl); 
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 计算商品总价钱并输出结果</span>
+Console.WriteLine(<span style="color: #800000;">"</span><span style="color: #800000;">Total: {0:c}</span><span style="color: #800000;">"</span><span style="color: #000000;">, cart.CalculateStockValue());
+...</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>Ninject的使用的一般步骤就是这样。该示例可正确输出如下结果：<br><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/06134931-18e5054c79954018a1254d9d000a38ad.png" alt=""></p>
+<p>但看上去Ninject的使用好像使得编码变得更加烦琐，朋友们会问，直接使用下面的代码不是更简单吗：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">...
+IValueCalculator calcImpl </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> LinqValueCalculator();
+ShoppingCart cart </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> ShoppingCart(calcImpl);
+Console.WriteLine(</span><span style="color: #800000;">"</span><span style="color: #800000;">Total: {0:c}</span><span style="color: #800000;">"</span><span style="color: #000000;">, cart.CalculateStockValue());
+...</span></pre>
+</div>
+<p>的确，对于单个简单的DI，用Ninject确实显得麻烦。但如果添加多个复杂点的依赖关系，使用Ninject则可大大提高编码的工作效率。</p>
+<h1>Ninject如何提高编码效率</h1>
+<p>当我们请求Ninject创建某个类型的实例时，它会检查这个类型和其它类型之间的耦合关系。如果存在依赖关系，那么Ninject会根据依赖处理理它们，并创建所有所需类的实例。为了解释这句话和说明使用Ninject编码的便捷，我们再创建一个接口IDiscountHelper和一个实现该接口的类DefaultDiscountHelper，代码如下：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">折扣计算接口</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> IDiscountHelper {
+    </span><span style="color: #0000ff;">decimal</span> ApplyDiscount(<span style="color: #0000ff;">decimal</span><span style="color: #000000;"> totalParam);
+}
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">默认折扣计算器</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> DefaultDiscountHelper : IDiscountHelper {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">decimal</span> ApplyDiscount(<span style="color: #0000ff;">decimal</span><span style="color: #000000;"> totalParam) {
+        </span><span style="color: #0000ff;">return</span> (totalParam - (1m / 10m *<span style="color: #000000;"> totalParam));
+    }
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>IDiscounHelper接口声明了ApplyDiscount方法，DefaultDiscounterHelper实现了该接口，并定义了打9折的ApplyDiscount方法。然后我们可以把IDiscounHelper接口作为依赖添加到LinqValueCalculator类中。代码如下：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> LinqValueCalculator : IValueCalculator { 
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> IDiscountHelper discounter; 
+ 
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> LinqValueCalculator(IDiscountHelper discountParam) { 
+        discounter </span>=<span style="color: #000000;"> discountParam; 
+    } 
+ 
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">decimal</span> ValueProducts(<span style="color: #0000ff;">params</span><span style="color: #000000;"> Product[] products) { 
+        </span><span style="color: #0000ff;">return</span> discounter.ApplyDiscount(products.Sum(p =&gt;<span style="color: #000000;"> p.Price)); 
+    } 
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>LinqValueCalculator类添加了一个用于接收IDiscountHelper接口的实现的构造函数，然后在ValueProducts方法中调用该接口的ApplyDiscount方法对计算出的商品总价钱进行打折处理，并返回折后总价。</p>
+<p>到这，我们先来画个图理一理ShoppingCart、LinqValueCalculator、IValueCalculator以及新添加的IDiscountHelper和DefaultDiscounterHelper之间的关系：</p>
+<p><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/06202650-409e84e9c43943eb885a4a43d2b75c6c.png" alt="" width="619" height="173"></p>
+<p>以此，我们还可以添加更多的接口和实现接口的类，接口和类越来越多时，它们的关系图看上去会像一个<strong>依赖“链”</strong>，和生物学中的分子结构图差不多。</p>
+<p>按照前面说的使用Ninject的“二个步骤”，现在我们在Main中的方法中编写用于计算购物车中商品折后总价钱的代码，如下所示：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008080;"> 1</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Program {
+</span><span style="color: #008080;"> 2</span>     <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> Main(<span style="color: #0000ff;">string</span><span style="color: #000000;">[] args) {
+</span><span style="color: #008080;"> 3</span>         IKernel ninjectKernel = <span style="color: #0000ff;">new</span><span style="color: #000000;"> StandardKernel();
+</span><span style="color: #008080;"> 4</span> 
+<span style="color: #008080;"> 5</span>         ninjectKernel.Bind&lt;IValueCalculator&gt;().To&lt;LinqValueCalculator&gt;<span style="color: #000000;">();
+</span><span style="color: #008080;"> 6</span>         ninjectKernel.Bind&lt;IDiscountHelper&gt;().To&lt;DefaultDiscountHelper&gt;<span style="color: #000000;">();
+</span><span style="color: #008080;"> 7</span> 
+<span style="color: #008080;"> 8</span>         IValueCalculator calcImpl = ninjectKernel.Get&lt;IValueCalculator&gt;<span style="color: #000000;">();
+</span><span style="color: #008080;"> 9</span>         ShoppingCart cart = <span style="color: #0000ff;">new</span><span style="color: #000000;"> ShoppingCart(calcImpl);
+</span><span style="color: #008080;">10</span>         Console.WriteLine(<span style="color: #800000;">"</span><span style="color: #800000;">Total: {0:c}</span><span style="color: #800000;">"</span><span style="color: #000000;">, cart.CalculateStockValue());
+</span><span style="color: #008080;">11</span> <span style="color: #000000;">        Console.ReadKey();
+</span><span style="color: #008080;">12</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">13</span> }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>输出结果：<br><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/06210041-b96c5be282284417bc8b7059ae27e80f.png" alt=""></p>
+<p>代码一目了然，虽然新添加了一个接口和一个类，但Main方法中只增加了第6行一句代码，获取实现IValueCalculator接口的对象实例的代码不需要做任何改变。<br>定位到代码的第8行，这一行代码，Ninject为我们做的事是：<br><span style="line-height: 1.5;">　　当我们需要使用IValueCalculator接口的实现时（通过Get方法），它便为我们创建LinqValueCalculator类的实例。而当创建LinqValueCalculator类的实例时，它检查到这个类依赖IDiscountHelper接口。于是它又创建一个实现了该接口的DefaultDiscounterHelper类的实例，并通过构造函数把该实例注入到LinqValueCalculator类。然后返回LinqValueCalculator类的一个实例，并赋值给IValueCalculator接口的对象（第8行的calcImpl）。</span></p>
+<p><span style="line-height: 1.5;">总之，不管依赖“链”有多长有多复杂，Ninject都会按照上面这种方式检查依赖“链”上的每个接口和实现接口的类，并自动创建所需要的类的实例。在依赖“链”越长越复杂的时候，更能显示使用Ninject编码的高效率。</span></p>
+<h1><span style="line-height: 1.5;">Ninject的绑定方式</span></h1>
+<p><span style="color: #000000;"><strong><span style="line-height: 1.5;">我个人将Ninject的绑定方式分为：一般绑定、指定值绑定、自我绑定、派生类绑定和条件绑定。这样分类有点牵强，只是为了本文的写作需要和方便读者阅读而分，<strong><span>并不是官方的分类</span></strong>。</span></strong></span></p>
+<p><strong><span style="line-height: 1.5;">1、一般绑定</span></strong></p>
+<p><span style="line-height: 1.5;">在前文的示例中用Bind和To方法把一个接口绑定到实现该接口的类，这属于一般的绑定。通过前文的示例相信大家已经掌握了，在这就不再累述。</span></p>
+<p><strong><span style="line-height: 1.5;">2、<strong>指定值绑定</strong></span></strong></p>
+<p>我们知道，通过Get方法，Ninject会自动帮我们创建我们所需要的类的实例。但有的类在创建实例时需要给它的属性赋值，如下面我们改造了一下的DefaultDiscountHelper类：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> DefaultDiscountHelper : IDiscountHelper { 
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">decimal</span> DiscountSize { <span style="color: #0000ff;">get</span>; <span style="color: #0000ff;">set</span><span style="color: #000000;">; } 
+ 
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">decimal</span> ApplyDiscount(<span style="color: #0000ff;">decimal</span><span style="color: #000000;"> totalParam) { 
+        </span><span style="color: #0000ff;">return</span> (totalParam - (DiscountSize / 10m *<span style="color: #000000;"> totalParam)); 
+    } 
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>给DefaultDiscountHelper类添加了一个DiscountSize属性，实例化时需要指定折扣值(DiscountSize属性值)，不然ApplyDiscount方法就没意义。而实例化的动作是Ninject自动完成的，怎么告诉Ninject在实例化类的时候给某属性赋一个指定的值呢？这时就需要用到参数绑定，我们在绑定的时候可以通过给WithPropertyValue方法传参的方式指定DiscountSize属性的值，如下代码所示：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> Main() {
+    IKernel ninjectKernel </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> StandardKernel();
+
+    ninjectKernel.Bind</span>&lt;IValueCalculator&gt;().To&lt;LinqValueCalculator&gt;<span style="color: #000000;">();
+    ninjectKernel.Bind</span>&lt;IDiscountHelper&gt;<span style="color: #000000;">()
+        .To</span>&lt;DefaultDiscountHelper&gt;().WithPropertyValue(<span style="color: #800000;">"</span><span style="color: #800000;">DiscountSize</span><span style="color: #800000;">"</span><span style="color: #000000;">, 5M);
+
+    IValueCalculator calcImpl </span>= ninjectKernel.Get&lt;IValueCalculator&gt;<span style="color: #000000;">();
+    ShoppingCart cart </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> ShoppingCart(calcImpl);
+    Console.WriteLine(</span><span style="color: #800000;">"</span><span style="color: #800000;">Total: {0:c}</span><span style="color: #800000;">"</span><span style="color: #000000;">, cart.CalculateStockValue());
+    Console.ReadKey();
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>只是在Bind和To方法后添加了一个WithPropertyValue方法，其他代码都不用变，再一次见证了用Ninject编码的高效。<br>WithPropertyValue方法接收了两个参数，一个是属性名（示例中的"DiscountSize"），一个是属性值（示例中的5）。运行结果如下：<br><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/07094137-4b396a91c81c4e90813c7eec29e7c945.png" alt=""></p>
+<p>如果要给多个属性赋值，则可以在Bind和To方式后添加多个WithPropertyValue(<em>&lt;属性名&gt;,&lt;属性值&gt;</em>)方法。</p>
+<p>我们还可以在类的实例化的时候为类的构造函数传递参数。为了演示，我们再把DefaultDiscountHelper类改一下：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> DefaultDiscountHelper : IDiscountHelper { 
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">decimal</span><span style="color: #000000;"> discountRate; 
+ 
+    </span><span style="color: #0000ff;">public</span> DefaultDiscountHelper(<span style="color: #0000ff;">decimal</span><span style="color: #000000;"> discountParam) { 
+        discountRate </span>=<span style="color: #000000;"> discountParam; 
+    } 
+ 
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">decimal</span> ApplyDiscount(<span style="color: #0000ff;">decimal</span><span style="color: #000000;"> totalParam) { 
+        </span><span style="color: #0000ff;">return</span> (totalParam - (discountRate/ 10m *<span style="color: #000000;"> totalParam)); 
+    } 
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>显然，DefaultDiscountHelper类在实例化的时候必须给构造函数传递一个参数，不然程序会出错。和给属性赋值类似，只是用的方法是WithConstructorArgument(<em>&lt;参数名&gt;,&lt;参数值&gt;</em>)，绑定方式如下代码所示：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">...
+ninjectKernel.Bind</span>&lt;IValueCalculator&gt;().To&lt;LinqValueCalculator&gt;<span style="color: #000000;">(); 
+ninjectKernel.Bind</span>&lt;IDiscountHelper&gt;<span style="color: #000000;">() 
+    .To</span>&lt; DefaultDiscountHelper&gt;().WithConstructorArgument(<span style="color: #800000;">"</span><span style="color: #800000;">discountParam</span><span style="color: #800000;">"</span><span style="color: #000000;">, 5M);
+...</span></pre>
+</div>
+<p>同样，只需要更改一行代码，其他代码原来怎么写还是怎么写。如果构造函数有多个参数，则需在Bind和To方法后面加上多个WithConstructorArgument即可。</p>
+<p><strong>3.自我绑定</strong></p>
+<p>Niject的一个非常好用的特性就是自绑定。当通过Bind和To方法绑定好接口和类后，可以直接通过ninjectKernel.Get&lt;<em>类名</em>&gt;()来获得一个类的实例。</p>
+<p>在前面的几个示例中，我们都是像下面这样来创建ShoppingCart类实例的：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">...
+IValueCalculator calcImpl </span>= ninjectKernel.Get&lt;IValueCalculator&gt;<span style="color: #000000;">();
+ShoppingCart cart </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> ShoppingCart(calcImpl);
+...</span></pre>
+</div>
+<p>其实有一种更简单的定法，如下：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">... 
+ShoppingCart cart </span>= ninjectKernel.Get&lt;ShoppingCart&gt;<span style="color: #000000;">(); 
+... </span></pre>
+</div>
+<p>这种写法不需要关心ShoppingCart类依赖哪个接口，也不需要手动去获取该接口的实现(calcImpl)。当通过这句代码请求一个ShoppingCart类的实例的时候，Ninject会自动判断依赖关系，并为我们创建所需接口对应的实现。这种方式看起来有点怪，其实中规中矩的写法是:</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">...
+ninjectKernel.Bind</span>&lt;ShoppingCart&gt;<span style="color: #000000;">().ToSelf();
+ShoppingCart cart </span>= ninjectKernel.Get&lt;ShoppingCart&gt;<span style="color: #000000;">();
+...</span></pre>
+</div>
+<p>这里有自我绑定用的是ToSelf方法，在本示例中可以省略该句。但用ToSelf方法自我绑定的好处是可以在其后面用WithXXX方法指定构造函数参数、属性等等的值。</p>
+<p><strong>4.派生类绑定</strong></p>
+<p>通过一般绑定，当请求一个接口的实现时，Ninject会帮我们自动创建实现接口的类的实例。我们说某某类实现某某接口，也可以说某某类继承某某接口。如果我们把接口当作一个父类，是不是也可以把父类绑定到一个继承自该父类的子类呢？我们来实验一把。先改造一下ShoppingCart类，给它的CalculateStockValue方法改成虚方法：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> ShoppingCart {
+    </span><span style="color: #0000ff;">protected</span><span style="color: #000000;"> IValueCalculator calculator;
+    </span><span style="color: #0000ff;">protected</span><span style="color: #000000;"> Product[] products;
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">构造函数，参数为实现了IEmailSender接口的类的实例</span>
+    <span style="color: #0000ff;">public</span><span style="color: #000000;"> ShoppingCart(IValueCalculator calcParam) {
+        calculator </span>=<span style="color: #000000;"> calcParam;
+        products </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;">[]{ 
+            </span><span style="color: #0000ff;">new</span> Product {Name = <span style="color: #800000;">"</span><span style="color: #800000;">西瓜</span><span style="color: #800000;">"</span>, Category = <span style="color: #800000;">"</span><span style="color: #800000;">水果</span><span style="color: #800000;">"</span>, Price = <span style="color: #800080;">2.3M</span><span style="color: #000000;">}, 
+            </span><span style="color: #0000ff;">new</span> Product {Name = <span style="color: #800000;">"</span><span style="color: #800000;">苹果</span><span style="color: #800000;">"</span>, Category = <span style="color: #800000;">"</span><span style="color: #800000;">水果</span><span style="color: #800000;">"</span>, Price = <span style="color: #800080;">4.9M</span><span style="color: #000000;">}, 
+            </span><span style="color: #0000ff;">new</span> Product {Name = <span style="color: #800000;">"</span><span style="color: #800000;">空心菜</span><span style="color: #800000;">"</span>, Category = <span style="color: #800000;">"</span><span style="color: #800000;">蔬菜</span><span style="color: #800000;">"</span>, Price = <span style="color: #800080;">2.2M</span><span style="color: #000000;">}, 
+            </span><span style="color: #0000ff;">new</span> Product {Name = <span style="color: #800000;">"</span><span style="color: #800000;">地瓜</span><span style="color: #800000;">"</span>, Category = <span style="color: #800000;">"</span><span style="color: #800000;">蔬菜</span><span style="color: #800000;">"</span>, Price = <span style="color: #800080;">1.9M</span><span style="color: #000000;">} 
+        };
+    }
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">计算购物车内商品总价钱</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">virtual</span> <span style="color: #0000ff;">decimal</span><span style="color: #000000;"> CalculateStockValue() {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">计算商品总价钱 </span>
+        <span style="color: #0000ff;">decimal</span> totalValue =<span style="color: #000000;"> calculator.ValueProducts(products);
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> totalValue;
+    }
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="font-size: 14px; line-height: 1.5;">再添加一个</span><span style="font-size: 14px; line-height: 1.5;">ShoppingCart类的子类：<br></span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> LimitShoppingCart : ShoppingCart {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> LimitShoppingCart(IValueCalculator calcParam)
+        : </span><span style="color: #0000ff;">base</span><span style="color: #000000;">(calcParam) {
+    }
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">override</span> <span style="color: #0000ff;">decimal</span><span style="color: #000000;"> CalculateStockValue() {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">过滤价格超过了上限的商品</span>
+        <span style="color: #0000ff;">var</span> filteredProducts = products.Where(e =&gt; e.Price &lt;<span style="color: #000000;"> ItemLimit);<br>
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> calculator.ValueProducts(filteredProducts.ToArray());
+    }
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">decimal</span> ItemLimit { <span style="color: #0000ff;">get</span>; <span style="color: #0000ff;">set</span><span style="color: #000000;">; }
+} </span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>然后把父类ShoppingCart绑定到子类LimitShoppingCart：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> Main() {
+    IKernel ninjectKernel </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> StandardKernel();
+
+    ninjectKernel.Bind</span>&lt;IValueCalculator&gt;().To&lt;LinqValueCalculator&gt;<span style="color: #000000;">();
+    ninjectKernel.Bind</span>&lt;IDiscountHelper&gt;().To&lt;DefaultDiscountHelper&gt;<span style="color: #000000;">()
+        .WithPropertyValue(</span><span style="color: #800000;">"</span><span style="color: #800000;">DiscountSize</span><span style="color: #800000;">"</span><span style="color: #000000;">, 5M);
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">派生类绑定</span>
+    ninjectKernel.Bind&lt;ShoppingCart&gt;().To&lt;LimitShoppingCart&gt;<span style="color: #000000;">()
+        .WithPropertyValue(</span><span style="color: #800000;">"</span><span style="color: #800000;">ItemLimit</span><span style="color: #800000;">"</span><span style="color: #000000;">, 3M);
+
+    ShoppingCart cart </span>= ninjectKernel.Get&lt;ShoppingCart&gt;<span style="color: #000000;">();
+    Console.WriteLine(</span><span style="color: #800000;">"</span><span style="color: #800000;">Total: {0:c}</span><span style="color: #800000;">"</span><span style="color: #000000;">, cart.CalculateStockValue());
+    Console.ReadKey();
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="font-size: 14px; line-height: 1.5;">运行结果：<br></span><img style="font-size: 14px; line-height: 1.5;" src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/07172318-cb97d60876a148e0bab4c40b8b209180.png" alt=""></p>
+<p><span style="font-size: 14px; line-height: 1.5;">从运行结果可以看出，cart对象调用的是子类的CalculateStockValue方法，证明了可以把父类绑定到一个继承自该父类的子类。通过派生类绑定，当我们请求父类的时候，Ninject自动帮我们创建一个对应的子类的实例，并将其返回。由于抽象类不能被实例化，所以派生类绑定在使用抽象类的时候非常有用。</span></p>
+<p><strong><span style="line-height: 1.5;">5.条件绑定</span></strong></p>
+<p><span>当一个接口有多个实现或一个类有多个子类的时候，我们可以通过条件绑定来指定使用哪一个实现或子类。为了演示，我们给IValueCalculator接口再添加一个实现，如下：<br></span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> IterativeValueCalculator : IValueCalculator { 
+ 
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">decimal</span> ValueProducts(<span style="color: #0000ff;">params</span><span style="color: #000000;"> Product[] products) { 
+        </span><span style="color: #0000ff;">decimal</span> totalValue = <span style="color: #800080;">0</span><span style="color: #000000;">; 
+        </span><span style="color: #0000ff;">foreach</span> (Product p <span style="color: #0000ff;">in</span><span style="color: #000000;"> products) { 
+            totalValue </span>+=<span style="color: #000000;"> p.Price; 
+        } 
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> totalValue; 
+    } 
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>IValueCalculator接口现在有两个实现：IterativeValueCalculator和LinqValueCalculator。我们可以指定，如果是把该接口的实现注入到LimitShoppingCart类，那么就用IterativeValueCalculator，其他情况都用LinqValueCalculator。如下所示：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> Main() {
+    IKernel ninjectKernel </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> StandardKernel();
+
+    ninjectKernel.Bind</span>&lt;IValueCalculator&gt;().To&lt;LinqValueCalculator&gt;<span style="color: #000000;">();
+    ninjectKernel.Bind</span>&lt;IDiscountHelper&gt;().To&lt;DefaultDiscountHelper&gt;<span style="color: #000000;">()
+        .WithPropertyValue(</span><span style="color: #800000;">"</span><span style="color: #800000;">DiscountSize</span><span style="color: #800000;">"</span><span style="color: #000000;">, 5M);
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">派生类绑定</span>
+    ninjectKernel.Bind&lt;ShoppingCart&gt;().To&lt;LimitShoppingCart&gt;<span style="color: #000000;">()
+        .WithPropertyValue(</span><span style="color: #800000;">"</span><span style="color: #800000;">ItemLimit</span><span style="color: #800000;">"</span><span style="color: #000000;">, 3M);
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">条件绑定</span>
+    ninjectKernel.Bind&lt;IValueCalculator&gt;<span style="color: #000000;">()
+        .To</span>&lt;IterativeValueCalculator&gt;().WhenInjectedInto&lt;LimitShoppingCart&gt;<span style="color: #000000;">();
+
+    ShoppingCart cart </span>= ninjectKernel.Get&lt;ShoppingCart&gt;<span style="color: #000000;">();
+    Console.WriteLine(</span><span style="color: #800000;">"</span><span style="color: #800000;">Total: {0:c}</span><span style="color: #800000;">"</span><span style="color: #000000;">, cart.CalculateStockValue());
+    Console.ReadKey();
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>运行结果：<br><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/07181719-c5e71c236acc4647b5aa44a7205595dd.png" alt=""></p>
+<p>运行结果是6.4，说明没有打折，即调用的是计算方法是IterativeValueCalculator的ValueProducts方法。可见，Ninject会查找最匹配的绑定，如果没有找到条件绑定，则使用默认绑定。在条件绑定中，除了WhenInjectedInto方法，还有When和WhenClassHas等方法，朋友们可以在使用的时候再慢慢研究。</p>
+<h1><span>在ASP.NET MVC中使用Ninject</span></h1>
+<p><span>本文用控制台应用程序演示了Ninject的使用，但要把Ninject集成到ASP.NET MVC中还是有点复杂的。首先要做的事就是创建一个继承System.Web.Mvc.DefaultControllerFactory的类，MVC默认使用这个类来创建Controller类的实例（后续博文会专门讲这个）。代码如下：<br></span></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show(&#39;cb376e66-b621-43b0-bffe-f4e07e55e05a&#39;)"><img id="code_img_closed_cb376e66-b621-43b0-bffe-f4e07e55e05a" class="code_img_closed" src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/ContractedBlock.gif" alt="" style="display: none;"><img id="code_img_opened_cb376e66-b621-43b0-bffe-f4e07e55e05a" class="code_img_opened" style="" onclick="cnblogs_code_hide(&#39;cb376e66-b621-43b0-bffe-f4e07e55e05a&#39;,event)" src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/ExpandedBlockStart.gif" alt="">
+<div id="cnblogs_code_open_cb376e66-b621-43b0-bffe-f4e07e55e05a" class="cnblogs_code_hide" style="display: block;"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">using</span><span style="color: #000000;"> System;
+</span><span style="color: #0000ff;">using</span><span style="color: #000000;"> Ninject;
+</span><span style="color: #0000ff;">using</span><span style="color: #000000;"> System.Web.Mvc;
+</span><span style="color: #0000ff;">using</span><span style="color: #000000;"> System.Web.Routing;
+
+</span><span style="color: #0000ff;">namespace</span><span style="color: #000000;"> MvcApplication1 {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> NinjectControllerFactory : DefaultControllerFactory {
+        </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> IKernel ninjectKernel;
+        </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> NinjectControllerFactory() {
+            ninjectKernel </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> StandardKernel();
+            AddBindings();
+        }
+        </span><span style="color: #0000ff;">protected</span> <span style="color: #0000ff;">override</span><span style="color: #000000;"> IController GetControllerInstance(RequestContext requestContext, Type controllerType) {
+            </span><span style="color: #0000ff;">return</span> controllerType == <span style="color: #0000ff;">null</span> ? <span style="color: #0000ff;">null</span><span style="color: #000000;"> : (IController)ninjectKernel.Get(controllerType);
+        }
+        </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> AddBindings() {
+            </span><span style="color: #008000;">//</span><span style="color: #008000;"> 在这添加绑定，
+            </span><span style="color: #008000;">//</span><span style="color: #008000;"> 如：ninjectKernel.Bind&lt;IProductRepository&gt;().To&lt;FakeProductRepository&gt;();</span>
+<span style="color: #000000;">        }
+    }
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<span class="cnblogs_code_collapse" style="display: none;"> NinjectControllerFactory</span></div>
+<p>现在暂时不解释这段代码，大家都看懂就看，看不懂就过，只要知道在ASP.NET MVC中使用Ninject要做这么一件事就行。</p>
+<p>添加完这个类后，还要做一件事，就是在MVC框架中注册这个类。一般我们在Global.asax文件中的Application_Start方法中进行注册，如下所示：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">protected</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> Application_Start() {
+    AreaRegistration.RegisterAllAreas();
+
+    WebApiConfig.Register(GlobalConfiguration.Configuration);
+    FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+    RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+    ControllerBuilder.Current.SetControllerFactory(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> NinjectControllerFactory());
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>注册后，MVC框架就会用NinjectControllerFactory类去获取Cotroller类的实例。在后续博文中会具体演示如何在ASP.NET MVC中使用Ninject，这里就不具体演示了，大家知道需要做这么两件事就行。</p>
+<p><span>虽然我们前面花了很大功夫来学习Ninject就是为了在MVC中使用这样一个NinjectControllerFactory类，但是了解Ninject如何工作是非常有必要的。理解好了一种DI容器，可以使得开发和测试更简单、更高效。</span></p>
+<p>&nbsp;</p>
+<p>参考：</p>
+<p>《Pro ASP.NET MVC 3 Framework》</p></div><div id="MySignature" style="display: block;"><div style="border: #e0e0e0 1px dashed;padding:8px;padding-left:90px; background: url(http://images.cnblogs.com/cnblogs_com/willick/515028/o_bulb_1.png) #e5f1f4 no-repeat 1% 50%;">
+	<p>
+	作者：<b><span style="font-size: 12px; color: red;"><a href="http://www.cnblogs.com/willick/" target="_blank">Liam Wang</a></span></b>
+	</p><p>
+	出处：<a href="http://www.cnblogs.com/willick/" target="_blank">http://www.cnblogs.com/willick/</a>
+	</p><p>
+联系：<strong><a href="mailto:liam.wang@live.com">liam.wang@live.com</a></strong>
+</p>
+<p>
+	本文版权归作者和博客园共有，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文连接，否则保留追究法律责任的权利。如有问题或建议，请多多赐教，非常感谢。
+
+	</p>
+</div>
+
+<div id="jump-box">
+    <a id="goto-top" href="http://www.cnblogs.com/willick/p/3223042.html#top" title="回到顶部"></a>
+    <a id="goto-comment" href="http://www.cnblogs.com/willick/p/3223042.html#tbCommentBody"></a>
+    <a id="goto-bottom" href="http://www.cnblogs.com/willick/p/3223042.html#MySignature" title="到达底部"></a>
+</div>
+
+</div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/willick/category/495350.html">[01] ASP.NET MVC</a></div>
+<div id="EntryTag">标签: <a href="http://www.cnblogs.com/willick/tag/MVC/">MVC</a></div>
+<div id="blog_post_info"><div id="green_channel">
+绿色通道：
+<a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(3223042,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+<a id="green_channel_follow" onclick="c_follow();" href="javascript:void(0);">关注我</a>
+<a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a><a id="green_channel_contact" href="http://msg.cnblogs.com/send/Liam%20Wang" target="_blank">与我联系</a>
+<a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/icon_weibo_24.png" alt=""></a>
+</div>
+<div id="author_profile">
+<div id="author_profile_info" class="author_profile_info">
+<a href="http://home.cnblogs.com/u/willick/" target="_blank"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/20141017195227.png" class="author_avatar" alt=""></a>
+<div id="author_profile_detail" class="author_profile_info">
+<a href="http://home.cnblogs.com/u/willick/">Liam Wang</a><br>
+<a href="http://home.cnblogs.com/u/willick/followees">关注 - 20</a><br>
+<a href="http://home.cnblogs.com/u/willick/followers">粉丝 - 1096</a>
+</div>
+</div>
+<div class="clear"></div>
+<div id="author_profile_honor"></div>
+<div id="author_profile_follow">
+    <a href="javascript:void(0);" onclick="c_follow();return false;">+加关注</a>
+</div>
+</div>
+<div id="div_digg">										
+    <div class="diggit" onclick="votePost(3223042,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">85</span>
+    </div>
+	<div class="buryit" onclick="votePost(3223042,&#39;Bury&#39;)"> 
+		<span class="burynum" id="bury_count">0</span>
+	</div>
+	<div class="clear"></div>	
+	<div class="diggword" id="digg_tips">
+    (请您对文章做出评价)
+    </div>	
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/willick/p/3224144.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/willick/p/3224144.html" title="发布于2013-08-02 14:39">[ASP.NET MVC 小牛之路]03 - Razor语法</a><br><a href="http://www.cnblogs.com/willick/p/3299077.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/willick/p/3299077.html" title="发布于2013-09-04 11:53">[ASP.NET MVC 小牛之路]05 - 使用 Ninject</a><br></div>
+</div>
+
+
+	<div class="postDesc">posted on <span id="post-date">2013-08-07 21:37</span> <a href="http://www.cnblogs.com/willick/">Liam Wang</a> 阅读(<span id="post_view_count">12306</span>) 评论(<span id="post_comment_count">37</span>)  <a href="http://i.cnblogs.com/EditPosts.aspx?postid=3223042" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/willick/p/3223042.html#" onclick="AddToWz(3223042);return false;">收藏</a></div>
+</div>
+<script type="text/javascript">var allowComments=true,isLogined=false,cb_blogId=79226,cb_entryId=3223042,cb_blogApp=currentBlogApp,cb_blogUserGuid='47cfa3ba-97eb-df11-ac81-842b2b196315',cb_entryCreatedDate='2013/8/7 21:37:00';loadViewCount(cb_entryId);</script>
+
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<!--done-->
+<br>
+<div class="feedback_area_title">发表评论</div>
+<div class="feedbackNoItems"></div>
+	
+
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2745749" class="layer">#1楼</a><a name="2745749" id="comment_anchor_2745749"></a>  <span class="comment_date">2013-08-07 22:21</span> | <a id="a_comment_author_2745749" class="feedbackmanagelink" href="http://www.cnblogs.com/niunan/" target="_blank">牛腩</a> <a href="http://msg.cnblogs.com/send/%E7%89%9B%E8%85%A9" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2745749" class="blog_comment_body">支持支持.</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2745749,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2745749,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2745749_avatar" style="display:none;">http://pic.cnblogs.com/face/u41249.jpg</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2745752" class="layer">#2楼</a><a name="2745752" id="comment_anchor_2745752"></a>  <span class="comment_date">2013-08-07 22:23</span> | <a id="a_comment_author_2745752" class="feedbackmanagelink" href="http://www.cnblogs.com/dolphinX/" target="_blank">Samaritans</a> <a href="http://msg.cnblogs.com/send/Samaritans" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2745752" class="blog_comment_body">学习了，顶起</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2745752,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2745752,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2745752_avatar" style="display:none;">http://pic.cnblogs.com/face/349217/20141207171254.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2745758" class="layer">#3楼</a><a name="2745758" id="comment_anchor_2745758"></a>[<span class="louzhu">楼主</span>]  <span class="comment_date">2013-08-07 22:27</span> | <a id="a_comment_author_2745758" class="feedbackmanagelink" href="http://www.cnblogs.com/willick/" target="_blank">Liam Wang</a> <a href="http://msg.cnblogs.com/send/Liam%20Wang" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2745758" class="blog_comment_body"><a href="http://www.cnblogs.com/willick/p/3223042.html#2745749" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2745749);">@</a>牛腩<br><fieldset class="comment_quote"><legend><a href="http://www.cnblogs.com/willick/p/3223042.html#2745749" title="查看引用原文">引用</a></legend>支持支持.</fieldset><br>谢谢支持.</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2745758,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2745758,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2745758_avatar" style="display:none;">http://pic.cnblogs.com/face/191097/20141017195227.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2745759" class="layer">#4楼</a><a name="2745759" id="comment_anchor_2745759"></a>[<span class="louzhu">楼主</span>]  <span class="comment_date">2013-08-07 22:27</span> | <a id="a_comment_author_2745759" class="feedbackmanagelink" href="http://www.cnblogs.com/willick/" target="_blank">Liam Wang</a> <a href="http://msg.cnblogs.com/send/Liam%20Wang" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2745759" class="blog_comment_body"><a href="http://www.cnblogs.com/willick/p/3223042.html#2745752" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2745752);">@</a>色拉油<br><fieldset class="comment_quote"><legend><a href="http://www.cnblogs.com/willick/p/3223042.html#2745752" title="查看引用原文">引用</a></legend>学习了，顶起</fieldset><br>:-)</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2745759,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2745759,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2745759_avatar" style="display:none;">http://pic.cnblogs.com/face/191097/20141017195227.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2745799" class="layer">#5楼</a><a name="2745799" id="comment_anchor_2745799"></a>  <span class="comment_date">2013-08-07 23:26</span> | <a id="a_comment_author_2745799" class="feedbackmanagelink" href="http://www.cnblogs.com/JustRun1983/" target="_blank">JustRun</a> <a href="http://msg.cnblogs.com/send/JustRun" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2745799" class="blog_comment_body">不错。<br>我也在深入研究MVC, IoC用的是Autofac</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2745799,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2745799,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2745799_avatar" style="display:none;">http://pic.cnblogs.com/face/14408/20140925140535.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2745859" class="layer">#6楼</a><a name="2745859" id="comment_anchor_2745859"></a>  <span class="comment_date">2013-08-08 07:47</span> | <a id="a_comment_author_2745859" class="feedbackmanagelink" href="http://www.cnblogs.com/smiler/" target="_blank">幕三少</a> <a href="http://msg.cnblogs.com/send/%E5%B9%95%E4%B8%89%E5%B0%91" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2745859" class="blog_comment_body">好文要顶</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2745859,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2745859,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2745859_avatar" style="display:none;">http://pic.cnblogs.com/face/75468/20130710131911.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2745907" class="layer">#7楼</a><a name="2745907" id="comment_anchor_2745907"></a>  <span class="comment_date">2013-08-08 09:01</span> | <a id="a_comment_author_2745907" class="feedbackmanagelink" href="http://www.cnblogs.com/hecool/" target="_blank">何苦丶</a> <a href="http://msg.cnblogs.com/send/%E4%BD%95%E8%8B%A6%E4%B8%B6" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2745907" class="blog_comment_body">支持一下</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2745907,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2745907,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2745907_avatar" style="display:none;">http://pic.cnblogs.com/face/u279191.jpg?id=18213541</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2745916" class="layer">#8楼</a><a name="2745916" id="comment_anchor_2745916"></a>[<span class="louzhu">楼主</span>]  <span class="comment_date">2013-08-08 09:12</span> | <a id="a_comment_author_2745916" class="feedbackmanagelink" href="http://www.cnblogs.com/willick/" target="_blank">Liam Wang</a> <a href="http://msg.cnblogs.com/send/Liam%20Wang" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2745916" class="blog_comment_body"><a href="http://www.cnblogs.com/willick/p/3223042.html#2745799" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2745799);">@</a>JustRun<br><fieldset class="comment_quote"><legend><a href="http://www.cnblogs.com/willick/p/3223042.html#2745799" title="查看引用原文">引用</a></legend>不错。<br>我也在深入研究MVC, IoC用的是Autofac</fieldset><br>欢迎指点和斧正。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2745916,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2745916,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2745916_avatar" style="display:none;">http://pic.cnblogs.com/face/191097/20141017195227.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2745920" class="layer">#9楼</a><a name="2745920" id="comment_anchor_2745920"></a>[<span class="louzhu">楼主</span>]  <span class="comment_date">2013-08-08 09:13</span> | <a id="a_comment_author_2745920" class="feedbackmanagelink" href="http://www.cnblogs.com/willick/" target="_blank">Liam Wang</a> <a href="http://msg.cnblogs.com/send/Liam%20Wang" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2745920" class="blog_comment_body"><a href="http://www.cnblogs.com/willick/p/3223042.html#2745859" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2745859);">@</a>幕三少<br>谢谢 :-)</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2745920,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2745920,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2745920_avatar" style="display:none;">http://pic.cnblogs.com/face/191097/20141017195227.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2745921" class="layer">#10楼</a><a name="2745921" id="comment_anchor_2745921"></a>[<span class="louzhu">楼主</span>]  <span class="comment_date">2013-08-08 09:14</span> | <a id="a_comment_author_2745921" class="feedbackmanagelink" href="http://www.cnblogs.com/willick/" target="_blank">Liam Wang</a> <a href="http://msg.cnblogs.com/send/Liam%20Wang" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2745921" class="blog_comment_body"><a href="http://www.cnblogs.com/willick/p/3223042.html#2745907" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2745907);">@</a>何苦丶<br>谢谢支持。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2745921,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2745921,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2745921_avatar" style="display:none;">http://pic.cnblogs.com/face/191097/20141017195227.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2746570" class="layer">#11楼</a><a name="2746570" id="comment_anchor_2746570"></a>  <span class="comment_date">2013-08-08 17:48</span> | <a id="a_comment_author_2746570" class="feedbackmanagelink" href="http://www.cnblogs.com/liuxx/" target="_blank">liujg1015</a> <a href="http://msg.cnblogs.com/send/liujg1015" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2746570" class="blog_comment_body">MARK</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2746570,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2746570,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2746570_avatar" style="display:none;">http://pic.cnblogs.com/face/u265480.jpg?id=04173044</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2772420" class="layer">#12楼</a><a name="2772420" id="comment_anchor_2772420"></a>  <span class="comment_date">2013-09-10 14:06</span> | <a id="a_comment_author_2772420" class="feedbackmanagelink" href="http://www.cnblogs.com/fcq121/" target="_blank">^_^哈哈</a> <a href="http://msg.cnblogs.com/send/%5E_%5E%E5%93%88%E5%93%88" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2772420" class="blog_comment_body">虽然看不懂但是感觉好高级，项目中用了一次，照着例子写完了，但是还不明其原理好处</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2772420,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2772420,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2772420_avatar" style="display:none;">http://pic.cnblogs.com/face/u363857.jpg?id=05190810</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2784373" class="layer">#13楼</a><a name="2784373" id="comment_anchor_2784373"></a>  <span class="comment_date">2013-09-29 09:37</span> | <a id="a_comment_author_2784373" class="feedbackmanagelink" href="http://www.cnblogs.com/MineDream/" target="_blank">黑色街角</a> <a href="http://msg.cnblogs.com/send/%E9%BB%91%E8%89%B2%E8%A1%97%E8%A7%92" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2784373" class="blog_comment_body">不错！受益匪浅！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2784373,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2784373,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2784373_avatar" style="display:none;">http://pic.cnblogs.com/face/281699/20130403110231.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2785363" class="layer">#14楼</a><a name="2785363" id="comment_anchor_2785363"></a>  <span class="comment_date">2013-09-30 16:05</span> | <a id="a_comment_author_2785363" class="feedbackmanagelink" href="http://www.cnblogs.com/sunxiaofeng/" target="_blank">GoBelieve</a> <a href="http://msg.cnblogs.com/send/GoBelieve" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2785363" class="blog_comment_body">受益匪浅啊！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2785363,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2785363,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2785363_avatar" style="display:none;">http://pic.cnblogs.com/face/31893/20130911145743.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2814493" class="layer">#15楼</a><a name="2814493" id="comment_anchor_2814493"></a>  <span class="comment_date">2013-11-12 08:43</span> | <a id="a_comment_author_2814493" class="feedbackmanagelink" href="http://www.cnblogs.com/stoneniqiu/" target="_blank">stoneniqiu</a> <a href="http://msg.cnblogs.com/send/stoneniqiu" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2814493" class="blog_comment_body"> 楼主辛苦了，学习了Ninject这个好东西，比较亲民。<br> 有些DI的库还要配置xml 于是就不想看了。<br>tks~</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2814493,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2814493,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2814493_avatar" style="display:none;">http://pic.cnblogs.com/face/417688/20140604115833.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2821213" class="layer">#16楼</a><a name="2821213" id="comment_anchor_2821213"></a>  <span class="comment_date">2013-11-21 14:05</span> | <a id="a_comment_author_2821213" class="feedbackmanagelink" href="http://www.cnblogs.com/luge/" target="_blank">卤鸽</a> <a href="http://msg.cnblogs.com/send/%E5%8D%A4%E9%B8%BD" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2821213" class="blog_comment_body">收获良多！赞</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2821213,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2821213,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2821213_avatar" style="display:none;">http://pic.cnblogs.com/face/199777/20141120220647.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2821219" class="layer">#17楼</a><a name="2821219" id="comment_anchor_2821219"></a>  <span class="comment_date">2013-11-21 14:13</span> | <a id="a_comment_author_2821219" class="feedbackmanagelink" href="http://www.cnblogs.com/fumj/" target="_blank">棋怜</a> <a href="http://msg.cnblogs.com/send/%E6%A3%8B%E6%80%9C" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2821219" class="blog_comment_body">//构造函数，参数为实现了IEmailSender接口的类的实例<br>    public ShoppingCart(IValueCalculator calcParam) {<br>        calculator = calcParam;<br>    }<br><br>关于什么是依赖注入的例子中,注释是不是没有改啊.跟书本上的一样.</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2821219,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2821219,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2821219_avatar" style="display:none;">http://pic.cnblogs.com/face/u297868.jpg?id=09164815</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2833910" class="layer">#18楼</a><a name="2833910" id="comment_anchor_2833910"></a>[<span class="louzhu">楼主</span>]  <span class="comment_date">2013-12-10 09:28</span> | <a id="a_comment_author_2833910" class="feedbackmanagelink" href="http://www.cnblogs.com/willick/" target="_blank">Liam Wang</a> <a href="http://msg.cnblogs.com/send/Liam%20Wang" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2833910" class="blog_comment_body"><a href="http://www.cnblogs.com/willick/p/3223042.html#2821219" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2821219);">@</a>棋怜<br>多谢提醒。已修改。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2833910,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2833910,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2833910_avatar" style="display:none;">http://pic.cnblogs.com/face/191097/20141017195227.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2858308" class="layer">#19楼</a><a name="2858308" id="comment_anchor_2858308"></a>  <span class="comment_date">2014-01-10 16:43</span> | <a id="a_comment_author_2858308" class="feedbackmanagelink" href="http://www.cnblogs.com/daner1257/" target="_blank">倒霉蛋_儿</a> <a href="http://msg.cnblogs.com/send/%E5%80%92%E9%9C%89%E8%9B%8B_%E5%84%BF" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2858308" class="blog_comment_body">基础知识太差了，这一篇看的非常吃力，看完懂了个七七八八，还得回头再仔细想想。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2858308,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2858308,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2858308_avatar" style="display:none;">http://pic.cnblogs.com/face/459321/20140609140835.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2883792" class="layer">#20楼</a><a name="2883792" id="comment_anchor_2883792"></a>  <span class="comment_date">2014-02-27 04:03</span> | <a id="a_comment_author_2883792" class="feedbackmanagelink" href="http://www.cnblogs.com/struCoder/" target="_blank">strucoder</a> <a href="http://msg.cnblogs.com/send/strucoder" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2883792" class="blog_comment_body">今天刚刚看到《programming_asp.net_mvc_4 》的关于DI和Ioc的chapter，英文看得有些含糊，刚才看了楼主的博文，理解的许多，感谢楼主！:)</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2883792,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2883792,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2883792_avatar" style="display:none;">http://pic.cnblogs.com/face/574418/20140814103948.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2885460" class="layer">#21楼</a><a name="2885460" id="comment_anchor_2885460"></a>  <span class="comment_date">2014-02-28 21:15</span> | <a id="a_comment_author_2885460" class="feedbackmanagelink" href="http://www.cnblogs.com/struCoder/" target="_blank">strucoder</a> <a href="http://msg.cnblogs.com/send/strucoder" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2885460" class="blog_comment_body">这两天在看楼主的博文，这篇博文写的非常好。可有一处，我不是十分的理解，因为这与《programming_asp.net_mvc_4 》中的叙述好像矛盾了！<br>您的：<a href="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/282111344469534.jpg" target="_blank"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/282111344469534.jpg" alt="" border="0" onload="javascript:if(this.width&gt;500) this.width=500;" width="500"></a><br><br>和书中的：However, certain IoC containers allow a lazy-loading approach for property injected<br>dependencies. In this case the dependency is not loaded until a property gets invoked.<br>是不是楼主说的有些绝对了。晚辈在此请教下</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2885460,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2885460,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2885460_avatar" style="display:none;">http://pic.cnblogs.com/face/574418/20140814103948.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2887807" class="layer">#22楼</a><a name="2887807" id="comment_anchor_2887807"></a>[<span class="louzhu">楼主</span>]  <span class="comment_date">2014-03-04 10:50</span> | <a id="a_comment_author_2887807" class="feedbackmanagelink" href="http://www.cnblogs.com/willick/" target="_blank">Liam Wang</a> <a href="http://msg.cnblogs.com/send/Liam%20Wang" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2887807" class="blog_comment_body"><a href="http://www.cnblogs.com/willick/p/3223042.html#2885460" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2885460);">@</a>Mr.Smart<br>不知道你指的是和本文的哪一段矛盾了。您提供的这段摘录说的“property inject”，其实就是文中提到的“setter注入”。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2887807,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2887807,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2887807_avatar" style="display:none;">http://pic.cnblogs.com/face/191097/20141017195227.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2888265" class="layer">#23楼</a><a name="2888265" id="comment_anchor_2888265"></a>  <span class="comment_date">2014-03-04 18:33</span> | <a id="a_comment_author_2888265" class="feedbackmanagelink" href="http://www.cnblogs.com/struCoder/" target="_blank">strucoder</a> <a href="http://msg.cnblogs.com/send/strucoder" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2888265" class="blog_comment_body"><a href="http://www.cnblogs.com/willick/p/3223042.html#2887807" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2887807);">@</a>Liam Wang<br>嗯？我明明截图并且上传了！  <br>感谢楼主指出，是我太粗心了。楼主这篇博文写的不错，晚辈这几天都在学习中。:)</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2888265,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2888265,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2888265_avatar" style="display:none;">http://pic.cnblogs.com/face/574418/20140814103948.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2888396" class="layer">#24楼</a><a name="2888396" id="comment_anchor_2888396"></a>[<span class="louzhu">楼主</span>]  <span class="comment_date">2014-03-04 22:25</span> | <a id="a_comment_author_2888396" class="feedbackmanagelink" href="http://www.cnblogs.com/willick/" target="_blank">Liam Wang</a> <a href="http://msg.cnblogs.com/send/Liam%20Wang" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2888396" class="blog_comment_body"><a href="http://www.cnblogs.com/willick/p/3223042.html#2888265" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2888265);">@</a>Mr.Smart<br>非常感谢，有时间我还会继续更新的。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2888396,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2888396,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2888396_avatar" style="display:none;">http://pic.cnblogs.com/face/191097/20141017195227.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2992156" class="layer">#25楼</a><a name="2992156" id="comment_anchor_2992156"></a>  <span class="comment_date">2014-07-22 10:30</span> | <a id="a_comment_author_2992156" class="feedbackmanagelink" href="http://www.cnblogs.com/tongjunjiang/" target="_blank">童俊江</a> <a href="http://msg.cnblogs.com/send/%E7%AB%A5%E4%BF%8A%E6%B1%9F" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2992156" class="blog_comment_body"><a href="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/221024270417267.jpg" target="_blank"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/221024270417267.jpg" alt="" border="0" onload="javascript:if(this.width&gt;500) this.width=500;" width="500"></a><br><br>遇到一个问题请教一下楼主；如上图，我直接增加一个业务层BLL.Ninject，此处的类在构造时，就通过Ninject绑定数据层和数据的接口，为了解耦；但是前端页面每一次调用BLL.Ninject下的类时，他的构造函数，就被执行一次，这样就变成每次都需要做Ninject的get方法的绑定，这样页面执行效率肯定很低，因此想请问一下，在BLL.Ninject层的每个类直接构造Ninject框架的映射和get方法，是否合理？如何改进？比如是否增加Global.asax全局方法进行一次绑定即可，那此时BLL.Ninject又如何跟前端通讯？</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2992156,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2992156,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2992156_avatar" style="display:none;">http://pic.cnblogs.com/face/u70148.jpg?id=06222738</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#2999236" class="layer">#26楼</a><a name="2999236" id="comment_anchor_2999236"></a>[<span class="louzhu">楼主</span>]  <span class="comment_date">2014-08-02 14:48</span> | <a id="a_comment_author_2999236" class="feedbackmanagelink" href="http://www.cnblogs.com/willick/" target="_blank">Liam Wang</a> <a href="http://msg.cnblogs.com/send/Liam%20Wang" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2999236" class="blog_comment_body"><a href="http://www.cnblogs.com/willick/p/3223042.html#2992156" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2992156);">@</a>童俊江<br>个人觉得在业务层的类中如果大部分方法中都需要调用同一个接口，那么应当在构造函数中获取接口的实现。否则，可以在实际需要时直接通过类似 ninjectKernel.Get&lt;ShoppingCart&gt;() 的语句来获得接口的实现。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2999236,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2999236,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2999236_avatar" style="display:none;">http://pic.cnblogs.com/face/191097/20141017195227.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#3090047" class="layer">#27楼</a><a name="3090047" id="comment_anchor_3090047"></a>  <span class="comment_date">2014-12-19 17:38</span> | <a id="a_comment_author_3090047" class="feedbackmanagelink" href="http://www.cnblogs.com/yanzhiyuan928/" target="_blank">like%'远远'%</a> <a href="http://msg.cnblogs.com/send/like%25%26%2339%3B%E8%BF%9C%E8%BF%9C%26%2339%3B%25" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3090047" class="blog_comment_body">最近也在学习MVC,追随楼主的脚印，看到这章的内容时不经查了Ninject,就Ioc的各种框架中，Ninject效率听说比较低，楼主有什么想说的吗？<br><a href="http://www.cnblogs.com/liping13599168/archive/2011/07/17/2108734.html" target="_blank">http://www.cnblogs.com/liping13599168/archive/2011/07/17/2108734.html</a></div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3090047,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3090047,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3090047_avatar" style="display:none;">http://pic.cnblogs.com/face/u37407.jpg</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#3090184" class="layer">#28楼</a><a name="3090184" id="comment_anchor_3090184"></a>[<span class="louzhu">楼主</span>]  <span class="comment_date">2014-12-19 23:09</span> | <a id="a_comment_author_3090184" class="feedbackmanagelink" href="http://www.cnblogs.com/willick/" target="_blank">Liam Wang</a> <a href="http://msg.cnblogs.com/send/Liam%20Wang" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3090184" class="blog_comment_body"><a href="http://www.cnblogs.com/willick/p/3223042.html#3090047" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3090047);">@</a>like%'远远'%<br>不能因为效率低一点就抛弃不用，在能接受的范围内就可以用。选择时，关键要看够不够满足使用需求，适不适合你的项目。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3090184,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3090184,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3090184_avatar" style="display:none;">http://pic.cnblogs.com/face/191097/20141017195227.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#3121180" class="layer">#29楼</a><a name="3121180" id="comment_anchor_3121180"></a>  <span class="comment_date">2015-02-02 09:06</span> | <a id="a_comment_author_3121180" class="feedbackmanagelink" href="http://www.cnblogs.com/EricQdWang/" target="_blank">ruri</a> <a href="http://msg.cnblogs.com/send/ruri" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3121180" class="blog_comment_body">写的很清晰，多谢。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3121180,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3121180,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#3144575" class="layer">#30楼</a><a name="3144575" id="comment_anchor_3144575"></a>  <span class="comment_date">2015-03-19 17:19</span> | <a id="a_comment_author_3144575" class="feedbackmanagelink" href="http://www.cnblogs.com/NaseemGuo/" target="_blank">NaseemGuo</a> <a href="http://msg.cnblogs.com/send/NaseemGuo" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3144575" class="blog_comment_body">受教了，大牛最近没更新啊</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3144575,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3144575,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3144575_avatar" style="display:none;">http://pic.cnblogs.com/face/732008/20150317141706.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#3162644" class="layer">#31楼</a><a name="3162644" id="comment_anchor_3162644"></a>  <span class="comment_date">2015-04-14 20:18</span> | <a id="a_comment_author_3162644" class="feedbackmanagelink" href="http://home.cnblogs.com/u/691915/" target="_blank">空城守望城空</a> <a href="http://msg.cnblogs.com/send/%E7%A9%BA%E5%9F%8E%E5%AE%88%E6%9C%9B%E5%9F%8E%E7%A9%BA" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3162644" class="blog_comment_body">写的真是太好了，一个在读学生，刚开始接触asp.net mvc,应该怎样学效果会好一点呢？</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3162644,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3162644,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#3169642" class="layer">#32楼</a><a name="3169642" id="comment_anchor_3169642"></a>[<span class="louzhu">楼主</span>]  <span class="comment_date">2015-04-24 11:39</span> | <a id="a_comment_author_3169642" class="feedbackmanagelink" href="http://www.cnblogs.com/willick/" target="_blank">Liam Wang</a> <a href="http://msg.cnblogs.com/send/Liam%20Wang" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3169642" class="blog_comment_body"><a href="http://www.cnblogs.com/willick/p/3223042.html#3162644" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3162644);">@</a>空城守望城空<br>实践很重要。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3169642,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3169642,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3169642_avatar" style="display:none;">http://pic.cnblogs.com/face/191097/20141017195227.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#3176196" class="layer">#33楼</a><a name="3176196" id="comment_anchor_3176196"></a>  <span class="comment_date">2015-05-05 11:25</span> | <a id="a_comment_author_3176196" class="feedbackmanagelink" href="http://home.cnblogs.com/u/523552/" target="_blank">symmeryTrees</a> <a href="http://msg.cnblogs.com/send/symmeryTrees" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3176196" class="blog_comment_body">不能使用控制器“ExampleController”的单个实例处理多个请求。如果正在使用自定义控制器工厂，请确保它为每个请求创建该控制器的新实例。  博主这个问题怎么解决，跪求！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3176196,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3176196,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#3183957" class="layer">#34楼</a><a name="3183957" id="comment_anchor_3183957"></a>  <span class="comment_date">2015-05-14 16:28</span> | <a id="a_comment_author_3183957" class="feedbackmanagelink" href="http://home.cnblogs.com/u/557970/" target="_blank">卍兲卐</a> <a href="http://msg.cnblogs.com/send/%E5%8D%8D%E5%85%B2%E5%8D%90" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3183957" class="blog_comment_body">收藏</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3183957,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3183957,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#3184010" class="layer">#35楼</a><a name="3184010" id="comment_anchor_3184010"></a>  <span class="comment_date">2015-05-14 17:05</span> | <a id="a_comment_author_3184010" class="feedbackmanagelink" href="http://home.cnblogs.com/u/311759/" target="_blank">weimeishuxishu</a> <a href="http://msg.cnblogs.com/send/weimeishuxishu" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3184010" class="blog_comment_body">好厉害的说,大牛你辛苦了，今天长见识了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3184010,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3184010,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#3187401" class="layer">#36楼</a><a name="3187401" id="comment_anchor_3187401"></a>  <span class="comment_date">2015-05-19 22:00</span> | <a id="a_comment_author_3187401" class="feedbackmanagelink" href="http://www.cnblogs.com/FredWang/" target="_blank">鷇音子</a> <a href="http://msg.cnblogs.com/send/%E9%B7%87%E9%9F%B3%E5%AD%90" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3187401" class="blog_comment_body"><a href="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/192200070414976.png" target="_blank"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/192200070414976.png" alt="" border="0" onload="javascript:if(this.width&gt;500) this.width=500;" width="500"></a><br>这里右半边符号错了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3187401,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3187401,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3187401_avatar" style="display:none;">http://pic.cnblogs.com/face/707463/20150313084311.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/willick/p/3223042.html#3191225" class="layer">#37楼</a><a name="3191225" id="comment_anchor_3191225"></a><span id="comment-maxId" style="display:none;">3191225</span><span id="comment-maxDate" style="display:none;">2015/5/23 17:04:58</span>  <span class="comment_date">2015-05-23 17:04</span> | <a id="a_comment_author_3191225" class="feedbackmanagelink" href="http://home.cnblogs.com/u/557970/" target="_blank">卍兲卐</a> <a href="http://msg.cnblogs.com/send/%E5%8D%8D%E5%85%B2%E5%8D%90" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3191225" class="blog_comment_body">好文!MVC新手,学习到很多东西!</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3191225,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3191225,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" id="lnk_RefreshComments" onclick="return RefreshCommentList();">刷新评论</a><a href="http://www.cnblogs.com/willick/p/3223042.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/willick/p/3223042.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="site_nav_under"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="http://www.gcpowertools.com.cn/order/specialoffers.htm?utm_source=cnblogs&utm_medium=blogpage&utm_term=Promotion&utm_content=SummerPromotion&utm_campaign=community" target="_blank">【热门】支持Visual Studio2015的葡萄城控件新品发布暨夏季促销</a><br></div>
+<div id="opt_under_post"></div>
+<script type="text/javascript">
+    var enableGoogleAd = canShowAdsense(); 
+    fixPostBodyFormat();
+</script>
+<script type="text/javascript">
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+    (function () {
+        if (enableGoogleAd) {
+            var gads = document.createElement('script');
+            gads.async = true;
+            gads.type = 'text/javascript';
+            var useSSL = 'https:' == document.location.protocol;
+            gads.src = (useSSL ? 'https:' : 'http:') +
+              '//www.googletagservices.com/tag/js/gpt.js';
+            var node = document.getElementsByTagName('script')[0];
+            node.parentNode.insertBefore(gads, node);
+        }
+  })();
+</script>
+<script type="text/javascript">
+    try {
+        if (enableGoogleAd) {
+            googletag.cmd.push(function() {
+            googletag.defineSlot('/1090369/cnblogs_blogpost_C2', [468, 60], 'div-gpt-ad-1433581717989-0').addService(googletag.pubads());
+            googletag.defineSlot('/1090369/cnblogs_blogpost_C1_sitehome', [300, 250], 'div-gpt-ad-1433581717989-1').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.pubads().collapseEmptyDivs();
+            googletag.enableServices();
+            });
+        };
+    } catch (e) { }
+</script>
+<div id="google_ad_c1" class="c_ad_block">
+    <div id="div-gpt-ad-1433581717989-1" style="height:250px; width:300px;">
+    <script type="text/javascript">
+        try {
+            if (enableGoogleAd) {
+                googletag.cmd.push(function () { googletag.display('div-gpt-ad-1433581717989-1'); });
+            } else {
+                $('#div-gpt-ad-1433581717989-1').hide();
+            }
+    } catch (e) { }
+    </script>
+    <div id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0" name="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" src="javascript:"<html><body style='background:transparent'></body></html>"" style="border: 0px; vertical-align: bottom;"></iframe></div><iframe id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__hidden__" name="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__hidden__" width="0" height="0" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" src="javascript:"<html><body style='background:transparent'></body></html>"" style="border: 0px; vertical-align: bottom; visibility: hidden; display: none;"></iframe></div>
+</div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/525506/" target="_blank">科学家发现单细胞眼球微生物</a><br> ·  <a href="http://news.cnblogs.com/n/525505/" target="_blank">Mozilla公布WebVR API标准草案</a><br> ·  <a href="http://news.cnblogs.com/n/525504/" target="_blank">新指纹技术出炉：iPhone的Home键要没了</a><br> ·  <a href="http://news.cnblogs.com/n/525503/" target="_blank">官方下载：.NET Framework 4.6简体中文版</a><br> ·  <a href="http://news.cnblogs.com/n/525502/" target="_blank">硅谷科技公司聘用巫师对付黑客和电脑病毒</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="google_ad_c2" class="c_ad_block">
+<div id="div-gpt-ad-1433581717989-0" style="height:60px; width:468px;">
+<script type="text/javascript">
+try {
+    if (enableGoogleAd) {
+        googletag.cmd.push(function () { googletag.display('div-gpt-ad-1433581717989-0'); });
+    } else {
+        $('#div-gpt-ad-1433581717989-0').hide();
+    }
+} catch (e) { }
+</script>
+<div id="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0" name="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0" width="468" height="60" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" src="javascript:"<html><body style='background:transparent'></body></html>"" style="border: 0px; vertical-align: bottom;"></iframe></div></div>
+</div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/512047/" target="_blank">RESTful架构详解</a><br> ·  <a href="http://kb.cnblogs.com/page/523194/" target="_blank">优秀程序员眼中的整洁代码</a><br> ·  <a href="http://kb.cnblogs.com/page/524946/" target="_blank">怎样看待比自己强的人</a><br> ·  <a href="http://kb.cnblogs.com/page/511067/" target="_blank">编程王道，唯“慢”不破</a><br> ·  <a href="http://kb.cnblogs.com/page/524473/" target="_blank">程序员要有持续产出</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+$(function () {
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 200);
+});
+</script>
+</div>
+
+		</div>
+	</div>
+	<!-- left ends -->
+	<!-- right starts -->
+	<div id="right">
+		<!-- 右侧工具部分 -->
+		<div id="right_content">
+	
+			
+<!--done-->
+<h2 class="listtitle">公告</h2>
+<div class="newsItem">
+	<div id="blog-news"><img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/o_2013-10-08_20.png">
+<!--http://images.cnblogs.com/cnblogs_com/willick/515028/o_2013-10-07_1740.png-->
+
+<div style="position:absolute;left:194px;top:248px;display:none;">
+<b style="border-bottom:1px solid black;">I am reading</b><br>
+<img src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/o_iamreading.png">
+</div>
+
+<div style="margin:10px 0 20px 0;">
+<p>欢迎光临我的技术博客，欢迎提问、指教或参与讨论，希望我的博文能给您带来一些收获！</p>
+<p style="color:red;"><b> 声明：本人所发表的文章、评论或观点仅代表个人，与本人所在公司无关。</b></p>
+
+<b style="color:#68A4BE">关于作者</b> 
+<p style="border-top:2px solid #aaa; margin-top:0;padding-top:10px;">
+鄙人自毕业以来一直从事.NET开发工作，自知才疏学浅，本着用心和勤劳的品质在平凡的工作中吸收养分快乐成长。</p>
+
+所在地：上海 闵行区 <br>
+联　系：liam.wang@live.com
+<p></p>
+
+<p style="font-weight:bold;magin-top:15px;border:2px solid #ccc;border-radius: 5px;padding:10px;">ASP.NET MVC 交流QQ群：<b style="color:red;">239152943</b><br> <a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=4f33c10abe053295b6e74cba97efa5dcd91fbfa85386140a8245e7a48e9d7c58"><img border="0" src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/group.png" alt="ASP.NET MVC 技术交流" title="ASP.NET MVC 技术交流"></a></p>
+</div><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/willick/">Liam Wang</a><br>园龄：<a href="http://home.cnblogs.com/u/willick/" title="入园时间：2010-11-09">4年8个月</a><br>粉丝：<a href="http://home.cnblogs.com/u/willick/followers/">1096</a><br>关注：<a href="http://home.cnblogs.com/u/willick/followees/">20</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="cnblogs.UserManager.FollowBlogger(&#39;47cfa3ba-97eb-df11-ac81-842b2b196315&#39;)">+加关注</a></div></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+	
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+				<div id="leftcontentcontainer">
+					<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block"></div><div id="sidebar_recentposts" class="sidebar-block">
+<h3 class="catListTitle">最新随笔</h3>
+<div class="RecentComment" id="RecentPosts">
+<ul style="word-break:break-all">
+<li><a href="http://www.cnblogs.com/willick/p/4177977.html">1. [ASP.NET MVC 大牛之路]03 - C#高级知识点概要(2) - 线程和并发</a></li><li><a href="http://www.cnblogs.com/willick/p/4172174.html">2. [ASP.NET MVC 大牛之路]02 - C#高级知识点概要(1) - 委托和事件</a></li><li><a href="http://www.cnblogs.com/willick/p/4169477.html">3. [ASP.NET MVC 大牛之路]01 - 开篇</a></li><li><a href="http://www.cnblogs.com/willick/p/3441432.html">4. [ASP.NET MVC 小牛之路]18 - Web API</a></li><li><a href="http://www.cnblogs.com/willick/p/3438272.html">5. [ASP.NET MVC 小牛之路]17 - 捆绑(Bundle)</a></li><li><a href="http://www.cnblogs.com/willick/p/3434483.html">6. [ASP.NET MVC 小牛之路]16 - Model 验证</a></li><li><a href="http://www.cnblogs.com/willick/p/3424188.html">7. [ASP.NET MVC 小牛之路]15 - Model Binding</a></li><li><a href="http://www.cnblogs.com/willick/p/3418517.html">8. [ASP.NET MVC 小牛之路]14 - Unobtrusive Ajax</a></li><li><a href="http://www.cnblogs.com/willick/p/3428413.html">9. [ASP.NET MVC 小牛之路]13 - Helper Method</a></li><li><a href="http://www.cnblogs.com/willick/p/3410855.html">10. [ASP.NET MVC 小牛之路]12 - Section、Partial View 和 Child Action</a></li>
+</ul>
+</div>
+</div><div id="sidebar_categories">
+<!--done-->
+
+		<h1 class="catListTitle">随笔分类</h1>
+		
+				<ul>
+			
+				<li class="catList">
+				 <a id="CatList_LinkList_0_Link_0" class="listitem" href="http://www.cnblogs.com/willick/category/495350.html">[01] ASP.NET MVC(21)</a>
+				</li>
+			
+				<li class="catList">
+				 <a id="CatList_LinkList_0_Link_1" class="listitem" href="http://www.cnblogs.com/willick/category/533061.html">[04] DataBase(2)</a>
+				</li>
+			
+				<li class="catList">
+				 <a id="CatList_LinkList_0_Link_2" class="listitem" href="http://www.cnblogs.com/willick/category/537329.html">[05] ORM框架(1)</a>
+				</li>
+			
+				<li class="catList">
+				 <a id="CatList_LinkList_0_Link_3" class="listitem" href="http://www.cnblogs.com/willick/category/396980.html">[06] 前台开发(6)</a>
+				</li>
+			
+				<li class="catList">
+				 <a id="CatList_LinkList_0_Link_4" class="listitem" href="http://www.cnblogs.com/willick/category/537373.html">[07] 项目管理</a>
+				</li>
+			
+				<li class="catList">
+				 <a id="CatList_LinkList_0_Link_5" class="listitem" href="http://www.cnblogs.com/willick/category/523099.html">[09] 第三方技术(1)</a>
+				</li>
+			
+				<li class="catList">
+				 <a id="CatList_LinkList_0_Link_6" class="listitem" href="http://www.cnblogs.com/willick/category/419352.html">[10] 问题解决(3)</a>
+				</li>
+			
+				<li class="catList">
+				 <a id="CatList_LinkList_0_Link_7" class="listitem" href="http://www.cnblogs.com/willick/category/518482.html">[11] 英语学习(6)</a>
+				</li>
+			
+				<li class="catList">
+				 <a id="CatList_LinkList_0_Link_8" class="listitem" href="http://www.cnblogs.com/willick/category/475085.html">[12] 生活哲学(5)</a>
+				</li>
+			
+				</ul>
+			
+	
+</div><div id="sidebar_scorerank" class="sidebar-block">
+<h3>积分与排名</h3>
+<ul>
+	<li>
+		积分 -
+		96215
+	</li><li>
+		排名 -
+		1788
+	</li>
+</ul>
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<h3 class="catListTitle">最新评论</h3>
+<div class="RecentComment" id="RecentComments">
+	<div id="RecentCommentsBlock"><ul>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/willick/p/3304534.html#3231699">1. Re:[ASP.NET MVC 小牛之路]06 - 使用 Entity Framework</a></li>
+    <li class="recent_comment_body">看了好多Code First的...正想找DB First的..歪打正着 哈哈</li>
+    <li class="recent_comment_author">--鸠翱</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/willick/p/4169477.html#3227098">2. Re:[ASP.NET MVC 大牛之路]01 - 开篇</a></li>
+    <li class="recent_comment_body">@未知的路上回答“好的”后，遵守群归即可。...</li>
+    <li class="recent_comment_author">--Liam Wang</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/willick/p/4169477.html#3226877">3. Re:[ASP.NET MVC 大牛之路]01 - 开篇</a></li>
+    <li class="recent_comment_body">239152943<br>这个群问题答案是什么呀，想加入</li>
+    <li class="recent_comment_author">--未知的路上</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/willick/p/4169477.html#3226875">4. Re:[ASP.NET MVC 大牛之路]01 - 开篇</a></li>
+    <li class="recent_comment_body">LZ，期待你的更新啊</li>
+    <li class="recent_comment_author">--未知的路上</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/willick/p/3331519.html#3226411">5. Re:[ASP.NET MVC 小牛之路]08 - Area 使用</a></li>
+    <li class="recent_comment_body">mark一下</li>
+    <li class="recent_comment_author">--Lumia1020</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/willick/p/3410855.html#3222884">6. Re:[ASP.NET MVC 小牛之路]12 - Section、Partial View 和 Child Action</a></li>
+    <li class="recent_comment_body">@jimcsharp你点击有样式是因为动态添加的，你想刷新就有样式就得加载的时候就给相应按钮添加样式。...</li>
+    <li class="recent_comment_author">--smile_rain</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/willick/p/3299077.html#3219782">7. Re:[ASP.NET MVC 小牛之路]05 - 使用 Ninject</a></li>
+    <li class="recent_comment_body">如果控制器中构造函数带多个参数 且参数中包含基本类型，NInject 怎么处理如：public BookController(IBookRepository bookRepository,string......</li>
+    <li class="recent_comment_author">--xinyu&amp;#39;s</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/willick/p/3224144.html#3212971">8. Re:[ASP.NET MVC 小牛之路]03 - Razor语法</a></li>
+    <li class="recent_comment_body">mark</li>
+    <li class="recent_comment_author">--贤狼赫萝</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/willick/p/4177977.html#3211602">9. Re:[ASP.NET MVC 大牛之路]03 - C#高级知识点概要(2) - 线程和并发</a></li>
+    <li class="recent_comment_body">博主，思路很清晰，也很平静。有平静的心态才能写出好东西</li>
+    <li class="recent_comment_author">--刘子翔</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/willick/p/3299077.html#3205778">10. Re:[ASP.NET MVC 小牛之路]05 - 使用 Ninject</a></li>
+    <li class="recent_comment_body">持续学习楼主的教程中</li>
+    <li class="recent_comment_author">--鷇音子</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<h3 class="catListTitle">阅读排行榜</h3>
+<div class="RecentComment" id="TopViewPosts"> 
+	<div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/willick/p/3168809.html">1. ExtJS初探：在项目中使用ExtJS(29466)</a></li><li><a href="http://www.cnblogs.com/willick/p/3195560.html">2. [ASP.NET MVC  小牛之路]01 - 理解MVC模式(16746)</a></li><li><a href="http://www.cnblogs.com/willick/p/3224144.html">3. [ASP.NET MVC 小牛之路]03 - Razor语法(15212)</a></li><li><a href="http://www.cnblogs.com/willick/p/3441432.html">4. [ASP.NET MVC 小牛之路]18 - Web API(13087)</a></li><li><a href="http://www.cnblogs.com/willick/p/4172174.html">5. [ASP.NET MVC 大牛之路]02 - C#高级知识点概要(1) - 委托和事件(12579)</a></li><li><a href="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园.html">6. [ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject(12306)</a></li><li><a href="http://www.cnblogs.com/willick/p/3208427.html">7. [ASP.NET MVC 小牛之路]02 - C#知识点提要(11537)</a></li><li><a href="http://www.cnblogs.com/willick/p/3343105.html">8. [ASP.NET MVC 小牛之路]07 - URL Routing(9188)</a></li><li><a href="http://www.cnblogs.com/willick/p/3410855.html">9. [ASP.NET MVC 小牛之路]12 - Section、Partial View 和 Child Action(8632)</a></li><li><a href="http://www.cnblogs.com/willick/p/4169477.html">10. [ASP.NET MVC 大牛之路]01 - 开篇(8264)</a></li><li><a href="http://www.cnblogs.com/willick/p/4177977.html">11. [ASP.NET MVC 大牛之路]03 - C#高级知识点概要(2) - 线程和并发(8132)</a></li><li><a href="http://www.cnblogs.com/willick/p/3304534.html">12. [ASP.NET MVC 小牛之路]06 - 使用 Entity Framework(8112)</a></li><li><a href="http://www.cnblogs.com/willick/p/3299077.html">13. [ASP.NET MVC 小牛之路]05 - 使用 Ninject(7603)</a></li><li><a href="http://www.cnblogs.com/willick/p/3424188.html">14. [ASP.NET MVC 小牛之路]15 - Model Binding(6926)</a></li><li><a href="http://www.cnblogs.com/willick/p/3331520.html">15. [ASP.NET MVC 小牛之路]11 - Filter(6668)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div class="RecentComment">
+	<div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/willick/p/4172174.html">1. [ASP.NET MVC 大牛之路]02 - C#高级知识点概要(1) - 委托和事件(113)</a></li><li><a href="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园.html">2. [ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject(85)</a></li><li><a href="http://www.cnblogs.com/willick/p/4177977.html">3. [ASP.NET MVC 大牛之路]03 - C#高级知识点概要(2) - 线程和并发(85)</a></li><li><a href="http://www.cnblogs.com/willick/p/3208427.html">4. [ASP.NET MVC 小牛之路]02 - C#知识点提要(66)</a></li><li><a href="http://www.cnblogs.com/willick/p/4169477.html">5. [ASP.NET MVC 大牛之路]01 - 开篇(66)</a></li><li><a href="http://www.cnblogs.com/willick/p/3343105.html">6. [ASP.NET MVC 小牛之路]07 - URL Routing(59)</a></li><li><a href="http://www.cnblogs.com/willick/p/3195560.html">7. [ASP.NET MVC  小牛之路]01 - 理解MVC模式(54)</a></li><li><a href="http://www.cnblogs.com/willick/p/3331513.html">8. [ASP.NET MVC 小牛之路]10 - Controller 和 Action (2)(45)</a></li><li><a href="http://www.cnblogs.com/willick/p/3224144.html">9. [ASP.NET MVC 小牛之路]03 - Razor语法(45)</a></li><li><a href="http://www.cnblogs.com/willick/p/3304534.html">10. [ASP.NET MVC 小牛之路]06 - 使用 Entity Framework(31)</a></li><li><a href="http://www.cnblogs.com/willick/p/3331520.html">11. [ASP.NET MVC 小牛之路]11 - Filter(30)</a></li><li><a href="http://www.cnblogs.com/willick/p/3441432.html">12. [ASP.NET MVC 小牛之路]18 - Web API(29)</a></li><li><a href="http://www.cnblogs.com/willick/p/3418517.html">13. [ASP.NET MVC 小牛之路]14 - Unobtrusive Ajax(28)</a></li><li><a href="http://www.cnblogs.com/willick/p/3299077.html">14. [ASP.NET MVC 小牛之路]05 - 使用 Ninject(27)</a></li><li><a href="http://www.cnblogs.com/willick/p/3410855.html">15. [ASP.NET MVC 小牛之路]12 - Section、Partial View 和 Child Action(26)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script><iframe src="./[ASP.NET MVC 小牛之路]04 - 依赖注入(DI)和Ninject - Liam Wang - 博客园_files/container.html" style="visibility: hidden; display: none;"></iframe>
+				</div>
+			
+		</div>
+		<!-- //右侧工具部分 -->
+		<div id="footer">
+			
+<!--done-->
+Copyright ©2015 Liam Wang
+		</div>
+	</div>
+	<!-- right ends -->
+	<div class="clear"></div>
+	
+</div>
+
+
+
+<iframe id="google_osd_static_frame_5425643010530" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;"></iframe></body></html>

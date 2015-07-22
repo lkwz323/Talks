@@ -1,0 +1,153 @@
+.header{height:100%;padding-top:20px;}
+.header br{display:none;}
+.headerText{display:inline;}
+.headerDis{display:inline;color:red;font-weight: bold;}
+#banner{height:80px;}
+h5{margin:0;padding:0;}
+hr{margin-top:0;}
+#Header1_HeaderTitle {
+	font-family: Verdana, Consolas, "Courier New";	
+	font-size: 32px;
+	color: #FF9999;
+	font-weight: bold;
+}
+#bnr_pic{background:none;}
+.postTitle{padding: 0px;font-size: 15px;}
+.cnblogs_code_toolbar{display:none;}
+.cnblogs_code_collapse{cursor:default;}
+#div_digg{position:fixed;bottom:1%;right:1%;border:1px solid #ddd;padding:10px;background:#fcfcfc;border-radius:3px;-moz-border-radius:3px;}
+
+#right{width:300px;}
+#right_content{width:95%;}
+.newsItem{padding:0 0 0 10px;}
+#profile_block{float:right;float:right;position:absolute;left:186px;top:158px;border-bottom:3px solid green;}
+#p_b_follow a{font-weight:bold;}
+h2.listtitle,#blog-sidecolumn h1.catListTitle,#blog-sidecolumn h3.catListTitle{
+background-image: url(http://images.cnblogs.com/cnblogs_com/willick/515028/o_tit_list1.jpg);
+width:250px!important;
+}
+
+#left{font-family: 微软雅黑;top:80px;left: 300px;}
+.postTitle h1{
+	padding-left: 0px;
+	font-size: 22px;
+}
+a.postTitle2{
+	font-family: 微软雅黑, Consolas, Arial, 宋体;
+	text-decoration: none;
+	padding: 3px;
+}
+a.postTitle2:hover{
+	color: #fff;
+	background-color: #78AFD3;
+	padding: 3px;
+	text-decoration: none;
+}
+
+#cnblogs_post_body img{
+-webkit-box-shadow: 0 0 8px #5c5c5c;
+-moz-box-shadow: 0 0 8px #5c5c5c;
+box-shadow: 0 0 8px #5c5c5c;
+}
+#cnblogs_post_body ul{line-height:25px;}
+#cnblogs_post_body, #navCategory {
+    font-size: 13px;
+}
+#cnblogs_post_body h1, #cnblogs_post_body h2, #cnblogs_post_body h3 {
+	margin-top: 24px;
+	margin-bottom: 12px;
+}
+#cnblogs_post_body h1 {
+	padding: 5px;
+	color: white;
+	background-color: #A5A5A5;
+}
+
+#cnblogs_post_body pre{
+	font-size: 10pt;
+	margin: 0;
+}
+.cnblogs_code,pre.code{
+	background-color: #F7F7FF;
+	padding: 8px;
+	border-left: solid 5px #6699FF;
+	border-style: solid;
+	border-width: 2px 2px 2px 5px;
+	border-color: #F0F0FF #F0F0FF #F0F0FF #B0D8FF;
+}
+#cnblogs_post_body p{
+	line-height: 180%;
+	padding: 0;
+}
+#cnblogs_post_body .spaceLine{
+	height: 10px;
+	margin: 0px;
+	padding: 0px;
+}
+div#information {
+    background-color: #f8f8ee;
+    border: solid 1px #e8e7d0;
+    padding: 5px 10px 0px 10px;
+    min-height: 10px;
+    margin-top: -15px;
+    margin-bottom: 30px;
+    color: #666666
+}
+
+#cnblogs_post_body a{
+	text-decoration: none;
+	color: #5B9DCA;
+	padding: 1px 2px;
+}
+#cnblogs_post_body a:hover{
+	color: #fff;
+	background-color: #78AFD3;
+	padding: 1px 2px;
+}
+
+#blog_post_info_block a{
+	text-decoration: none;
+	color: #5B9DCA;
+	padding: 3px;
+}
+#blog_post_info_block a:hover{
+	color: #fff;
+	background-color: #78AFD3;
+	padding: 3px;
+	text-decoration: none;
+}
+.feedbackItem {
+	padding: 5px 10px;
+	line-height: 150%;
+	margin-bottom: 5px;
+	margin-top: 20px;
+	border: 1px dashed #676767;
+	background-color: #FAFAFF;
+}
+div.feedbackCon img{
+	display: none;
+}
+
+#ad_under_post_holder{display:none}
+.commentbox_title {
+	width: 80%;
+}
+#tbCommentBody{
+	width: 80%;
+	height: 230px;
+}
+#btn_comment_submit{ 
+	background-color: #A2C2E5; 
+}
+
+#green_channel{border: green 5px dashed;font-size: 9pt;width: 98%;}
+#green_channel a,#green_channel a:link, #green_channel a:visited, #green_channel a:active{padding: 10px;}
+
+#jump-box{ position: fixed; bottom: 35%; right: 8px;}
+#jump-box a{ display: block; margin-bottom: 18px; width: 32px; height: 30px;}
+#goto-top{background: url("http://images.cnblogs.com/cnblogs_com/willick/515028/o_ico_jump.png") 0px 0px no-repeat;}
+#goto-comment{background: url("http://images.cnblogs.com/cnblogs_com/willick/515028/o_ico_jump.png") 0px -55px no-repeat;}
+#goto-bottom{background: url("http://images.cnblogs.com/cnblogs_com/willick/515028/o_ico_jump.png") 0px -25px no-repeat;}
+#goto-top:hover{background: url("http://images.cnblogs.com/cnblogs_com/willick/515028/o_ico_jump.png") 0px -130px no-repeat;}
+#goto-comment:hover{background: url("http://images.cnblogs.com/cnblogs_com/willick/515028/o_ico_jump.png") 0px -95px no-repeat;}
+#goto-bottom:hover{background: url("http://images.cnblogs.com/cnblogs_com/willick/515028/o_ico_jump.png") 0px -155px no-repeat;}

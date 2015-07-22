@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Talks.Model.Dto;
-using Talks.Model.Searcher.Base;
-
-namespace Talks.Dao
+namespace Talks.Service
 {
-    public interface ITalksDao
+    public interface IDiscountHelper
     {
-        
+        decimal ApplyDiscount(decimal totalParam);
+
     }
 }

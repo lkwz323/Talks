@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CAEC7643-D88D-453A-B429-A1F5E74D62D8}</ProjectGuid>
+    <ProjectGuid>{85BDC6E0-F2A1-4609-8E31-F9132BF5644A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Talks.Dao</RootNamespace>
-    <AssemblyName>Talks.Dao</AssemblyName>
+    <RootNamespace>Talks.Service.Impl</RootNamespace>
+    <AssemblyName>Talks.Service.Impl</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,20 +30,36 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ITalksDao.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="DefalutDiscountHelper.cs" />
+    <Compile Include="Init.cs" />
+    <Compile Include="LinqValueCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Talks.Dao\Talks.Dao.csproj">
+      <Project>{caec7643-d88d-453a-b429-a1f5e74d62d8}</Project>
+      <Name>Talks.Dao</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Talks.Model\Talks.Model.csproj">
       <Project>{f2e4df87-4f96-4004-ac37-8335202a6b43}</Project>
       <Name>Talks.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Talks.Service\Talks.Service.csproj">
+      <Project>{f4bb6b87-084d-41e4-acbf-708141454073}</Project>
+      <Name>Talks.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Talks.Model.Dto;
-using Talks.Model.Searcher.Base;
-
-namespace Talks.Dao
+namespace Talks.Service.Impl
 {
-    public interface ITalksDao
+    public class Class1
     {
-        
     }
 }

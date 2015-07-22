@@ -5,19 +5,19 @@ using System.Web;
 using System.Web.Mvc;
 using Talks.Model.Searcher;
 using Talks.Service;
-using Talks.Service.Impl;
+
 
 namespace Talks.Admin.Controllers
 {
      [Authorize]
     public class HomeController : Controller
     {
-        IHomeService homeService = new HomeServiceImpl();
+        IHomeService homeService ;
 
         public ActionResult Index(HomeSearcher searcher)
         {
             searcher.PageSize = 10;
-            homeService.BindDataList(ViewBag, searcher);
+            //homeService.BindDataList(ViewBag, searcher);
             return View();
         }
 
