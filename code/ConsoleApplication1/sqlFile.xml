@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<sqlMap namespace="TestApp" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+<sqlMap namespace="Ibatis" xmlns="http://ibatis.apache.org/mapping" xmlns:xls="http://www.w3.org/2001/XMLSchema-instance">
 
   <statements>
     <statement id="FindPageId" parameterClass="System.String" resultClass="System.Guid" >

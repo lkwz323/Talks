@@ -10,8 +10,10 @@ namespace Talks.Service.Impl
     public class Init
     {
         //Inject绑定接口与实现
-        public static void Bind(StandardKernel kernel) {
-            kernel.Bind<IValueCalculater>().To<LinqValueCalculator>();
+        public static void Bind(StandardKernel kernel)
+        {
+            kernel.Bind<IProductService>().To<ProductServiceImpl>();
+
         }
     }
 }

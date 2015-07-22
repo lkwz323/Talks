@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Ibatis" xmlns="http://ibatis.apache.org/mapping" xmlns:xls="http://www.w3.org/2001/XMLSchema-instance">
+  <resultMaps>
+    <!--Product类与db表的映射-->
+    <resultMap id="SelectAllResult" class="Talks.Model.Product">
+      <result property="ProductID" column="ProductID"/>
+      <result property="Name" column="Name"/>
+      <result property="Description" column="Description" />
+      <result property="Company" column="Company" />
+      <result property="Price" column="Price"  />
+      <result property="Category" column="Category" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <select id="GetALLProduct"    resultMap="SelectAllResult" >
+      SELECT  *
+      FROM Product
+    </select>
+    <insert  id="InsertProduct"  parameterClass="Talks.Model.Product">
+      <![CDATA[
+      INSERT INTO  [dbo].[Product]
+      ([ProductID]
+      ,[Name]
+      ,[Description]
+      ,[Company]
+      ,[Price]
+      ,[Category])
+      VALUES
+      (#ProductID#
+      ,#Name#
+      ,#Description#
+      ,#Company#
+      ,#Price#
+      ,#Category#)
+      ]]>
+      <selectKey resultClass="string" type="post" property="ProductID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert >
+  </statements>
+</sqlMap>

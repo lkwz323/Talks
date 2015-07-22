@@ -42,10 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IDiscountHelper.cs" />
-    <Compile Include="IHomeService.cs" />
-    <Compile Include="ITalksService.cs" />
-    <Compile Include="IValueCalculater.cs" />
+    <Compile Include="IProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

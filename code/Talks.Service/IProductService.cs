@@ -7,8 +7,9 @@ using Talks.Model;
 
 namespace Talks.Service
 {
-    public interface IValueCalculater
+    public interface IProductService
     {
-        decimal ValueProducts(params Product[] products);
+        IList<Product> GetAllProduct();
+        string InserProduct(Product product);
     }
 }

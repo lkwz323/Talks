@@ -12,7 +12,7 @@ namespace Talks.Dao.Impl
         //Inject绑定接口与实现
         public static void Bind(StandardKernel kernel)
         {
-           // kernel.Bind<IValueCalculater>().To<LinqValueCalculator>();
+            kernel.Bind<IProductDao>().To<ProductDaoImpl>();
         }
     }
 }

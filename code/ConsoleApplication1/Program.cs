@@ -21,7 +21,7 @@ namespace ConsoleApplication1
                 try
                 {
                     ISqlMapper mapper = Mapper.Instance();
-                    mapper.DataSource.ConnectionString = "Data Source=(local);Initial Catalog=web;Integrated Security=True";
+                    mapper.DataSource.ConnectionString = "Data Source=(local)\\sqlExpress;Initial Catalog=TalksDB;uid=sa;pwd=sd;";
                     return mapper;
                 }
                 catch (Exception ex)

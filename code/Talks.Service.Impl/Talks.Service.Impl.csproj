@@ -42,10 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="DefalutDiscountHelper.cs" />
     <Compile Include="Init.cs" />
-    <Compile Include="LinqValueCalculator.cs" />
+    <Compile Include="ProductServiceImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

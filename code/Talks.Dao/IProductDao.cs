@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using Talks.Model.Dto;
-using Talks.Model.Searcher.Base;
+using Talks.Model;
 
 namespace Talks.Dao
 {
-    public interface ITalksDao
+   public  interface IProductDao
     {
-        
+       IList<Product> GetAllProduct();
+       string InserProduct(Product product);
     }
 }

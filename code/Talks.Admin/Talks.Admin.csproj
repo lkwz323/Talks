@@ -175,7 +175,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\TalksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1421,6 +1420,9 @@
     <Content Include="charisma\bower_components\terebentina-sco\package.json" />
     <Content Include="charisma\bower_components\terebentina-sco\README.md" />
     <Content Include="charisma\bower_components\terebentina-sco\sco.js.jquery.json" />
+    <Content Include="providers.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1478,6 +1480,7 @@
     <Content Include="Views\Shared\_inc_topbar.cshtml" />
     <Content Include="Views\Shared\_LogOnPartial.cshtml" />
     <Content Include="Views\Shared\_Layout_Account.cshtml" />
+    <Content Include="SqlMap.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
