@@ -1,8 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <sqlMap namespace="Ibatis" xmlns="http://ibatis.apache.org/mapping" xmlns:xls="http://www.w3.org/2001/XMLSchema-instance">
+  <!--模块配置 配置类的命名空间，不配置则要写全类的命名空间-->
+  <alias>
+    <typeAlias alias="Product" type="Talks.Model.Product,Talks.Model"/>
+  </alias>
   <resultMaps>
+    
     <!--Product类与db表的映射-->
-    <resultMap id="SelectAllResult" class="Talks.Model.Product">
+    <resultMap id="SelectAllResult" class="Product">
       <result property="ProductID" column="ProductID"/>
       <result property="Name" column="Name"/>
       <result property="Description" column="Description" />
@@ -50,7 +55,7 @@
       SELECT  *
       FROM Product
     </select>
-    <insert  id="InsertProduct"  parameterClass="Talks.Model.Product" resultClass="string">
+    <insert  id="InsertProduct"  parameterClass="Product" resultClass="string">
       <![CDATA[
       INSERT INTO  [dbo].[Product]
       ([ProductID]
