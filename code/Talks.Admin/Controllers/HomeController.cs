@@ -34,6 +34,7 @@ namespace Talks.Admin.Controllers
                 Company = "vancl",
                 Description = "hahaha",
                 Price = 100.01M,
+                AddTime=DateTime.Now,
 
             };
             var id = productService.InserProduct(product);

@@ -15,7 +15,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <form class="form-inline" id="scheme" method="get"
-            action="/home/list">
+            action="@Url.Action("index","home")">
             @*<div class="form-group">
                 <label class="control-label">xxxx：</label>
                 <input type="text"
@@ -49,12 +49,12 @@
                        class=" input-inline form-control input-sm" name="Category"
                        size="13" value='@searcher.Category' />
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label class="control-label">描述：</label>
                 <input type="text"
                        class=" input-inline form-control input-sm" name="Description"
                        size="13" value='@searcher.Description' />
-            </div>
+            </div>*@
             @*<div class="form-group">
                 <label class="control-label">类型： </label>
                 <select name="type"
@@ -94,14 +94,13 @@
             <tr>
               
                 <th style="" class="text-center">编号</th>
-                <th style="width: 60px" class="text-center">名称</th>
-                <th style="width: 120px" class="text-center">添加时间</th>
+                <th style="" class="text-center">名称</th>
+                <th style="width: 160px" class="text-center">添加时间</th>
                 <th style="width: 150px" class="text-center">分类</th>
                 <th style="width: 150px" class="text-center">公司</th>
-                <th style="width: 75px" class="text-center">价格</th>
-                <th style="width: 200px" class="text-center">描述</th>
+                <th style="width: 80px" class="text-center">价格</th>              
                
-                <th style="" class="text-center">操作</th>
+                <th style="width: 120px" class="text-center">操作</th>
             </tr>
         </thead>
         <tbody class="listContainer">
@@ -111,14 +110,14 @@
                 foreach (var item in list)
                 {
                 <tr class="item">
-                    <td><a href="/edit/@item.ProductID">@item.Name</a></td>
+                    <td><a href="/view/@item.ProductID">@item.ProductID</a></td>
+                    <td><a href="/view/@item.ProductID">@item.Name</a></td>
                     <td class="text-center">@item.AddTime.ToString("yyyy-MM-dd hh:mm:ss")</td>
                     <td class="text-center">@item.Category</td>
                     <td class="text-center">@item.Company</td>
-                    <td class="text-center">@item.Price</td>
-                    <td class="text-center">@item.Description</td>
+                    <td class="text-center">@item.Price</td>                  
                   
-                    <td><a href="/edit/@item.ProductID">编辑</a> <a href="javascript:void(0)">审核</a> <a href="#">删除</a></td>
+                    <td class="text-center"><a href="/edit/@item.ProductID">编辑</a> <a href="javascript:void(0)">审核</a> <a href="#">删除</a></td>
                 </tr>
                 }
             }

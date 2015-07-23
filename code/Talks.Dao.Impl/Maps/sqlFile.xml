@@ -50,7 +50,7 @@
         Company LIKE '%$Company$%'
       </isNotEmpty>
       <isNotEmpty prepend="AND" property="Category" >
-        Company LIKE '%$Category$%'
+        Category LIKE '%$Category$%'
       </isNotEmpty>
     </sql>
     <!--SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY {1}) AS DataRowNumber, * FROM ({0}) AS OriginDataTable ) AS DataTableWithRowNumber WHERE DataRowNumber BETWEEN {2} AND {3} ORDER BY DataRowNumber ASC;-->
