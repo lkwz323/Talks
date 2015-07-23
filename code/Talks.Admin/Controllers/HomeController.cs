@@ -11,7 +11,7 @@ using Talks.Service;
 
 namespace Talks.Admin.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class HomeController : Controller
     {
 
