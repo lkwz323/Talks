@@ -52,5 +52,10 @@ namespace Talks.Admin.Controllers
 
             return View();
         }
+
+        public ActionResult Ueditor() {
+
+            return View();
+        }
     }
 }
