@@ -1,0 +1,19 @@
+case Languages.CSHARP:
+                filename = "csharp.xml";
+                break;
+            case Languages.JAVASHARP:
+                filename = "javasharp.xml";
+                break;
+            case Languages.SQL:
+                filename = "sql.xml";
+                break;
+            case Languages.VBSCRIPT:
+                filename = "vbscript.xml";
+                break;
+            case Languages.XML:
+                filename = "xml.xml";
+                break;
+            case Languages.VBNET:
+                filename = "vbnet.xml";
+                break;
+            default:

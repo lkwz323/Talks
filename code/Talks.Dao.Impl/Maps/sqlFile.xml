@@ -12,11 +12,45 @@
     </resultMap>
   </resultMaps>
   <statements>
+    <sql id="pageSql">
+      SELECT
+      *
+      FROM
+      (
+      SELECT
+      ROW_NUMBER() OVER (ORDER BY {1}) AS DataRowNumber,
+      *
+      FROM (
+      {0}
+      ) AS OriginDataTable
+      ) AS DataTableWithRowNumber
+      WHERE
+      DataRowNumber BETWEEN #Start# AND #End#
+      ORDER BY
+      DataRowNumber ASC;
+    </sql>
+    <!--SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY {1}) AS DataRowNumber, * FROM ({0}) AS OriginDataTable ) AS DataTableWithRowNumber WHERE DataRowNumber BETWEEN {2} AND {3} ORDER BY DataRowNumber ASC;-->
     <select id="GetALLProduct"    resultMap="SelectAllResult" >
+      SELECT
+      *
+      FROM
+      (
+      SELECT
+      ROW_NUMBER() OVER (ORDER BY {1}) AS DataRowNumber,
+      *
+      FROM (
+      {0}
+      ) AS OriginDataTable
+      ) AS DataTableWithRowNumber
+      WHERE
+      DataRowNumber BETWEEN {2} AND {3}
+      ORDER BY
+      DataRowNumber ASC;
+      
       SELECT  *
       FROM Product
     </select>
-    <insert  id="InsertProduct"  parameterClass="Talks.Model.Product">
+    <insert  id="InsertProduct"  parameterClass="Talks.Model.Product" resultClass="string">
       <![CDATA[
       INSERT INTO  [dbo].[Product]
       ([ProductID]
@@ -32,10 +66,12 @@
       ,#Company#
       ,#Price#
       ,#Category#)
+      
       ]]>
       <selectKey resultClass="string" type="post" property="ProductID" >
-        select @@IDENTITY as value
+        select @@IDENTITY as ProductID
       </selectKey>
     </insert >
+    
   </statements>
 </sqlMap>

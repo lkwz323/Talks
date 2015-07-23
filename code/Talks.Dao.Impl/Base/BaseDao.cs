@@ -9,6 +9,7 @@ namespace Talks.Dao.Impl.Base
 {
     public static class BaseDao
     {
+        //add
         public static string Insert<T>(string statementName, T t)
         {
             ISqlMapper iSqlMapper = Mapper.Instance();
@@ -19,6 +20,7 @@ namespace Talks.Dao.Impl.Base
             return null;
         }
 
+        //edit
         public static int Update<T>(string statementName, T t)
         {
             ISqlMapper iSqlMapper = Mapper.Instance();
@@ -28,7 +30,7 @@ namespace Talks.Dao.Impl.Base
             }
             return 0;
         }
-
+        //delete
         public static int Delete(string statementName, int primaryKeyId)
         {
             ISqlMapper iSqlMapper = Mapper.Instance();
@@ -38,7 +40,7 @@ namespace Talks.Dao.Impl.Base
             }
             return 0;
         }
-
+        //get
         public static T Get<T>(string statementName, string primaryKeyId) where T : class
         {
             ISqlMapper iSqlMapper = Mapper.Instance();
@@ -48,7 +50,7 @@ namespace Talks.Dao.Impl.Base
             }
             return null;
         }
-
+        //list
         public static IList<T> QueryForList<T>(string statementName, object parameterObject = null)
         {
             ISqlMapper iSqlMapper = Mapper.Instance();
@@ -58,5 +60,6 @@ namespace Talks.Dao.Impl.Base
             }
             return null;
         }
+        
     }
 }

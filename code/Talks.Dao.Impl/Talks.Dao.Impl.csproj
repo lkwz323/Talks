@@ -72,7 +72,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Maps\sqlFile.xml">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

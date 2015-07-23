@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<BLRoot>
+  <Item>string</Item>
+  <Item>int</Item>
+  <Item>double</Item>
+  <Item>bool</Item>
+  <Item>float</Item>
+  <Item>DateTime</Item>
+  <Item>long</Item>
+  <Item>short</Item>
+  <Item>byte</Item>
+<Item>byte[]</Item>
+<Item>Extention1</Item>
+<Item>Extention2</Item>
+<Item>Extention3</Item>
+
+  
+</BLRoot>

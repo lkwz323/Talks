@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<BLRoot Text="Templates" Deep="1" Parent="none" Comment="模版树的根节点，作为模版管理器,能对生成的代码进行管理" Tag="">
+  <CSharp Text="C#_Templates V1.0" Deep="2" Parent="BLRoot" Comment="C#模版管理器，用户对标准的C#模版进行管理" Tag="">
+    <Domain1  Text="C#_Domain V1.6" Deep="3" Parent="CSharp" Comment="C#对象描述" Tag=""></Domain1>
+	<Domain2  Text="C#_SQLMap V1.6" Deep="3" Parent="CSharp" Comment="SQLMap映射文件" Tag=""></Domain2>
+	<Domain3  Text="C#_Dao V1.6" Deep="3" Parent="CSharp" Comment="数据访问层" Tag=""></Domain3>
+	<Domain4  Text="C#_Server V1.6" Deep="3" Parent="CSharp" Comment="服务层" Tag=""></Domain4>
+<Domain6  Text="C#_ServerEx V1.6" Deep="3" Parent="CSharp" Comment="服务层 扩展" Tag=""></Domain6>
+	<Domain5  Text="C#_SQLTable V1.6" Deep="3" Parent="CSharp" Comment="创建表SQL语句" Tag=""></Domain5>
+        
+  </CSharp>
+</BLRoot>
