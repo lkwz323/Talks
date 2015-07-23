@@ -65,9 +65,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Include="packages.config" />
-    <Resource Include="providers.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    <EmbeddedResource Include="providers.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Maps\sqlFile.xml">

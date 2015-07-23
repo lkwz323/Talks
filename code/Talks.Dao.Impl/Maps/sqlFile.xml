@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<sqlMap namespace="Ibatis" xmlns="http://ibatis.apache.org/mapping" xmlns:xls="http://www.w3.org/2001/XMLSchema-instance">
+<sqlMap namespace="Talks.Dao.Impl.IProductDao" xmlns="http://ibatis.apache.org/mapping" xmlns:xls="http://www.w3.org/2001/XMLSchema-instance">
   <!--模块配置 配置类的命名空间，不配置则要写全类的命名空间-->
   <alias>
+    <!--<typeAlias alias="Account" assembly="NPetshop.Domain.dll" type="NPetshop.Domain.Accounts.Account" />-->
     <typeAlias alias="Product" type="Talks.Model.Product,Talks.Model"/>
   </alias>
   <resultMaps>
-    
+
     <!--Product类与db表的映射-->
     <resultMap id="SelectAllResult" class="Product">
       <result property="ProductID" column="ProductID"/>
@@ -14,6 +15,7 @@
       <result property="Company" column="Company" />
       <result property="Price" column="Price"  />
       <result property="Category" column="Category" />
+      <result property="AddTime" column="AddTime" />
     </resultMap>
   </resultMaps>
   <statements>
@@ -34,26 +36,63 @@
       ORDER BY
       DataRowNumber ASC;
     </sql>
+    <sql id="ProductWhere">
+      <isNotEmpty prepend="AND" property="ProductID" >
+        ProductID = #ProductID#
+      </isNotEmpty>
+      <isNotEmpty prepend="AND" property="Name" >
+        Name LIKE '%$Name$%'
+      </isNotEmpty>
+      <isNotEmpty prepend="AND" property="Description" >
+        Description LIKE '%$Description$%'
+      </isNotEmpty>
+      <isNotEmpty prepend="AND" property="Company" >
+        Company LIKE '%$Company$%'
+      </isNotEmpty>
+      <isNotEmpty prepend="AND" property="Category" >
+        Company LIKE '%$Category$%'
+      </isNotEmpty>
+    </sql>
     <!--SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY {1}) AS DataRowNumber, * FROM ({0}) AS OriginDataTable ) AS DataTableWithRowNumber WHERE DataRowNumber BETWEEN {2} AND {3} ORDER BY DataRowNumber ASC;-->
-    <select id="GetALLProduct"    resultMap="SelectAllResult" >
-      SELECT
+    <select id="GetProductList"  parameterClass="Talks.Model.Searcher.ProductSearcher"  resultMap="SelectAllResult" >
+      <![CDATA[
+     SELECT
       *
       FROM
       (
-      SELECT
-      ROW_NUMBER() OVER (ORDER BY {1}) AS DataRowNumber,
-      *
-      FROM (
-      {0}
-      ) AS OriginDataTable
+          SELECT
+          ROW_NUMBER() OVER (ORDER BY AddTime DESC) AS DataRowNumber,
+          *
+          FROM (
+            SELECT  
+              *
+            FROM 
+              Product
+            WHERE 
+              1=1
+      ]]>
+      <include refid="ProductWhere"/>
+      <![CDATA[
+      
+          ) AS OriginDataTable
       ) AS DataTableWithRowNumber
       WHERE
-      DataRowNumber BETWEEN {2} AND {3}
+      DataRowNumber BETWEEN #Start# AND #End#
       ORDER BY
       DataRowNumber ASC;
-      
-      SELECT  *
-      FROM Product
+    ]]>
+
+    </select>
+    <select id="GetProductCount"  parameterClass="Talks.Model.Searcher.ProductSearcher"   resultClass="int" >
+      <![CDATA[
+      SELECT
+        count(*)
+      FROM
+        Product
+      WHERE
+        1=1
+          ]]>
+      <include refid="ProductWhere"/>     
     </select>
     <insert  id="InsertProduct"  parameterClass="Product" resultClass="string">
       <![CDATA[
@@ -63,20 +102,21 @@
       ,[Description]
       ,[Company]
       ,[Price]
-      ,[Category])
+      ,[Category],AddTime)
       VALUES
       (#ProductID#
       ,#Name#
       ,#Description#
       ,#Company#
       ,#Price#
-      ,#Category#)
+      ,#Category#
+      ,#AddTime#)
       
       ]]>
       <selectKey resultClass="string" type="post" property="ProductID" >
         select @@IDENTITY as ProductID
       </selectKey>
     </insert >
-    
+
   </statements>
 </sqlMap>

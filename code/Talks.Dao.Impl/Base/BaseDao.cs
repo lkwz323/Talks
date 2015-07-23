@@ -60,6 +60,17 @@ namespace Talks.Dao.Impl.Base
             }
             return null;
         }
+
+        public static int Count(string statementName, object parameterObject = null)
+        {
+            ISqlMapper iSqlMapper = Mapper.Instance();
+            if (iSqlMapper != null)
+            {
+                return iSqlMapper.QueryForObject<int>(statementName, null);  
+            }
+            return 0;
+            
+        }
         
     }
 }

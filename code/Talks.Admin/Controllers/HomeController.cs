@@ -18,10 +18,10 @@ namespace Talks.Admin.Controllers
         [Inject]
         public IProductService productService { get; set; }
 
-        public ActionResult Index(HomeSearcher searcher)
+        public ActionResult Index(ProductSearcher searcher)
         {
             searcher.PageSize = 10;
-            //homeService.BindDataList(ViewBag, searcher);
+            productService.BindList(ViewBag, searcher);         
             return View();
         }
         public ActionResult Index2()

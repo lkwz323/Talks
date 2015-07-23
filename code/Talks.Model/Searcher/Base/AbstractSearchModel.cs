@@ -9,13 +9,6 @@ namespace Talks.Model.Searcher.Base
 {
     public abstract class AbstractSearchModel
     {
-        public abstract SqlParameter[] GetParams();
-
-        public abstract string Sql { get; }
-
-        public abstract string OrderBy { get; }
-
-
 
         /**
          * 分页号

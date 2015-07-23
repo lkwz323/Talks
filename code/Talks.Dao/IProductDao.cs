@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IBatisNet.DataAccess.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,9 +8,10 @@ using Talks.Model;
 
 namespace Talks.Dao
 {
-   public  interface IProductDao
+    public interface IProductDao : IDao
     {
-       IList<Product> GetAllProduct();
-       string InserProduct(Product product);
+        IList<Product> GetProductList(Model.Searcher.ProductSearcher searcher);
+        int GetProductCount(Model.Searcher.ProductSearcher searcher);
+        string InsertProduct(Product product);
     }
 }

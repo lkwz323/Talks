@@ -26,19 +26,6 @@ namespace Talks.Model.Searcher
         public string Category { get; set; }
 
 
-        public override System.Data.SqlClient.SqlParameter[] GetParams()
-        {
-            return null;
-        }
-
-        public override string Sql
-        {
-            get { return sql; }
-        }
-
-        public override string OrderBy
-        {
-            get { return " AddTime desc"; }
-        }
+      
     }
 }

@@ -14,7 +14,7 @@ namespace Talks.Model
         public string Company { get; set; }
         public decimal Price { get; set; }
         public string Category { get; set; }
-
+        public DateTime AddTime { get; set; }
     }
 
 }

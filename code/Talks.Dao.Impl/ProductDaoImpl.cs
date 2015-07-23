@@ -8,7 +8,7 @@ using Talks.Model;
 
 namespace Talks.Dao.Impl
 {
-    public class ProductDaoImpl : IProductDao
+    public class ProductDaoImpl :  IProductDao
     {
         public IList<Product> GetAllProduct()
         {
@@ -16,9 +16,21 @@ namespace Talks.Dao.Impl
             return list;
         }
 
-        public string InserProduct(Model.Product product)
+        public string InsertProduct(Model.Product product)
         {
             return BaseDao.Insert<Product>("InsertProduct", product);
+        }
+
+        public IList<Product> GetProductList(Model.Searcher.ProductSearcher searcher)
+        {
+            var list = BaseDao.QueryForList<Product>("GetProductList",searcher);
+            return list;
+        }
+
+        public int GetProductCount(Model.Searcher.ProductSearcher searcher)
+        {
+            var count = BaseDao.Count("GetProductCount", searcher);
+            return count;
         }
     }
 }
