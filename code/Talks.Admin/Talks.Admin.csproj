@@ -57,6 +57,10 @@
       <HintPath>..\DLL\IBatisNet.DataMapper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
@@ -132,9 +136,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -182,6 +183,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ueditor\Controller\UploadImage.ashx.cs">
+      <DependentUpon>UploadImage.ashx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -1436,6 +1440,7 @@
     <Content Include="Content\charisma\bower_components\terebentina-sco\package.json" />
     <Content Include="Content\charisma\bower_components\terebentina-sco\README.md" />
     <Content Include="Content\charisma\bower_components\terebentina-sco\sco.js.jquery.json" />
+    <Content Include="ueditor\Controller\config.min.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1764,11 +1769,15 @@
     <Content Include="ueditor\third-party\video-js\font\vjs.eot" />
     <Content Include="ueditor\third-party\video-js\font\vjs.ttf" />
     <Content Include="ueditor\third-party\video-js\font\vjs.woff" />
+    <Content Include="ueditor\Controller\UploadImage.ashx" />
+    <Content Include="ueditor\Controller\config.json" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
     <Folder Include="Views\ShoppingCart\" />
     <Folder Include="Views\Talks\" />
+    <Folder Include="Views\UEditor\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -1793,6 +1802,10 @@
     <ProjectReference Include="..\Talks.Service\Talks.Service.csproj">
       <Project>{f4bb6b87-084d-41e4-acbf-708141454073}</Project>
       <Name>Talks.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Talks.UEditor\Talks.UEditor.csproj">
+      <Project>{6bac8820-0cd9-4a4d-ac04-5fa72f46b2e9}</Project>
+      <Name>Talks.UEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

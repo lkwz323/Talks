@@ -46,7 +46,7 @@ function initEvtHandler( conId ) {
 
 function InsertSmiley( url, evt ) {
     var obj = {
-        src:editor.options.emotionLocalization ? editor.options.UEDITOR_HOME_URL + "dialogs/emotion/" + url : url
+        src:"/static/emotion/" + url 
     };
     obj._src = obj.src;
     editor.execCommand( 'insertimage', obj );

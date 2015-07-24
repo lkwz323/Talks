@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talks.Service.Impl", "Talks
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{BC0E3F6B-AA02-41B2-A862-717B39AF806B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talks.UEditor", "Talks.UEditor\Talks.UEditor.csproj", "{6BAC8820-0CD9-4A4D-AC04-5FA72F46B2E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +117,16 @@ Global
 		{BC0E3F6B-AA02-41B2-A862-717B39AF806B}.Release|Mixed Platforms.Build.0 = Release|x86
 		{BC0E3F6B-AA02-41B2-A862-717B39AF806B}.Release|x86.ActiveCfg = Release|x86
 		{BC0E3F6B-AA02-41B2-A862-717B39AF806B}.Release|x86.Build.0 = Release|x86
+		{6BAC8820-0CD9-4A4D-AC04-5FA72F46B2E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BAC8820-0CD9-4A4D-AC04-5FA72F46B2E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BAC8820-0CD9-4A4D-AC04-5FA72F46B2E9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6BAC8820-0CD9-4A4D-AC04-5FA72F46B2E9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6BAC8820-0CD9-4A4D-AC04-5FA72F46B2E9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6BAC8820-0CD9-4A4D-AC04-5FA72F46B2E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BAC8820-0CD9-4A4D-AC04-5FA72F46B2E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BAC8820-0CD9-4A4D-AC04-5FA72F46B2E9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6BAC8820-0CD9-4A4D-AC04-5FA72F46B2E9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6BAC8820-0CD9-4A4D-AC04-5FA72F46B2E9}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -128,5 +140,6 @@ Global
 		{E8394E70-49B1-42F4-BD2E-60255903F9C7} = {0CACEF26-B523-4E83-8FB7-0F678B7158B7}
 		{85BDC6E0-F2A1-4609-8E31-F9132BF5644A} = {0CACEF26-B523-4E83-8FB7-0F678B7158B7}
 		{BC0E3F6B-AA02-41B2-A862-717B39AF806B} = {DED8F74C-AC87-4822-8647-3278D406490A}
+		{6BAC8820-0CD9-4A4D-AC04-5FA72F46B2E9} = {0CACEF26-B523-4E83-8FB7-0F678B7158B7}
 	EndGlobalSection
 EndGlobal
